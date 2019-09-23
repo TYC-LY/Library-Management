@@ -1,5 +1,18 @@
 package service;
 
-public class BaseService {
+import dao.BaseDao;
 
+public class BaseService<TEntity> {
+	
+	// 未初始化，Spring通过其setter注入
+	private BaseDao<TEntity> dao;
+
+	protected BaseDao<TEntity> getDao() {
+		return dao;
+	}
+
+	public void setDao(BaseDao<TEntity> dao) {
+		this.dao = dao;
+	}
+	
 }

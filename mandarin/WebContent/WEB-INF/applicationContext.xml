@@ -1,1 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Hibernate 会话工厂 -->
+	<bean id="sessionFactory" class="utils.HibernateHelper"
+		factory-method="getSessionFactory" />
+	
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		
+		<!-- action:书的操作 -->
+		<bean id="bookAction" class="BookAction" scope="prototype">
+			<property name="service" ref="bookService" />
+			<property name="model" ref="bookModel" />
+		</bean>
+		
+		<!-- service:书的服务 -->
+		<bean id="bookService" class="service.BookServiceImpl">
+			<property name="dao" ref="bookDao" />
+		</bean>
+		
+		<!-- model:书的实体 -->
+		<bean id="bookModel" class="entity.Book" scope="prototype" />
+		
+		<!-- dao:书的DAO -->
+		<bean id="bookDao" class="dao.BookDaoImpl">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+			
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		
+		<!-- action:读者的操作 -->
+		<bean id="readerAction" class="ReaderAction" scope="prototype">
+			<property name="service" ref="readerService" />
+			<property name="model" ref="readerModel" />
+		</bean>
+		
+		<!-- service:读者的服务 -->
+		<bean id="readerService" class="service.ReaderServiceImpl">
+			<property name="dao" ref="bookDao" />
+		</bean>
+		
+		<!-- model:读者的实体 -->
+		<bean id="readerModel" class="entity.Reader" scope="prototype" />
+		
+		<!-- dao:读者的DAO -->
+		<bean id="readerDao" class="dao.ReaderDaoImpl">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+			
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		
+		<!-- action:记录的操作 -->
+		<bean id="recordAction" class="RecordAction" scope="prototype">
+			<property name="service" ref="recordService" />
+			<property name="model" ref="recordModel" />
+		</bean>
+		
+		<!-- service:记录的服务 -->
+		<bean id="recordService" class="service.RecordServiceImpl">
+			<property name="dao" ref="recordDao" />
+		</bean>
+		
+		<!-- model:记录的实体 -->
+		<bean id="recordModel" class="entity.Record" scope="prototype" />
+		
+		<!-- dao:记录的DAO -->
+		<bean id="recordDao" class="dao.RecordDaoImpl">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		
+</beans>

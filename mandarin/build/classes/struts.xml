@@ -1,1 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<!-- 用Spring管理Struts -->
+	<constant name="struts.objectFactory" value="spring" />
+	
+	<!-- 定义所有Action -->
+	<package name="default" extends="struts-default">
+	
+		<!-- test.jsp -->
+		<!-- <action name="" class="" method="">
+			
+		</action> -->
+		
+	</package>
+	
+</struts>

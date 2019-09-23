@@ -9,6 +9,7 @@
   * 项目的运行环境: jre 1.8.0_212 -- 非必要, 仅做参考
   * 项目的编译环境: 1.8 -- 非必要, 仅做参考
   * SSH的版本号详见jars文件
+  * **暂定**有三个分支(mandarin-reader, mandarin-admin, mandarin-librarian), 每个小组在各自负责的分支上新建分支(命名示例mandarin-reader-xxx) 
 ---
 # 关于项目的简单解释，**欢迎补充和更正**!!!
   * java源码结构的解释

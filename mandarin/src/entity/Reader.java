@@ -9,7 +9,7 @@ public class Reader extends BaseEntity {
 	private String username;
 	private String email;
 	private String password;
-	private String repaetpw;
+	private String repeatpw;
 
 	public String getUsername() {
 		return username;
@@ -35,12 +35,12 @@ public class Reader extends BaseEntity {
 		this.password = password;
 	}
 
-	public String getRepaetpw() {
-		return repaetpw;
+	public String getRepeatpw() {
+		return repeatpw;
 	}
 
-	public void setRepaetpw(String repaetpw) {
-		this.repaetpw = repaetpw;
+	public void setRepeatpw(String repeatpw) {
+		this.repeatpw = repeatpw;
 	}
 	
 }

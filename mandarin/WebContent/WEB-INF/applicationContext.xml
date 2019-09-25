@@ -11,7 +11,7 @@
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		
 		<!-- action:书的操作 -->
-		<bean id="bookAction" class="BookAction" scope="prototype">
+		<bean id="bookAction" class="action.BookAction" scope="prototype">
 			<property name="service" ref="bookService" />
 			<property name="model" ref="bookModel" />
 		</bean>
@@ -32,14 +32,14 @@
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		
 		<!-- action:读者的操作 -->
-		<bean id="readerAction" class="ReaderAction" scope="prototype">
+		<bean id="readerAction" class="action.ReaderAction" scope="prototype">
 			<property name="service" ref="readerService" />
 			<property name="model" ref="readerModel" />
 		</bean>
 		
 		<!-- service:读者的服务 -->
 		<bean id="readerService" class="service.ReaderServiceImpl">
-			<property name="dao" ref="bookDao" />
+			<property name="dao" ref="readerDao" />
 		</bean>
 		
 		<!-- model:读者的实体 -->
@@ -53,7 +53,7 @@
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		
 		<!-- action:记录的操作 -->
-		<bean id="recordAction" class="RecordAction" scope="prototype">
+		<bean id="recordAction" class="action.RecordAction" scope="prototype">
 			<property name="service" ref="recordService" />
 			<property name="model" ref="recordModel" />
 		</bean>

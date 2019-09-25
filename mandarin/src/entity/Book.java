@@ -2,8 +2,8 @@ package entity;
 
 public class Book extends BaseEntity {
 	
-	public Book(long id) {
-		super(id);
+	public Book() {
+		super(0);
 	}
 
 	private String isbn;

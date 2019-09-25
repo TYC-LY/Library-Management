@@ -2,8 +2,8 @@ package entity;
 
 public class Reader extends BaseEntity {
 	
-	public Reader(long id) {
-		super(id);
+	public Reader() {
+		super(0);
 	}
 
 	private String username;

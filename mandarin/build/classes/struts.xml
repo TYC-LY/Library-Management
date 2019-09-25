@@ -10,10 +10,69 @@
 	<!-- 定义所有Action -->
 	<package name="default" extends="struts-default">
 	
-		<!-- test.jsp -->
-		<!-- <action name="" class="" method="">
+		<!-- <result name="success" type="chain">
+			<param name="actionName">/profile</param>
+		</result> -->
+	
+		<!-- test.jsp================================================================= -->
+		
+			<action name="reader-signin" class="readerAction" method="signin">
+				<result name="input">/test-signin.jsp</result>
+			</action>
 			
-		</action> -->
+			<action name="reader-search" class="readerAction" method="search">
+				<!-- TODO: 搜索种类代完善，实现需更改视图（表单添加下拉框） -->
+				<result name="isTitle" type="chain">
+					<param name="actionName">searchTitle</param>
+				</result>
+				<!-- <result name="isAuthor" type="chain">
+					<param name="actionName">searchAuthor</param>
+				</result> -->
+			</action>
+			
+				<action name="searchTitle" class="bookAction" method="searchTitle">
+					<result name="input">/test-search.jsp</result>
+				</action>
+				
+				<!-- <action name="searchTitle" class="bookAction" method="searchAuthor">
+					<result name="input">/test-search.jsp</result>
+				</action> -->
+			
+			<action name="reader-current-borrowed" class="readerAction" method="currentBorrowed">
+				<result name="success" type="chain">
+					<param name="actionName">get-current-borrowed</param>
+				</result>
+			</action>
+			
+				<action name="get-current-borrowed" class="recordAction" method="getCurrentBorrowed">
+					<result name="input">/test-current-borrowed.jsp</result>
+				</action>
+				
+				<!-- <action name="get-book-by-current-record" class="bookAction" method="getBookByCurrentRecord">
+					<result name="input">/test-current-borrowed.jsp</result>
+				</action> -->
+				
+			<action name="reader-borrow-history" class="readerAction" method="borrowHistory">
+				<result name="success" type="chain">
+					<param name="actionName">get-borrow-history</param>
+				</result>
+			</action>
+			
+				<action name="get-borrow-history" class="recordAction" method="getBorrowHistory">
+					<result name="input">/test-borrow-history.jsp</result>
+				</action>
+				
+				<!-- <action name="get-book-by-history-record" class="bookAction" method="getBookByHistoryRecord">
+					<result name="input">/test-borrow-history.jsp</result>
+				</action> -->
+		
+
+		<!-- test.jsp================================================================= -->
+		
+		
+		<!-- ***.jsp================================================================= -->
+		
+		<!-- ***.jsp================================================================= -->
 		
 	</package>
 	

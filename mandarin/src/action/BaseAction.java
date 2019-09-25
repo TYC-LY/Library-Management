@@ -20,7 +20,7 @@ public class BaseAction<TEntity, TService> extends ActionSupport implements Mode
 	public void setModel(TEntity model) {
 		this.model = model;
 	}
-	
+
 	// service
 	public TService getService() {
 		return service;
@@ -29,7 +29,7 @@ public class BaseAction<TEntity, TService> extends ActionSupport implements Mode
 	public void setService(TService service) {
 		this.service = service;
 	}
-	
+
 	// errorMessage
 	public String getErrorMessage() {
 		return errorMessage;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import entity.Reader;
 
-public interface ReaderService {
+public interface ReaderService{
 	
 	public Reader verify(long id, String password);
 	
@@ -15,4 +15,6 @@ public interface ReaderService {
 	public Reader getReaderByEmail(String email);
 	public List<Reader> getAllReader();
 	public void mergeReader(Reader reader);
+	
+	public void pass(long id);
 }

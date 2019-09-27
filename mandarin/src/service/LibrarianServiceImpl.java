@@ -33,7 +33,6 @@ public class LibrarianServiceImpl extends BaseService<Librarian> implements Libr
 
 	@Override
 	public Reader getReaderById(long id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -48,5 +47,4 @@ public class LibrarianServiceImpl extends BaseService<Librarian> implements Libr
 		// TODO Auto-generated method stub
 		
 	}
-
 }

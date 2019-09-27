@@ -20,8 +20,8 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 
 	@Override
 	public Reader getReaderById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Reader reader = this.getDao().getSingle("id", id);
+		return reader;
 	}
 
 	@Override
@@ -39,6 +39,14 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 	@Override
 	public void mergeReader(Reader reader) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pass(long id) {
+		Reader reader = getReaderById(id);
+		reader.setCheckState(true);
+		this.getDao().merge(reader);
 		
 	}
 

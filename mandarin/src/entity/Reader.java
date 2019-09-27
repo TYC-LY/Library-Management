@@ -12,6 +12,7 @@ public class Reader extends BaseEntity{
 	private int borrowBookNumber;
 	private boolean fineState;
 	private String createDate;
+	private boolean checkState;
 	
 	public Reader(long id) {
 		super(0);
@@ -86,6 +87,14 @@ public class Reader extends BaseEntity{
 
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
+	}
+
+	public boolean isCheckState() {
+		return checkState;
+	}
+
+	public void setCheckState(boolean checkState) {
+		this.checkState = checkState;
 	}
 	
 }

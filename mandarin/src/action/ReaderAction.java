@@ -30,4 +30,25 @@ public class ReaderAction extends BaseAction<Reader,ReaderService>{
 		 this.getService().pass(id);
 		 return SUCCESS;
 	 }
+	 
+	 public String checkReader() {
+		 this.Readers = this.getService().getReaderCheckStateIsFalse();
+		 return SUCCESS;
+	 }
+
+	public Reader getReader() {
+		return Reader;
+	}
+
+	public void setReader(Reader reader) {
+		Reader = reader;
+	}
+
+	public List<Reader> getReaders() {
+		return Readers;
+	}
+
+	public void setReaders(List<Reader> readers) {
+		Readers = readers;
+	}
 }

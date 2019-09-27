@@ -10,19 +10,21 @@
 
 <body>
 
-<table>
+	<a href="${pageContext.request.contextPath}/readerInformation.action">需要注册的reader</a>
+	<table>
 		<thead>
 			<tr>
 				<th>username</th>
 				<th>password</th>
 				<th>email</th>
 				<th>phoneNumber</th>
+				<th>checkState</th>
 				<th>admit</th>
 				<th>refuse</th>
 			</tr>
 		</thead>
 		<tbody>
-			<s:iterator value="" status="">
+			<s:iterator value="Readers" status="">
 				<tr>
 					<td>
 						<form action="checkReader">
@@ -31,9 +33,11 @@
 							<input name="password" value="<s:property value="password"/>"/>
 							<input name="email" value="<s:property value="email"/>"/>
 							<input name="phoneNumber" value="<s:property value="phoneNumber"/>"/>
+							<input name="checkState" value="<s:property value="checkState"/>"/>
 							<button type="submit">admit</button>
-							<button type="submit">refuse</button>
 						</form>
+							<button type="submit">refuse</button>
+						<br>
 					</td>
 				</tr>
 			</s:iterator>

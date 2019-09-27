@@ -17,4 +17,6 @@ public interface ReaderService{
 	public void mergeReader(Reader reader);
 	
 	public void pass(long id);
+
+	public List<Reader> getReaderCheckStateIsFalse();
 }

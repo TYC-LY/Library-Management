@@ -20,5 +20,15 @@
 		<action name="logout" class="LibrarianAction" method="logout">
 			<result name="success">/login.jsp</result>
 		</action>
+		
+		<action name="readerInformation" class="ReaderAction" method="checkReader">
+			<result name="success">/checkReader.jsp</result>
+		</action>
+		
+		<action name="checkReader" class="ReaderAction" method="pass">
+			<result name="success" type="chain">
+				<param name="actionName">readerInformation</param>
+			</result>
+		</action>
 	</package>
 </struts>

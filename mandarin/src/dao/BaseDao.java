@@ -46,7 +46,7 @@ public interface BaseDao<TEntity> {
 	List<TEntity> findAll();
 	/**
 	 * 
-	 * @param condition 根据条件查找对应的实体集合
+	 * @param condition 根据condition对查找到的所有的实体进行排序
 	 * @return the List of entities which are specialized by the condition
 	 */
 	List<TEntity> findAll(String condition);

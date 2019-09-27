@@ -32,8 +32,8 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 
 	@Override
 	public List<Reader> getAllReader() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Reader> readers = this.getDao().findAll();
+		return readers;
 	}
 
 	@Override
@@ -48,6 +48,12 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 		reader.setCheckState(true);
 		this.getDao().merge(reader);
 		
+	}
+
+	@Override
+	public List<Reader> getReaderCheckStateIsFalse() {
+		List<Reader> readers = this.getDao().findBy("checkState", false);
+		return readers;
 	}
 
 }

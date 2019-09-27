@@ -14,13 +14,13 @@ public class Reader extends BaseEntity{
 	private String createDate;
 	private boolean checkState;
 	
-	public Reader(long id) {
+	public Reader() {
 		super(0);
 		// TODO Auto-generated constructor stub
 	}
 
 	public Reader(long id, String username, String password, String email, String phoneNumber, int borrowBookNumber,
-			boolean fineState, String createDate) {
+			boolean fineState, String createDate, boolean checkState) {
 		super(id);
 		this.username = username;
 		this.password = password;
@@ -31,6 +31,7 @@ public class Reader extends BaseEntity{
 		SimpleDateFormat bjsdf =   new SimpleDateFormat( "yyyy/MM/dd  HH:mm:ss" ); 
 		bjsdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
 		this.setCreateDate(bjsdf.format(new Date()));
+		this.checkState = checkState;
 	}
 
 	public String getUsername() {

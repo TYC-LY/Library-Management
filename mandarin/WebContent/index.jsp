@@ -48,10 +48,18 @@
 			</a>
 		</div>
 		
-		<div>
+		<div class="mt-5 row justify-content-center">
 			<form class="form-inline">
 			    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-			    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+			    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search By</button>
+			    <div class="col-auto my-1">
+			        <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+			        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+			       	    <option value="title">Book Title</option>
+			            <option value="author">Author</option>
+			            <option value="publisher">Publisher</option>
+			        </select>
+			    </div>
 		    </form>
 		</div>
 	</main>

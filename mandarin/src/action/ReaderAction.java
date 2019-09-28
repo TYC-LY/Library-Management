@@ -19,14 +19,14 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 	public String signin() throws Exception {
 		String email = this.getModel().getEmail();
 		String password = this.getModel().getPassword();
-//		if(email == null) {
-//			this.errorMessage="Please enter your email!";
-//			return INPUT;
-//		}
-//		if(password==null) {
-//			this.errorMessage="Please enter your password!";
-//			return INPUT;
-//		}
+		if(email == null) {
+			this.errorMessage="Please enter your email!";
+			return INPUT;
+		}
+		if(password==null) {
+			this.errorMessage="Please enter your password!";
+			return INPUT;
+		}
 		Reader reader = this.getService().verify(email, password);
 		if (reader != null) {
 			Map<String, Object> session = ActionContext.getContext().getSession();
@@ -34,9 +34,33 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 			setTempReader(reader);
 			return INPUT;
 		}
-//		this.errorMessage="Your email or password is wrong!";
+		this.errorMessage="Your email or password is wrong!";
 		return INPUT;
 	}
+	
+    public String signup() throws Exception{
+    	String nickname = this.getModel().getUsername();
+    	String email = this.getModel().getEmail();
+    	String password = this.getModel().getPassword();
+    	String repeatpw = this.getModel().getRepeatpw();
+    	boolean check = this.getService().checkEmail(email);
+    	if(!check) {
+    		this.errorMessage="wrong email";
+    		return INPUT;
+    	}
+    	if(!repeatpw.equals(password)){
+    		this.errorMessage="wrong password";
+    		return INPUT;
+    	}
+    	try {
+			this.getService().register(this.getModel());
+		}
+		catch (Exception ex){
+			this.addActionError(ex.getMessage());
+			return INPUT;
+		}
+    	return SUCCESS;
+    }
 
 	public String search() throws Exception {
 		if (this.searchContent == null) {

@@ -20,6 +20,10 @@
 				<result name="input">/test-signin.jsp</result>
 			</action>
 			
+			<action name="reader-login" class="readerAction" method="signin">
+				<result name="input">/test-signin.jsp</result>
+			</action>
+			
 			<action name="reader-search" class="readerAction" method="search">
 				<!-- TODO: 搜索种类代完善，实现需更改视图（表单添加下拉框） -->
 				<result name="isTitle" type="chain">

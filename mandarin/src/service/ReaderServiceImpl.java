@@ -20,24 +20,5 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 		return null;
 	}
 	
-	@Override
-	public void register(Reader reader) {
-		// TODO Auto-generated method stub
-//		reader.setColor("default");
-//		reader.setSalt(Encrypt.getSalt());
-//		reader.setPassword(Encrypt.encrypt(reader.getPassword()+reader.getSalt()));
-//		reader.setPicfilename("default.png");
-		this.getDao().save(reader);
-	}
-
-	@Override
-	public boolean checkEmail(String email) {
-		// TODO Auto-generated method stub
-		Reader reader = this.getDao().getSingle("email", email);
-		if(reader == null) {
-			return true;
-		}
-		return false;
-	}
 
 }

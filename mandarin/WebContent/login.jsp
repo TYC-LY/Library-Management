@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,5 +21,6 @@
 			logon
 		</button>
 	</form>
+	<p><s:property value="errorMessage"/></p>
 </body>
 </html>

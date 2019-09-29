@@ -16,24 +16,24 @@ public class LibrarianAction extends BaseAction<Librarian, LibrarianService> {
 	private String tempLibrarianId;
 
 	public String login() throws Exception {
-		String username = this.getModel().getUsername();
+		String librarianUsername = this.getModel().getUsername();
 		String password = this.getModel().getPassword();
-		System.out.println(username + password);
-		if (username == null) {
-			this.errorMessage = "«Î ‰»ÎID∫≈¬Î£°";
+		System.out.println(librarianUsername + password);
+		if (librarianUsername == null) {
+			this.errorMessage = "Please enter your username";
 			return INPUT;
 		}
 		if (password == null) {
-			this.errorMessage = "«Î ‰»Î√‹¬Î£°";
+			this.errorMessage = "Please enter your password";
 			return INPUT;
 		}
-		Librarian librarian = this.getService().verify(username, password);
+		Librarian librarian = this.getService().verify(librarianUsername, password);
 		if (librarian != null) {
 			Map<String, Object> session = ActionContext.getContext().getSession();
 			session.put("librarian", librarian);
 			return SUCCESS;
 		}
-		this.errorMessage = "”√ªß√˚ªÚ√‹¬Î¥ÌŒÛ£°";
+		this.errorMessage = "Your username or password is wrong";
 		return INPUT;
 	}
 

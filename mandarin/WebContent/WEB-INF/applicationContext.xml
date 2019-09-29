@@ -74,5 +74,25 @@
 	</bean>
 	
 	
+	<!-- Book的层级结构 -->
+	<!--Book的Dao,Service,Action -->
+	<bean id="bookDao" class="dao.BookDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- BookService 用户操作的业务对象 -->
+	<bean id="bookService"
+		class="service.BookServiceImpl">
+		<property name="dao" ref="bookDao" />
+	</bean>
+
+	<!-- BookAction 用户操作的控制器对象 -->
+	<bean id="bookModel" class="entity.Book"
+		scope="prototype" />
+		
+	<bean id="BookAction" class="action.BookAction"
+		scope="prototype">
+		<property name="service" ref="bookService" />
+		<property name="model" ref="bookModel" />
+	</bean>
 		
 </beans>

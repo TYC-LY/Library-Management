@@ -19,4 +19,6 @@ public interface ReaderService{
 	public void pass(long id);
 
 	public List<Reader> getReaderCheckStateIsFalse();
+
+	public void register(Reader reader);
 }

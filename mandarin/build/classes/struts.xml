@@ -10,25 +10,36 @@
 	
 		<!-- login -->
 		<action name="login" class="LibrarianAction" method="login">
-			<result name="success">
-				<!--  param name="actionName">getThemeTable</param  -->
-				/logout.jsp
-			</result>
+			<result name="success">/registerReader.jsp</result>
 			<result name="input">/login.jsp</result>
 		</action>
 		
+		<!-- logout -->
 		<action name="logout" class="LibrarianAction" method="logout">
 			<result name="success">/login.jsp</result>
 		</action>
 		
-		<action name="readerInformation" class="ReaderAction" method="checkReader">
-			<result name="success">/checkReader.jsp</result>
-		</action>
-		
+		<!-- management reader -->
 		<action name="checkReader" class="ReaderAction" method="pass">
 			<result name="success" type="chain">
 				<param name="actionName">readerInformation</param>
 			</result>
 		</action>
+		<action name="readerInformation" class="ReaderAction" method="checkReader">
+			<result name="success">/checkReader.jsp</result>
+		</action>
+		
+		<!-- register reader -->
+		<action name="signup" class="ReaderAction" method="signup">
+			<result name="success">/registerReader.jsp</result>
+			<result name="input">/registerReader.jsp</result>
+		</action>
+		
+		<!-- book registration -->
+		<action name="register" class="BookAction" method="BookRegistration">
+			<result name="success" >/BookRegistration.jsp</result>
+			<result name="input">/BookRegistration.jsp</result>
+		</action>
+		
 	</package>
 </struts>

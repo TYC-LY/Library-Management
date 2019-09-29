@@ -29,5 +29,6 @@
 		<mapping resource="entity/Admin.hbm.xml" />
 		<mapping resource="entity/Librarian.hbm.xml" />
 		<mapping resource="entity/Reader.hbm.xml" />
+		<mapping resource="entity/Book.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

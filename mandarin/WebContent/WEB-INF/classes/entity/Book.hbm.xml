@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="entity">
+	<class name="Book">
+		<id name="id" type="long">
+			<generator class="native" />
+		</id>
+		<property name="ISBN" type="string" length="100" not-null="true" />
+		<property name="title" type="string" length="100" not-null="true" />
+		<property name="author" type="string" length="100" not-null="true" />
+		<property name="publisher" type="string" length="100" not-null="true" />
+		<property name="description" type="string" length="100" not-null="true" />
+		<property name="reservationState" type="boolean"  not-null="true" />
+		<property name="borrowState" type="boolean"  not-null="true" />
+		<property name="location" type="string" length="100" not-null="true" />
+		<property name="price" type="string" length="100" not-null="true" />
+		<property name="categoryNo" type="string" length="100" not-null="true" />
+				
+	</class>
+</hibernate-mapping>

@@ -56,4 +56,14 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 		return readers;
 	}
 
+	@Override
+	public void register(Reader reader) {
+		// TODO Auto-generated method stub
+		reader.setBorrowBookNumber(0);
+		reader.setCheckState(true);
+		reader.setCreateDate("0");
+		reader.setFineState(false);
+		this.getDao().save(reader);
+	}
+
 }

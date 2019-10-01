@@ -16,10 +16,10 @@ public class LibrarianAction extends BaseAction<Librarian, LibrarianService> {
 	private String tempLibrarianId;
 
 	public String login() throws Exception {
-		String librarianUsername = this.getModel().getUsername();
+		String username = this.getModel().getUsername();
 		String password = this.getModel().getPassword();
-		System.out.println(librarianUsername + password);
-		if (librarianUsername == null) {
+		System.out.println(username + password);
+		if (username == null) {
 			this.errorMessage = "Please enter your username";
 			return INPUT;
 		}
@@ -27,7 +27,7 @@ public class LibrarianAction extends BaseAction<Librarian, LibrarianService> {
 			this.errorMessage = "Please enter your password";
 			return INPUT;
 		}
-		Librarian librarian = this.getService().verify(librarianUsername, password);
+		Librarian librarian = this.getService().verify(username, password);
 		if (librarian != null) {
 			Map<String, Object> session = ActionContext.getContext().getSession();
 			session.put("librarian", librarian);

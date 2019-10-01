@@ -10,7 +10,7 @@
 	
 		<!-- login -->
 		<action name="login" class="LibrarianAction" method="login">
-			<result name="success">/registerReader.jsp</result>
+			<result name="success">/logout.jsp</result>
 			<result name="input">/login.jsp</result>
 		</action>
 		
@@ -36,9 +36,9 @@
 		</action>
 		
 		<!-- book registration -->
-		<action name="register" class="BookAction" method="BookRegistration">
-			<result name="success" >/BookRegistration.jsp</result>
-			<result name="input">/BookRegistration.jsp</result>
+		<action name="register" class="BookAction" method="bookManagement_Add_books">
+			<result name="success" >/BookManagement_Add_Books.jsp</result>
+			<result name="input">/BookManagement_Add_Books.jsp</result>
 		</action>
 		
 	</package>

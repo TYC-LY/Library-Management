@@ -8,6 +8,8 @@
 <title>Login</title>
 </head>
 <body>
+	<h1>Login</h1>
+	
 	<form action="login" >
 		<input name="username" type="text" placeholder="account" required autofocus="">
 		<br>
@@ -17,10 +19,8 @@
 		<button type="submit">
 			login
 		</button>
-		<button type="button">
-			logon
-		</button>
 	</form>
-	<p><s:property value="errorMessage"/></p>
+	
+	<p><s:property value="errorMessage"></s:property></p>
 </body>
 </html>

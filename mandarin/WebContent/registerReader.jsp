@@ -8,17 +8,9 @@
 <title>register reader</title>
 </head>
 <body>
-	<form action="logout">
-		welcome,<s:property value="username" ></s:property>
-		<br>
-		
-		<button name="logout" type="submit">
-		logout
-		</button>
-	</form>
-
+	<h1 style="text-align: center">Register reader</h1>
+	
 	<form action="signup">
-		<h1 style="text-align: center">注册新用户</h1>
 		<input name="username" type="text" id="user-username" placeholder="username" required autofocus=""> 
 		<input name="email" type="email" id="user-email" placeholder="email" required autofocus=""> 
 		<input name="password" type="password" id="user-pass" placeholder="password" required autofocus="">

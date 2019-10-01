@@ -8,6 +8,8 @@
 <title>BookRegistration</title>
 </head>
 <body>
+	<h1>Add book</h1>
+
 	<form action="register">
 		<input name="ISBN" type="text" placeholder="ISBN" required autofocus="">
 		<br>

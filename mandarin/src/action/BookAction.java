@@ -10,7 +10,7 @@ public class BookAction extends BaseAction<Book, BookService>{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public String BookRegistration() throws Exception{
+	public String bookManagement_Add_books() throws Exception{
 		String ISBN = this.getModel().getISBN();
 		String title = this.getModel().getTitle();
 		String author = this.getModel().getAuthor();

@@ -10,7 +10,7 @@
 
 <body>
 
-	<a href="${pageContext.request.contextPath}/readerInformation.action">需要注册的reader</a>
+	<a href="${pageContext.request.contextPath}/readerInformation.action">Manage reader</a>
 	<table>
 		<thead>
 			<tr>

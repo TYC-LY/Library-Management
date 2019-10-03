@@ -21,26 +21,46 @@
 			</div>
 		</header>
 	
-		<main role="main" class="flex-shrink-0">
-			<div class="container">
-				<!-- <div id="carouselExampleIndicators" class="carousel slide"
-					data-ride="carousel" style="height: 512px">
+		<main role="main" class="">
+			<div class="">
+				 <div id="carouselExampleIndicators" class="carousel slide"
+					data-ride="carousel" >
 					<ol class="carousel-indicators">
 						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+				<!--  	<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>-->
 					</ol>
-					<div class="carousel-inner" style="height: 512px">
+					
+				  
+				  	<div class="carousel-inner" >
 						<div class="carousel-item active">
-							<img class="d-block w-100" src="pic/a.jpg" alt="First slide">
+							<img class="d-block w-100" src="pic/1.jpg" alt="First slide">
+							<div class="carousel-caption text-left">
+                              <h1>Welcome to Mandarin-Library Automation</h1>
+                              <p>If you don't have an account, please register it first, so that you can borrow books quickly</p>
+                             <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up</a></p>
+                           </div>
 						</div>
+					 <!--
 						<div class="carousel-item">
-							<img class="d-block w-100" src="pic/a.jpg" alt="Second slide">
+							<img class="d-block w-100" src="pic/b.jpg" alt="Second slide">
+                              <div class="carousel-caption">
+                                  <h1>Current Borrowing</h1>
+                                  <p>Can display the books you are currently borrowing, as well as information about books.</p>
+                                  <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>   
+                            </div>
 						</div>
+						-->
 						<div class="carousel-item">
-							<img class="d-block w-100" src="pic/a.jpg" alt="Third slide">
+							<img class="d-block w-100" src="pic/2.jpg" alt="Third slide">
+							<div class="carousel-caption text-right">
+                                <h1>Borrowing Record</h1>
+                                <p>If you want to know the books you are borrowing and the specific information about them, you can find out more here.</p>
+                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                              </div>
+                            </div>
 						</div>
-					</div>
+					</div> 
 					<a class="carousel-control-prev" href="#carouselExampleIndicators"
 						role="button" data-slide="prev"> <span
 						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
@@ -50,25 +70,25 @@
 						class="carousel-control-next-icon" aria-hidden="true"></span> <span
 						class="sr-only">Next</span>
 					</a>
-				</div> -->
-				
-				<div class="mt-2 row justify-content-center">
+				</div> 
+					
+				<div class="mt-4 row justify-content-center">
 					<form class="form-inline" action="reader-search">
-					    <input name="searchContent" type="text" placeholder="Search" class="form-control mr-sm-2" aria-label="Search" autocomplete="off">
-					    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search By</button>
-					    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+					    <select class="custom-select mr-sm-2 rounded-right" id="inlineFormCustomSelect">
 					    	<option value="title">Book Title</option>
 					    	<option value="author">Author</option>
 					    	<option value="publisher">Publisher</option>
 					    	<option value="isbn">ISBN</option>
 					    </select>
+					    <input name="searchContent" type="text" placeholder="Search" class="form-control mr-sm-2" aria-label="Search" autocomplete="off">
+					    <button class="btn btn-outline-primary my-2 my-sm-0 rounded-left" type="submit">Search</button>
 				    </form>
 				</div>
 				
 				<div>
 					
 				</div>	
-			</div>
+
 		</main>
 	
 		<footer class="footer mt-auto">

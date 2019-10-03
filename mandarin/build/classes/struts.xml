@@ -35,7 +35,7 @@
 			</action>
 			
 				<action name="searchTitle" class="bookAction" method="searchTitle">
-					<result name="input">/test-search.jsp</result>
+					<result name="input">/search.jsp</result>
 				</action>
 				
 				<!-- <action name="searchTitle" class="bookAction" method="searchAuthor">

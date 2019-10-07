@@ -31,14 +31,18 @@
 		
 		<!-- register reader -->
 		<action name="signup" class="ReaderAction" method="signup">
-			<result name="success">/registerReader.jsp</result>
-			<result name="input">/registerReader.jsp</result>
+			<result name="success">/logout.jsp</result>
+			<result name="input">/logout.jsp</result>
 		</action>
 		
-		<!-- book registration -->
-		<action name="register" class="BookAction" method="bookManagement_Add_books">
-			<result name="success" >/BookManagement_Add_Books.jsp</result>
-			<result name="input">/BookManagement_Add_Books.jsp</result>
+		<!-- Book Management Add Books -->
+		<action name="bookManagement_Find_Book_Detail" class="BookAction" method="bookManagement_Find_Book_Detail">
+			<result name="success">/BookManagement_Add_Books_Detail.jsp</result>
+		</action>
+		
+		<action name="BookManagement_Add_Books" class="BookAction" method="bookManagement_Add_Books">
+			<result name="success" >/BookManagement_Add_Books_Detail.jsp</result>
+			<result name="input">/BookManagement_Add_Books_Detail.jsp</result>
 		</action>
 		
 	</package>

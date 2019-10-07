@@ -61,7 +61,7 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 		// TODO Auto-generated method stub
 		reader.setBorrowBookNumber(0);
 		reader.setCheckState(true);
-		reader.setCreateDate("0");
+		reader.setCreateDate("2019/10/2");
 		reader.setFineState(false);
 		this.getDao().save(reader);
 	}

@@ -4,6 +4,8 @@ import entity.Book;
 
 public interface BookService {
 	
-	public void BookRegistration(Book book);
+	public void addBook(Book book);
+
+	public void addBookCopy(Book book);
 
 }

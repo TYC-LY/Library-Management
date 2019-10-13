@@ -32,19 +32,20 @@ public class LibrarianServiceImpl extends BaseService<Librarian> implements Libr
 	}
 
 	@Override
-	public Reader getReaderById(long id) {
-		return null;
-	}
-
-	@Override
-	public List<Reader> getAllUsers() {
+	public Librarian getLibrarianById(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void mergeReader(Reader reader) {
+	public void mergeLibrarian(Librarian librarian) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Librarian> getAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

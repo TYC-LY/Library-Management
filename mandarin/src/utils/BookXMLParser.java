@@ -58,23 +58,26 @@ public class BookXMLParser extends DefaultHandler {
 	public void endElement(String uri, String localName, String name) throws SAXException {
 		if (name.equalsIgnoreCase("db:attribute")) {
 			String value = buff.toString().trim();
+			
+			// 当对应的标签存在，则直接赋值
+			// 当不存在对应的标签，则设为“null”
 			if ("title".equalsIgnoreCase(attname)) {
 				book.setTitle(value);
+				
 			} else if ("author".equalsIgnoreCase(attname)) {
 				book.setAuthor(value);
+				
 			} else if ("price".equalsIgnoreCase(attname)) {
 				book.setPrice(value);
+				
 			} else if ("publisher".equalsIgnoreCase(attname)) {
 				book.setPublisher(value);
+				
 			} else if ("isbn13".equalsIgnoreCase(attname)) {
 				book.setISBN(value);
 			}
 		} else if ("summary".equalsIgnoreCase(name)) {
-			if(buff.toString().isEmpty()) {
-				book.setDescription("There is no description for this book.");
-			} else {
-				book.setDescription(buff.toString());
-			}
+			book.setDescription(buff.toString());
 		}
 		buff.setLength(0);
 	}

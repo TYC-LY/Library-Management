@@ -11,11 +11,11 @@ public interface LibrarianService {
 	
 	public void register(Reader reader);
 	
-	// Í¼Êé¹İ¹ÜÀíÔ±ÄÜ¹»ÔÚ³¬¹ÜµÄ°ïÖúÏÂÕÒ»ØÃÜÂë£¬µ«²»È·¶¨Õâ¸ö·şÎñÓ¦¸ÃÔÚadminÖĞ»¹ÊÇÔÚserviceÖĞ
+	// Í¼ï¿½ï¿½İ¹ï¿½ï¿½ï¿½Ô±ï¿½Ü¹ï¿½ï¿½Ú³ï¿½ï¿½ÜµÄ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½adminï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½serviceï¿½ï¿½
 	public boolean checkEmail(String email);
 	
-	public Reader getReaderById(long id);
+	public Librarian getLibrarianById(long id);
 	
-	public List<Reader> getAllUsers();
-	public void mergeReader(Reader reader);
+	public List<Librarian> getAllUsers();
+	public void mergeLibrarian(Librarian librarian);
 }

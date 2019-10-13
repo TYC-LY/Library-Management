@@ -41,8 +41,13 @@
 		</action>
 		
 		<action name="BookManagement_Add_Books" class="BookAction" method="bookManagement_Add_Books">
-			<result name="success" >/BookManagement_Add_Books_Detail.jsp</result>
+			<result name="success" >/BookManagement_Add_Books_Image.jsp</result>
 			<result name="input">/BookManagement_Add_Books_Detail.jsp</result>
+		</action>
+		
+		<action name="BookManagement_Add_Books_Copy" class="BookAction" method="bookManagement_Add_Books_Copy">
+			<result name="success" >/BookManagement_Add_Books_Image.jsp</result>
+			<result name="input">/BookManagement_Add_Books_Image.jsp</result>
 		</action>
 		
 	</package>

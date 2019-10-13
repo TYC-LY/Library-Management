@@ -9,8 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 public abstract class BaseDaoImpl<TEntity> implements BaseDao<TEntity>{
-	private SessionFactory sf; // Éæ¼°µ½hibernateµÄÊ¹ÓÃ
-	private Class<TEntity> entityClass; // ÓÃÓÚ»ñÈ¡ÊµÌå¶ÔÓ¦µÄ±íÃû£¨SQLÓï¾äÖÐÐèÒª±íÃû£©
+	private SessionFactory sf; // ï¿½æ¼°ï¿½ï¿½hibernateï¿½ï¿½Ê¹ï¿½ï¿½
+	private Class<TEntity> entityClass; // ï¿½ï¿½ï¿½Ú»ï¿½È¡Êµï¿½ï¿½ï¿½Ó¦ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½SQLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public void setSessionFactory(SessionFactory sf) {
 		this.sf = sf;
@@ -22,7 +22,7 @@ public abstract class BaseDaoImpl<TEntity> implements BaseDao<TEntity>{
 	
 	@SuppressWarnings("unchecked")
 	public BaseDaoImpl() {
-		// ¸ù¾ÝÊµ¼ÊÊ¹ÓÃµÄÀà¶¨Òå¶ÔÓ¦µÄÀàÐÍ
+		// ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ê¹ï¿½Ãµï¿½ï¿½à¶¨ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Class<?> c = this.getClass();
 		Type t = c.getGenericSuperclass();
 		if(t instanceof ParameterizedType) {
@@ -34,20 +34,29 @@ public abstract class BaseDaoImpl<TEntity> implements BaseDao<TEntity>{
 	@Override
 	public void save(TEntity entity) {
 		Session session = this.getSession();
-		// ¿ªÊ¼Ò»¸öÊý¾Ý¿âÊÂÎñ
+		// ï¿½ï¿½Ê¼Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
 		session.beginTransaction();
 		session.saveOrUpdate(entity);
-		// Ìá½»ÊÂÎñ
+		// ï¿½á½»ï¿½ï¿½ï¿½ï¿½
+		session.getTransaction().commit();
+		session.close();
+	}
+	
+	@Override
+	public void saveCopy(TEntity entity) {
+		Session session = this.getSession();
+		session.beginTransaction();
+		session.save(entity);
 		session.getTransaction().commit();
 		session.close();
 	}
 	
 	public void merge(TEntity entity) {
 		Session session = this.getSession();
-		// ¿ªÊ¼Ò»¸öÊý¾Ý¿âÊÂÎñ
+		// ï¿½ï¿½Ê¼Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
 		session.beginTransaction();
 		session.merge(entity);
-		// Ìá½»ÊÂÎñ
+		// ï¿½á½»ï¿½ï¿½ï¿½ï¿½
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -55,10 +64,10 @@ public abstract class BaseDaoImpl<TEntity> implements BaseDao<TEntity>{
 	@Override
 	public void delete(TEntity entity) {
 		Session session = this.getSession();
-		// ¿ªÊ¼Ò»¸öÊý¾Ý¿âÊÂÎñ
+		// ï¿½ï¿½Ê¼Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
 		session.beginTransaction();
 		session.delete(entity);
-		// Ìá½»ÊÂÎñ
+		// ï¿½á½»ï¿½ï¿½ï¿½ï¿½
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -78,14 +87,14 @@ public abstract class BaseDaoImpl<TEntity> implements BaseDao<TEntity>{
 		else {
 			condition = "";
 		}
-		// ¶ÔÊý¾Ý¿âÖÐµÄÊý¾Ý½øÐÐÌõ¼þ²éÑ¯
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯
 		List<TEntity> entities = this.getSession().createQuery("from " + entityClass.getSimpleName() + condition).list();
 		return entities;
 	}
 	
 	@Override
 	public List<TEntity> findAll() {
-		// ¸´ÓÃÉÏÃæµÄfindAll(String condition)£¬¼ò»¯´úÂë
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½findAll(String condition)ï¿½ï¿½ï¿½ò»¯´ï¿½ï¿½ï¿½
 		return this.findAll(null);
 	}
 	
@@ -97,7 +106,7 @@ public abstract class BaseDaoImpl<TEntity> implements BaseDao<TEntity>{
 			condition = "";
 		}
 		String queryString = "from " + entityClass.getSimpleName() + " e ";
-		// ²»Ì«Àí½â"=:propertyValue"µÄÐ´·¨
+		// ï¿½ï¿½Ì«ï¿½ï¿½ï¿½"=:propertyValue"ï¿½ï¿½Ð´ï¿½ï¿½
 		queryString += "where e." + propertyName + "=:propertyValue" + condition;
 		Query query = this.getSession().createQuery(queryString);
 		List<TEntity> entities = query.setParameter("propertyValue", propertyValue).list();
@@ -106,7 +115,7 @@ public abstract class BaseDaoImpl<TEntity> implements BaseDao<TEntity>{
 	
 	@Override
 	public List<TEntity> findBy(String propertyName, Object propertyValue) {
-		// ¸´ÓÃ·½·¨findBy(propertyName,propertyValue,condition);
+		// ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½findBy(propertyName,propertyValue,condition);
 		return findBy(propertyName, propertyValue, null);
 	}
 	
@@ -130,7 +139,7 @@ public abstract class BaseDaoImpl<TEntity> implements BaseDao<TEntity>{
 	
 	@Override
 	public TEntity getSingle(String propertyName, Object propertyValue) {
-		// ¸´ÓÃ·½·¨findBy(propertyName,propertyValue);
+		// ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½findBy(propertyName,propertyValue);
 		List<TEntity> entities = findBy(propertyName, propertyValue);
 		if(entities != null && entities.size() > 0) {
 			return entities.get(0);

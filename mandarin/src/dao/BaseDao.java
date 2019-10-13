@@ -2,6 +2,8 @@ package dao;
 
 import java.util.List;
 
+import entity.Book;
+
 public interface BaseDao<TEntity> {
 	
 	/**
@@ -46,7 +48,7 @@ public interface BaseDao<TEntity> {
 	List<TEntity> findAll();
 	/**
 	 * 
-	 * @param condition ¸ù¾Ýcondition¶Ô²éÕÒµ½µÄËùÓÐµÄÊµÌå½øÐÐÅÅÐò
+	 * @param condition ï¿½ï¿½ï¿½ï¿½conditionï¿½Ô²ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return the List of entities which are specialized by the condition
 	 */
 	List<TEntity> findAll(String condition);
@@ -60,4 +62,10 @@ public interface BaseDao<TEntity> {
 	List<TEntity> findBy(String propertyName, Object propertyValue);
 	List<TEntity> findBy(String propertyName, Object propertyValue, String condition);
 	List<TEntity> findBySubString(String propertyName, String condition);
+
+	/**
+	 * save the copy of the entity
+	 * @param entity the entity to be saved
+	 */
+	void saveCopy(TEntity entity);
 }

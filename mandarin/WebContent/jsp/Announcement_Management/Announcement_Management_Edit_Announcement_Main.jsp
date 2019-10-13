@@ -1,16 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
 <!-- Required meta tags -->
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Logout</title>
+<title>Insert title here</title>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
@@ -20,8 +19,9 @@
 	src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 <script
 	src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+	
 </head>
+
 <body>
 
 	<!-- 导航栏 -->
@@ -36,10 +36,11 @@
 			</div>
 
 			<div class="col-sm-8">
-				<h1>Librarian Personal Center</h1>
+				<%@include file="/jsp/Announcement_Management/Announcement_Management_Edit_Announcement.jsp" %>
+			
 			</div>
 		</div>
 	</div>
-
+	
 </body>
 </html>

@@ -30,5 +30,6 @@
 		<mapping resource="entity/Librarian.hbm.xml" />
 		<mapping resource="entity/Reader.hbm.xml" />
 		<mapping resource="entity/Book.hbm.xml" />
+		<mapping resource="entity/Announcement.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

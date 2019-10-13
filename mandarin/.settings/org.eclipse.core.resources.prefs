@@ -1,6 +1,10 @@
 eclipse.preferences.version=1
-encoding//WebContent/jsp/BookManagement_Add_Books_Detail.jsp=UTF-8
-encoding//WebContent/jsp/BookManagement_Add_Books_ISBN.jsp=UTF-8
+encoding//WebContent/jsp/Announcement_Management/Announcement_Management_Add_Announcement.jsp=UTF-8
+encoding//WebContent/jsp/Announcement_Management/Announcement_Management_Delete_Announcement.jsp=UTF-8
+encoding//WebContent/jsp/Book_Management/BookManagement_Add_Books_Detail.jsp=UTF-8
+encoding//WebContent/jsp/Book_Management/BookManagement_Add_Books_ISBN.jsp=UTF-8
+encoding//WebContent/jsp/Reader_Management/Reader_Management_RegisterReader.jsp=UTF-8
+encoding//WebContent/jsp/accordion.jsp=UTF-8
 encoding//WebContent/jsp/header.jsp=UTF-8
-encoding//WebContent/jsp/registerReader.jsp=UTF-8
+encoding//WebContent/jsp/sidebar.jsp=UTF-8
 encoding//src/service/ReaderServiceImpl.java=UTF-8

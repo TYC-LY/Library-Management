@@ -10,7 +10,9 @@
 	
 		<!-- login -->
 		<action name="login" class="LibrarianAction" method="login">
-			<result name="success">/logout.jsp</result>
+			<result name="success" type="chain">
+				<param name="actionName">viewAnnouncements</param>
+			</result>
 			<result name="input">/login.jsp</result>
 		</action>
 		
@@ -35,20 +37,67 @@
 			<result name="input">/logout.jsp</result>
 		</action>
 		
+		<!-- Book Management -->
 		<!-- Book Management Add Books -->
 		<action name="bookManagement_Find_Book_Detail" class="BookAction" method="bookManagement_Find_Book_Detail">
-			<result name="success">/BookManagement_Add_Books_Detail.jsp</result>
+			<result name="success">/jsp/Book_Management/BookManagement_Add_Books_Detail_Main.jsp</result>
 		</action>
 		
 		<action name="BookManagement_Add_Books" class="BookAction" method="bookManagement_Add_Books">
-			<result name="success" >/BookManagement_Add_Books_Image.jsp</result>
-			<result name="input">/BookManagement_Add_Books_Detail.jsp</result>
+			<result name="success" >/jsp/Book_Management/BookManagement_Add_Books_Image_Main.jsp</result>
+			<result name="input">/jsp/Book_Management/BookManagement_Add_Books_Detail_Main.jsp</result>
 		</action>
 		
 		<action name="BookManagement_Add_Books_Copy" class="BookAction" method="bookManagement_Add_Books_Copy">
-			<result name="success" >/BookManagement_Add_Books_Image.jsp</result>
-			<result name="input">/BookManagement_Add_Books_Image.jsp</result>
+			<result name="success" >/jsp/Book_Management/BookManagement_Add_Books_Image_Main.jsp</result>
+			<result name="input">/jsp/Book_Management/BookManagement_Add_Books_Image_Main.jsp</result>
 		</action>
+		<!-- Book Management -->
+		
+		<!-- Announcement -->
+		<!-- View Announcement -->
+		<action name="viewAnnouncement" class="AnnouncementAction" method="viewAnnouncement">
+			<result name="success">/jsp/Announcement_Management/Announcement_Management_Edit_Announcement_viewAnnouncement.jsp</result>
+		</action>
+		
+		<!-- View Announcements -->
+		<action name="viewAnnouncements" class="AnnouncementAction" method="viewAnnouncements">
+			<result name="success">/logout.jsp</result>
+			<result name="input">/logout.jsp</result>
+		</action>
+		
+		<action name="viewAnnouncements_Delete" class="AnnouncementAction" method="viewAnnouncements_Delete">
+			<result name="success">/jsp/Announcement_Management/Announcement_Management_Delete_Announcement_Main.jsp</result>
+			<result name="input">/jsp/Announcement_Management/Announcement_Management_Delete_Announcement_Main.jsp</result>
+		</action>
+		
+		<action name="viewAnnouncements_Edit" class="AnnouncementAction" method="viewAnnouncements_Edit">
+			<result name="success">/jsp/Announcement_Management/Announcement_Management_Edit_Announcement_Main.jsp</result>
+			<result name="input">/jsp/Announcement_Management/Announcement_Management_Edit_Announcement_Main.jsp</result>
+		</action>
+		<!-- View Announcements -->
+		
+		<!-- Delete/Edit/Create Announcement -->
+		<action name="deleteAnnouncement" class="AnnouncementAction" method="deleteAnnouncement">
+			<result name="success" type="chain">
+				<param name="actionName">viewAnnouncements_Delete</param>
+			</result>
+		</action>
+		
+		<action name="editAnnouncement" class="AnnouncementAction" method="editAnnouncement">
+			<result name="success" type="chain">
+				<param name="actionName">viewAnnouncement</param>
+			</result>
+			<result name="input">/jsp/Announcement_Management/Announcement_Management_Edit_Announcement_viewAnnouncement.jsp</result>
+		</action>
+		
+		<action name="createAnnouncement" class="AnnouncementAction" method="createAnnouncement">
+			<result name="success" type="chain">
+				<param name="actionName">viewAnnouncements</param>
+			</result>
+			<result name="input">/logout.jsp</result>
+		</action>
+		<!-- /Announcement -->
 		
 	</package>
 </struts>

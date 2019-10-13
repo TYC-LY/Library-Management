@@ -94,5 +94,25 @@
 		<property name="service" ref="bookService" />
 		<property name="model" ref="bookModel" />
 	</bean>
+	
+	<!-- Announcement的层级结构 -->
+	<!--Announcement的Dao,Service,Action -->
+	<bean id="announcementDao" class="dao.AnnouncementDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- AnnouncementService 用户操作的业务对象 -->
+	<bean id="announcementService"
+		class="service.AnnouncementServiceImpl">
+		<property name="dao" ref="announcementDao" />
+	</bean>
+
+	<!-- AnnouncementAction 用户操作的控制器对象 -->
+	<bean id="announcementModel" class="entity.Announcement"
+		scope="prototype" />
 		
+	<bean id="AnnouncementAction" class="action.AnnouncementAction"
+		scope="prototype">
+		<property name="service" ref="announcementService" />
+		<property name="model" ref="announcementModel" />
+	</bean>
 </beans>

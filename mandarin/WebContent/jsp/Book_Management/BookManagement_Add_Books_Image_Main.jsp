@@ -31,29 +31,20 @@
 	<div class="container" style="margin-top: 30px">
 		<div class="row">
 			<div class="col-sm-4">
+				<h3>Librarian Function</h3>
+				<!-- 侧边栏 手风琴 -->
+				<jsp:include page="/jsp/accordion.jsp" flush="true" />
 
-				<ul class="nav nav-pills flex-column">
-					<li class="nav-item">
-						<!-- 按钮：用于打开模态框 -->
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#RegisterReader">Register Reader</button>
-					</li>
-					<br>
-					<li class="nav-item">
-						<!-- 按钮：用于打开模态框 -->
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#AddBook">Add Book</button>
-				</ul>
-
-			<!-- 模态框 RegisterReader -->
-			<jsp:include page="/jsp/registerReader.jsp" flush="true"/>
-			
-			<!-- 模态框 AddBook -->
-			<jsp:include page="/jsp/BookManagement_Add_Books_ISBN.jsp" flush="true"/>
+				<!-- 模态框 RegisterReader -->
+				<jsp:include page="/jsp/Reader_Management/Reader_Management_RegisterReader.jsp" flush="true"/>
+				
+				<!-- 模态框 AddBook -->
+				<jsp:include page="/jsp/Book_Management/BookManagement_Add_Books_ISBN.jsp" flush="true"/>
 
 			</div>
 			<div class="col-sm-8">
-				<%@include file="/jsp/BookManagement_Add_Books_Detail.jsp" %>
+				<!-- 条形码和位置图片页面 -->
+				<%@include file="/jsp/Book_Management/BookManagement_Add_Books_Image.jsp" %>
 			</div>
 		</div>
 	</div>

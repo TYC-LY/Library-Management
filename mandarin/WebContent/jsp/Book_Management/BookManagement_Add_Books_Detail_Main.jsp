@@ -31,29 +31,11 @@
 	<div class="container" style="margin-top: 30px">
 		<div class="row">
 			<div class="col-sm-4">
-
-				<ul class="nav nav-pills flex-column">
-					<li class="nav-item">
-						<!-- 按钮：用于打开模态框 -->
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#RegisterReader">Register Reader</button>
-					</li>
-					<br>
-					<li class="nav-item">
-						<!-- 按钮：用于打开模态框 -->
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#AddBook">Add Book</button>
-				</ul>
-
-			<!-- 模态框 RegisterReader -->
-			<jsp:include page="/jsp/registerReader.jsp" flush="true"/>
-			
-			<!-- 模态框 AddBook -->
-			<jsp:include page="/jsp/BookManagement_Add_Books_ISBN.jsp" flush="true"/>
-
+				<!-- 侧边栏 -->
+				<jsp:include page="/jsp/sidebar.jsp" flush="true" />
 			</div>
 			<div class="col-sm-8">
-				<%@include file="/jsp/BookManagement_Add_Books_Image.jsp" %>
+				<%@include file="/jsp/Book_Management/BookManagement_Add_Books_Detail.jsp" %>
 			</div>
 		</div>
 	</div>

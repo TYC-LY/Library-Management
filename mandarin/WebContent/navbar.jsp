@@ -3,7 +3,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <nav class="navbar navbar-expand-lg navbar-light">
 
-	<img alt="logo" src="pic/b.png">
+	<img alt="logo" src="pic/logo.png" weight="100px" height="60px">
 	
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"

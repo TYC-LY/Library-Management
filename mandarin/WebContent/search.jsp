@@ -43,9 +43,15 @@
 						<ul class="list-group">
 							<s:iterator value="bookTable" status="L">
 								<li class="list-group-item d-flex justify-content-between align-items-center">
-									<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample<s:property value="#L.index+1"></s:property>" role="button" aria-expanded="false" aria-controls="collapseExample">
-					    				<s:property value="title" />
-					  				</a>
+									<div class="justify-content-left">
+										<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement ="bottom" data-html="true" title="<img src='http://img1.doubanio.com/view/subject/m/public/s1106934.jpg' height='250px'>">
+											<s:property value="title" />
+										</button>
+										<a class="btn btn-primary badge badge-primary badge-pill" data-toggle="collapse" href="#collapseExample<s:property value="#L.index+1"></s:property>" role="button" aria-expanded="false" aria-controls="collapseExample">
+						    				
+						  				</a>
+									</div>
+					  				
 					  				<div class="justify-content-right">
 					  					<span class="badge badge-primary"><s:property value="author" /></span>
 					  					<span class="badge badge-primary"><s:property value="publisher" /></span>
@@ -77,5 +83,10 @@
 	<script src="js/jquery-3.3.1.slim.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script>
+    	$(document).ready(function(){
+    		$('[data-toggle="tooltip"]').tooltip();
+    	});
+    </script>
 </body>
 </html>

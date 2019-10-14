@@ -17,7 +17,11 @@ public class BookAction extends BaseAction<Book, BookService> {
 	private List<Record> historyTable;
 
 	public String searchTitle() throws Exception {
+		if(searchContent == "") {
+			return INPUT;
+		}
 		setBookTable(this.getService().getBooksByTitle(searchContent));
+		
 		return INPUT;
 	}
 	

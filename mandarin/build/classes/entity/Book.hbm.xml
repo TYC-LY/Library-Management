@@ -10,9 +10,11 @@
 		<property name="title" type="string" not-null="true" length="100"/>
 		<property name="author" type="string" not-null="true" length="100"/>
 		<property name="publisher" type="string" not-null="true" length="50"/>
-		<property name="description" type="string" not-null="true" length="500"/>
-		<property name="price" type="float" not-null="true" length="10"/>
+		<property name="description" type="string" not-null="true" length="1000"/>
+		<property name="reservationState" type="boolean"  not-null="true" />
+		<property name="borrowState" type="boolean"  not-null="true" />
 		<property name="location" type="string" not-null="true" length="50"/>
-		<property name="restNumber" not-null="true"/>
+		<property name="price" type="string" not-null="true" length="10"/>
+		<property name="imgpath" type="string" length="100"/>
 	</class>
 </hibernate-mapping>

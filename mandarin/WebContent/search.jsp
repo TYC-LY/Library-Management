@@ -4,89 +4,138 @@
 <!doctype html>
 <html lang="en" class="h-100">
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="referrer" content="no-referrer" />
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
 
-	<title>Mandarin</title>
+<title>Mandarin</title>
 </head>
 <body class="d-flex flex-column h-100">
 
-		<header>
-			<div class="container">
-				<s:include value="navbar.jsp" />
+	<header>
+		<div class="container">
+			<s:include value="navbar.jsp" />
+		</div>
+	</header>
+
+	<main role="main" class="flex-shrink-0">
+	<div class="container">
+		<form class="m-3" action="reader-search">
+			<div class="input-group mt-3">
+				<select class="rounded-left btn-outline-primary"
+					id="inlineFormCustomSelect">
+					<option value="title">Book Title</option>
+					<option value="author">Author</option>
+					<option value="publisher">Publisher</option>
+					<option value="isbn">ISBN</option>
+				</select> <input type="text" name="searchContent"
+					class="form-control mr-3 rounded-right"
+					placeholder="Put some information here." aria-label="Search"
+					autocomplete="off">
+				<button class="btn btn-outline-primary" type="submit">Search</button>
 			</div>
-		</header>
-	
-		<main role="main" class="flex-shrink-0">
-			<div class="container">
-				<div class="sidebar">
-					<!-- 侧边导航栏，按目录检索 -->
+		</form>
+		<div class="row">
+			<nav class="col-md-10 offset-md-1 col-lg-3 offset-lg-0 sidebar">
+				<div class="mt-3 ml-3">
+					<ul class="list-group flex-column">
+						<li class="list-group-item"><a>Category 1</a></li>
+						<li class="list-group-item"><a>Category 2</a></li>
+						<li class="list-group-item"><a>Category 3</a></li>
+						<li class="list-group-item"><a>Category 4</a></li>
+						<li class="list-group-item"><a>Category 5</a></li>
+						<li class="list-group-item"><a>Category 1</a></li>
+						<li class="list-group-item"><a>Category 2</a></li>
+						<li class="list-group-item"><a>Category 3</a></li>
+						<li class="list-group-item"><a>Category 4</a></li>
+						<li class="list-group-item"><a>Category 5</a></li>
+						<li class="list-group-item"><a>Category 1</a></li>
+						<li class="list-group-item"><a>Category 2</a></li>
+						<li class="list-group-item"><a>Category 3</a></li>
+						<li class="list-group-item"><a>Category 4</a></li>
+						<li class="list-group-item"><a>Category 5</a></li>
+						<!-- 分类检索 -->
+					</ul>
 				</div>
-				<div class="container">
-					<form action="reader-search">
-						<div class="input-group mt-3">
-						    <select class="rounded-left btn-outline-primary" id="inlineFormCustomSelect">
-								<option value="title">Book Title</option>
-								<option value="author">Author</option>
-								<option value="publisher">Publisher</option>
-								<option value="isbn">ISBN</option>
-							</select>
-							<input type="text" name="searchContent" class="form-control mr-3 rounded-right" placeholder="Put some information here." aria-label="Search" autocomplete="off">
-						    <button class="btn btn-outline-primary" type="submit">Search</button>
-						</div>
-					</form>
-					<div class="py-3">
-						<ul class="list-group">
-							<s:iterator value="bookTable" status="L">
-								<li class="list-group-item d-flex justify-content-between align-items-center">
-									<div class="justify-content-left">
-										<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement ="bottom" data-html="true" title="<img src='http://img1.doubanio.com/view/subject/m/public/s1106934.jpg' height='250px'>">
+			</nav>
+			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+				<div class="py-3 mr-3">
+					<ul class="list-group">
+						<s:iterator value="bookTable" status="L">
+							<li class="list-group-item d-flex align-items-center">
+								<div class="just-content-left mr-3">
+									<img src="<s:property value="imgpath"></s:property>"
+										height="80px">
+								</div>
+								<div class="container">
+									<div class="row mb-2">
+										<h4 data-toggle="tooltip" data-placement="right"
+											data-html="true" title="<s:property value='description' />">
 											<s:property value="title" />
-										</button>
-										<a class="btn btn-primary badge badge-primary badge-pill" data-toggle="collapse" href="#collapseExample<s:property value="#L.index+1"></s:property>" role="button" aria-expanded="false" aria-controls="collapseExample">
-						    				
-						  				</a>
+										</h4>
 									</div>
-					  				
-					  				<div class="justify-content-right">
-					  					<span class="badge badge-primary"><s:property value="author" /></span>
-					  					<span class="badge badge-primary"><s:property value="publisher" /></span>
-						  				<span class="badge badge-secondary"><s:property value="location" /></span>
-										<span class="badge badge-primary badge-pill"><s:property value="restNumber" /></span>
-					  				</div>
-								</li>
-								<div class="collapse" id="collapseExample<s:property value="#L.index+1"></s:property>">
-									<div class="card card-body">
-										<!-- TODO: 完善book信息 -->
-										<s:property value="description" />
+									<div class="row">
+										<span class="badge badge-primary mr-2"><s:property
+												value="author" /></span> <span class="badge badge-primary mr-2"><s:property
+												value="publisher" /></span> <span class="badge badge-secondary"><s:property
+												value="location" /></span>
 									</div>
 								</div>
-							</s:iterator>
-						</ul>
-					</div>
+								<div>
+									<a class="btn btn-primary badge badge-primary badge-pill"
+										data-toggle="collapse"
+										href="#collapseExample<s:property value="#L.index+1"></s:property>"
+										role="button" aria-expanded="false"
+										aria-controls="collapseExample"><span
+										class="badge badge-primary badge-pill">View Holding</span></a>
+								</div>
+							</li>
+							<div class="collapse"
+								id="collapseExample<s:property value="#L.index+1"></s:property>">
+								<div class="card card-body">
+									<!-- TODO: 完善book馆藏信息 -->
+									<table>
+										<thead>
+
+										</thead>
+										<tbody>
+											<s:iterator>
+
+											</s:iterator>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</s:iterator>
+					</ul>
 				</div>
 			</div>
-		</main>
-	
-		<footer class="footer mt-auto">
-			<div class="container text-center py-3" style="background-color: #f5f5f5">
-				© 2019 <a href="http://www.nwpu.edu.cn/" target="_blank">NWPU</a> Mandarin-Library Automation
-			</div>
-		</footer>
-	
+		</div>
+	</div>
+	</main>
+
+	<footer class="footer mt-auto">
+		<div class="container text-center py-3"
+			style="background-color: #f5f5f5">
+			© 2019 <a href="http://www.nwpu.edu.cn/" target="_blank">NWPU</a>
+			Mandarin-Library Automation
+		</div>
+	</footer>
+
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="js/jquery-3.3.1.slim.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script>
-    	$(document).ready(function(){
-    		$('[data-toggle="tooltip"]').tooltip();
-    	});
-    </script>
+		$(document).ready(function() {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
 </body>
 </html>

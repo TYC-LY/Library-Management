@@ -16,8 +16,6 @@
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
 			<li class="nav-item"><a class="nav-link" href="search.jsp">Search</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Current Borrowing</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Borrowing History</a></li>
 		</ul>
 		<!-- <form class="form-inline my-2 my-lg-0">
 			<input class="form-control mr-sm-2" type="search"

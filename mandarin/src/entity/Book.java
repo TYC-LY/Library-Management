@@ -11,9 +11,11 @@ public class Book extends BaseEntity {
 	private String author;
 	private String publisher;
 	private String description;
-	private Float price;
+	private Boolean reservationState;
+	private Boolean borrowState;
 	private String location;
-	private int restNumber;
+	private String price;
+	private String imgpath;
 
 	public String getIsbn() {
 		return isbn;
@@ -55,11 +57,11 @@ public class Book extends BaseEntity {
 		this.description = description;
 	}
 
-	public Float getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(Float price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
@@ -71,12 +73,28 @@ public class Book extends BaseEntity {
 		this.location = location;
 	}
 
-	public int getRestNumber() {
-		return restNumber;
+	public String getImgpath() {
+		return imgpath;
 	}
 
-	public void setRestNumber(int restNumber) {
-		this.restNumber = restNumber;
+	public void setImgpath(String imgpath) {
+		this.imgpath = imgpath;
+	}
+
+	public Boolean getReservationState() {
+		return reservationState;
+	}
+
+	public void setReservationState(Boolean reservationState) {
+		this.reservationState = reservationState;
+	}
+
+	public Boolean getBorrowState() {
+		return borrowState;
+	}
+
+	public void setBorrowState(Boolean borrowState) {
+		this.borrowState = borrowState;
 	}
 
 }

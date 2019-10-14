@@ -9,6 +9,11 @@ import com.opensymphony.xwork2.ActionContext;
 import entity.Reader;
 import service.ReaderService;
 
+import utils.mail;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
 public class ReaderAction extends BaseAction<Reader, ReaderService> {
 
 	private static final long serialVersionUID = 1L;
@@ -19,12 +24,13 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 	public String signin() throws Exception {
 		String email = this.getModel().getEmail();
 		String password = this.getModel().getPassword();
+		
 		if(email == null) {
 			this.errorMessage="Please enter your email!";
 			return INPUT;
 		}
 		if(password==null) {
-			this.errorMessage="Please enter your password!";
+			this.errorMessage="???????";
 			return INPUT;
 		}
 		Reader reader = this.getService().verify(email, password);
@@ -32,11 +38,43 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 			Map<String, Object> session = ActionContext.getContext().getSession();
 			session.put("reader", reader);
 			setTempReader(reader);
-			return INPUT;
+			return SUCCESS;
 		}
-		this.errorMessage="Your email or password is wrong!";
+		this.errorMessage="////////";
 		return INPUT;
 	}
+	
+	public String login() throws Exception{
+		return SUCCESS;
+	}
+	public String logout() throws Exception{
+		ActionContext.getContext().getSession().clear();
+		System.out.println("***" + ActionContext.getContext().getSession().get("reader") + "***");
+		return SUCCESS;
+	}
+	
+	// zhao hai tang de signin
+//	public String signin() throws Exception {
+//		String email = this.getModel().getEmail();
+//		String password = this.getModel().getPassword();
+//		if (email == null) {
+//			this.errorMessage = "Please enter your email!";
+//			return INPUT;
+//		}
+//		if (password == null) {
+//			this.errorMessage = "Please enter your password!";
+//			return INPUT;
+//		}
+//		Reader reader = this.getService().verify(email, password);
+//		if (reader != null) {
+//			Map<String, Object> session = ActionContext.getContext().getSession();
+//			session.put("reader", reader);
+//			setTempReader(reader);
+//			return INPUT;
+//		}
+//		this.errorMessage = "Your email or password is wrong!";
+//		return INPUT;
+//	}
 
 	public String search() throws Exception {
 		if (this.searchContent == null) {
@@ -67,25 +105,54 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 	public String currentBorrowed() throws Exception {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		Reader reader = (Reader) session.get("reader");
-		if(reader != null) {
+		if (reader != null) {
 			System.out.println(reader.getId());
 			return SUCCESS;
-		}
-		else {
+		} else {
 			return "signin";
 		}
 	}
-	
+
 	public String borrowHistory() throws Exception {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		Reader reader = (Reader) session.get("reader");
-		if(reader != null) {
+		if (reader != null) {
 			System.out.println(reader.getId());
 			return SUCCESS;
-		}
-		else {
+		} else {
 			return "signin";
 		}
+	}
+
+	// 更改信息
+	public String changeInfo() {
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		Reader temReader = (Reader) session.get("reader");
+		String email = this.getModel().getEmail();
+		String password = this.getModel().getPassword();
+		String repeatpw = this.getModel().getRepeatpw();
+		if (email.isEmpty()) {
+			return INPUT;
+		} else if (password != repeatpw) {
+			return INPUT;
+		}
+		temReader.setEmail(email);
+		temReader.setPassword(password);
+		temReader.setRepeatpw(repeatpw);
+		// TODO
+		return SUCCESS;
+	}
+
+	public String reset() throws AddressException, MessagingException {
+//    	                String email = this.getModel().getEmail();
+//		if(email == null) {
+//			this.errorMessage="Please enter your email!";
+//			return INPUT;
+//		}
+		mail.main();
+//		Reader reader=this.getService().find(email);
+//		reader.setPassword("123456");
+		return INPUT;
 	}
 
 	// tempReader

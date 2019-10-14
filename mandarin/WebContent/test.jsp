@@ -44,6 +44,8 @@
 			</form>
 		</div>
 		
+		<img src="https://api.qrserver.com/v1/create-qr-code/?size=150%C3%97150&data=9787464654">
+		
 	</div>
 
     <!-- Optional JavaScript -->

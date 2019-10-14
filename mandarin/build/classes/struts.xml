@@ -20,9 +20,9 @@
 				<result name="input">/test-signin.jsp</result>
 			</action>
 			
-			<action name="reader-login" class="readerAction" method="signin">
+			<!-- <action name="reader-login" class="readerAction" method="signin">
 				<result name="input">/test-signin.jsp</result>
-			</action>
+			</action> -->
 			
 			<action name="reader-search" class="readerAction" method="search">
 				<!-- TODO: 搜索种类代完善，实现需更改视图（表单添加下拉框） -->
@@ -74,10 +74,32 @@
 		<!-- test.jsp================================================================= -->
 		
 		
-		<!-- ***.jsp================================================================= -->
+		<!-- profile.jsp================================================================= -->
 		
-		<!-- ***.jsp================================================================= -->
+			<action name="changeInfo" class="readerAction" method="changeInfo">
+				<result name="input">/changeInfo.jsp</result>
+				<result name="success">/index.jsp</result>
+			</action>
+			
+			<action name="reset" class="readerAction" method="reset">
+				<result name="input">/index.jsp</result>
+			</action>
 		
+		<!-- index.jsp================================================================= -->
+		
+			<action name="reader-login" class="readerAction" method="signin">
+				<result name="success">/index.jsp</result>
+				<result name="input">/test-login.jsp</result>
+			</action>
+		
+		
+			<action name="in" class="readerAction" method="login">
+				<result name="success">/test-login.jsp</result>
+			</action>
+			
+			<action name="out" class="readerAction" method="logout">
+				<result name="success">/index.jsp</result>
+			</action>
 	</package>
 	
 </struts>

@@ -20,5 +20,13 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 		return null;
 	}
 	
-
+	public  Reader find(String email) {
+		Reader reader=this.getDao().getSingle("email", email);
+		if (reader == null) {
+		return null;
+		}
+		return reader;
+		
+	}
+	
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+
+<head>
+  <script>
+    function $(id) {
+      return document.getElementById(id);
+    }
+    function textToImg() {
+      var len = 30;// 设置长度？？？
+      var i = 0;
+      var fontSize = 25;// 设置字号
+      var fontWeight = 'bold';// 设置粗细
+      var txt = $('txt').value;// 取文本框的值
+      var canvas = $('canvas');
+      if (len > txt.length) {
+        len = txt.length;
+      }
+      canvas.width = fontSize * len;
+      canvas.height = fontSize * (3 / 2)
+        * (Math.ceil(txt.length / len) + txt.split('\n').length - 1);
+      var context = canvas.getContext('2d');
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.font = fontWeight + ' ' + fontSize + 'px sans-serif';
+      context.textBaseline = 'top';
+      canvas.style.display = 'none';
+      console.log(txt.length);
+      function fillTxt(text) {
+        while (text.length > len) {
+          var txtLine = text.substring(0, len);
+          text = text.substring(len);
+          context.fillText(txtLine, 0, fontSize * (3 / 2) * i++,
+            canvas.width);
+        }
+        context.fillText(text, 0, fontSize * (3 / 2) * i, canvas.width);
+      }
+      var txtArray = txt.split('\n');
+      for (var j = 0; j < txtArray.length; j++) {
+        fillTxt(txtArray[j]);
+        context.fillText('\n', 0, fontSize * (3 / 2) * i++, canvas.width);
+      }
+      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      var img = $("img");
+      img.src = canvas.toDataURL("image/png");
+    }
+  </script>
+</head>
+
+<body>
+  <textarea id="txt">asdfasdfdsa</textarea>
+  <button onclick="textToImg();">开始</button>
+  <canvas id="canvas" style="display:block"></canvas>
+  <div><img id="img" style="border: 1px solid" /></div>
+</body>
+
+</html>

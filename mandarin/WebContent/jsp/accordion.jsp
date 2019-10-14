@@ -56,12 +56,20 @@
 									<br>
 									<li class="nav-item">
 										<!-- 按钮：用于打开链接 -->
-										<a href="/mandarin/jsp/Announcement_Management/Announcement_Management_Edit_Announcement_Main.jsp"><button type="button" class="btn btn-primary btn-block">Edit Announcement</button></a>
+										<a href="/mandarin/jsp/Announcement_Management/Announcement_Management_Edit_Announcement_Main.jsp">
+											<form action="viewAnnouncements_Edit">
+												<button type="submit" class="btn btn-primary btn-block">Edit Announcement</button>
+											</form>
+										</a>
 									</li>
 									<br>
 									<li class="nav-item">
 										<!-- 按钮：用于打开链接 -->
-										<a href="/mandarin/jsp/Announcement_Management/Announcement_Management_Delete_Announcement_Main.jsp"><button type="button" class="btn btn-primary btn-block">Delete Announcement</button></a>
+										<a href="/mandarin/jsp/Announcement_Management/Announcement_Management_Delete_Announcement_Main.jsp">
+											<form action="viewAnnouncements_Delete">
+												<button type="submit" class="btn btn-primary btn-block">Delete Announcement</button>
+											</form>
+										</a>
 									</li>
 								</ul>
 							</div>

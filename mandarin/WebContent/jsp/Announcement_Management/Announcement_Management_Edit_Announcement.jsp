@@ -3,32 +3,30 @@
 	
 	<form action="viewAnnouncements_Edit">
 		<button type="submit" class="btn btn-primary">refresh</button>
-	</form>		
+	</form>
 	
 	
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>ID</th>
 				<th>author</th>
 				<th>title</th>
+				<th>View</th>
 			</tr>
 		</thead>
 		<tbody>
 			<s:iterator value="announcements" status="">
 				<tr>
 					<form action="viewAnnouncement">
+								<input type="hidden" name="announcementId" readonly="readonly" value="<s:property value="id"/>"/>
 							<td>
-								<input name="announcementId" readonly="readonly" value="<s:property value="id"/>"/>
+								<s:property value="author"/>
 							</td>
 							<td>
-								<input name="author" readonly="readonly" value="<s:property value="author"/>"/>
+								<s:property value="title"/>
 							</td>
 							<td>
-								<input name="title"  readonly="readonly" value="<s:property value="title"/>"/>
-							</td>
-							<td>
-								<button type="submit" class="btn btn-primary">view</button>
+								<button type="submit" class="btn btn-primary">View</button>
 							</td>
 					</form>
 					<br>

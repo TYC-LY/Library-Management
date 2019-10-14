@@ -1,33 +1,29 @@
 <!-- col-sm-8 Delete Announcement -->
 <h1>Delete Announcement</h1>
-<p>
 	<form action="viewAnnouncements_Delete">
 		<button type="submit" class="btn btn-primary" >Refresh</button>
 	</form>
-</p>
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>ID</th>
 				<th>author</th>
 				<th>title</th>
+				<th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>
 			<s:iterator value="announcements" status="">
 				<tr>		
 					<form action="deleteAnnouncement">
+							<input type="hidden" name="id" readonly="readonly" value="<s:property value="id"/>"/>
 						<td>
-							<input name="id" readonly="readonly" value="<s:property value="id"/>"/>
+							<s:property value="author"/>
 						</td>
 						<td>
-							<input name="author" readonly="readonly" value="<s:property value="author"/>"/>
+							<s:property value="title"/>
 						</td>
 						<td>
-							<input name="title"  readonly="readonly" value="<s:property value="title"/>"/>
-						</td>
-						<td>
-							<button type="submit" class="btn btn-primary" >delete</button>
+							<button type="submit" class="btn btn-danger" >Delete</button>
 						</td>
 					</form>				
 					<br>

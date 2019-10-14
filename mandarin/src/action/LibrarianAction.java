@@ -50,4 +50,51 @@ public class LibrarianAction extends BaseAction<Librarian, LibrarianService> {
 		ActionContext.getContext().getSession().clear();
 		return SUCCESS;
 	}
+	
+
+	public String answerSecurityQuestion() throws Exception {
+		String username = this.getModel().getUsername();
+		String securityAnswer = this.getModel().getSecurityAnswer();
+		//System.out.println(username + securityAnswer);
+		Librarian librarian = this.getService().verifySecurityQuestion(username, securityAnswer);
+		if (librarian != null) {
+			Map<String, Object> session = ActionContext.getContext().getSession();
+			session.put("librarian", librarian);
+			return SUCCESS;
+		}
+		this.errorMessage = "Your answer is wrong!";
+		return INPUT;
+	}
+	
+	public String changePassword() throws Exception {
+		Map<String, Object> session = ActionContext.getContext().getSession();
+    	tempLibrarian = (Librarian) session.get("librarian");
+    	String password = this.getModel().getPassword();
+		String repeatpw = this.getModel().getRepeatpw();
+		if (password.equals(repeatpw)) {
+			tempLibrarian.setPassword(password);
+    	this.getService().mergeLibrarian(tempLibrarian);
+    	return SUCCESS;
+		}
+		//System.out.println(password+repeatpw);
+		this.errorMessage = "Please keep the same password!";
+		return INPUT;
+	}
+
+	public String getTempLibrarianId() {
+		return tempLibrarianId;
+	}
+
+	public void setTempLibrarianId(String tempLibrarianId) {
+		this.tempLibrarianId = tempLibrarianId;
+	}
+
+	public Librarian getTempLibrarian() {
+		return tempLibrarian;
+	}
+
+	public void setTempLibrarian(Librarian tempLibrarian) {
+		this.tempLibrarian = tempLibrarian;
+	}
+	
 }

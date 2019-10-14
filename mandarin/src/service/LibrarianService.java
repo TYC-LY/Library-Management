@@ -18,4 +18,6 @@ public interface LibrarianService {
 	
 	public List<Librarian> getAllUsers();
 	public void mergeLibrarian(Librarian librarian);
+
+	public Librarian verifySecurityQuestion(String username, String securityAnswer);
 }

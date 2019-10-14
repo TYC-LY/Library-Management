@@ -40,12 +40,24 @@ public class LibrarianServiceImpl extends BaseService<Librarian> implements Libr
 	@Override
 	public void mergeLibrarian(Librarian librarian) {
 		// TODO Auto-generated method stub
-		
+		this.getDao().merge(librarian);
 	}
 
 	@Override
 	public List<Librarian> getAllUsers() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+	public Librarian verifySecurityQuestion(String username, String securityAnswer) {
+		Librarian librarian = this.getDao().getSingle("username", username);
+		if(librarian == null) {
+			return null;
+		}
+		if(librarian.getSecurityAnswer().equals(securityAnswer)){
+			return librarian;
+		}
 		return null;
 	}
 }

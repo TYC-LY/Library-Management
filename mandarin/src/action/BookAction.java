@@ -63,6 +63,9 @@ public class BookAction extends BaseAction<Book, BookService> {
 		if(tempBook.getDescription() == null) {
 			tempBook.setDescription("There is no description about the book.");
 		}
+		if(tempBook.getImagePath() == null) {
+			tempBook.setImagePath("#");
+		}
 
 		return SUCCESS;
 	}
@@ -73,9 +76,11 @@ public class BookAction extends BaseAction<Book, BookService> {
 		String author = this.getModel().getAuthor();
 		String publisher = this.getModel().getPublisher();
 		String description = this.getModel().getDescription();
-		String location = this.getModel().getLocation();
+		String location_floor = this.getModel().getLocation_floor();
+		String location_stack = this.getModel().getLocation_stack();
 		String price = this.getModel().getPrice();
 		String categoryNo = this.getModel().getCategoryNo();
+		String imagePath = this.getModel().getImagePath();
 		if (ISBN.isEmpty()) {
 			this.errorMessage = "ISBN can not be empty";
 			return INPUT;
@@ -91,8 +96,11 @@ public class BookAction extends BaseAction<Book, BookService> {
 		} else if (description.isEmpty()) {
 			this.errorMessage = "description can not be empty";
 			return INPUT;
-		} else if (location.isEmpty()) {
-			this.errorMessage = "location can not be empty";
+		} else if (location_floor.isEmpty()) {
+			this.errorMessage = "location_floor can not be empty";
+			return INPUT;
+		} else if (location_stack.isEmpty()) {
+			this.errorMessage = "location_stack can not be empty";
 			return INPUT;
 		} else if (price.isEmpty()) {
 			this.errorMessage = "price can not be empty";
@@ -100,6 +108,8 @@ public class BookAction extends BaseAction<Book, BookService> {
 		} else if (categoryNo.isEmpty()) {
 			this.errorMessage = "categoryNo can not be empty";
 			return INPUT;
+		} else if (imagePath.isEmpty()) {
+			this.errorMessage = "imagePath can not be empty";
 		}
 
 		// add book
@@ -126,7 +136,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 			this.errorMessage = "failure to create the barcode";
 		}
 
-		String bookLocation = this.getModel().getLocation();
+		String bookLocation = "floor " + this.getModel().getLocation_floor() + " stack " + this.getModel().getLocation_stack();
 		// 生成the image of the bookLoaction
 		try {
 			FontImage.createImage(bookLocation, new Font("Arial", Font.BOLD, 72),
@@ -179,7 +189,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 		
 		// 根据idString和bookLocation生成对应的条形码和图片
 		String idString = String.valueOf(id);
-		String bookLocation = tempBook.getLocation();
+		String bookLocation = "floor " + this.getModel().getLocation_floor() + " stack " + this.getModel().getLocation_stack();
 		
 		// 生成barcode
 		try {

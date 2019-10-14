@@ -8,9 +8,11 @@ public class Book extends BaseEntity{
 	private String description;
 	private boolean reservationState;
 	private boolean borrowState;
-	private String location;
+	private String location_floor;
+	private String location_stack;
 	private String price;
 	private String categoryNo;
+	private String imagePath;
 	
 	public Book() {
 		super(0);
@@ -18,8 +20,9 @@ public class Book extends BaseEntity{
 	}
 
 	public Book(long id, String iSBN, String title, String author, String publisher, String description,
-			boolean reservationState, boolean borrowState, String location, String price, String categoryNo) {
-		this();
+			boolean reservationState, boolean borrowState, String location_floor, String location_stack, String price,
+			String categoryNo, String imagePath) {
+		super(id);
 		ISBN = iSBN;
 		this.title = title;
 		this.author = author;
@@ -27,10 +30,38 @@ public class Book extends BaseEntity{
 		this.description = description;
 		this.reservationState = reservationState;
 		this.borrowState = borrowState;
-		this.location = location;
+		this.location_floor = location_floor;
+		this.location_stack = location_stack;
 		this.price = price;
 		this.categoryNo = categoryNo;
+		this.imagePath = imagePath;
 	}
+
+
+
+	public String getLocation_floor() {
+		return location_floor;
+	}
+
+
+
+	public void setLocation_floor(String location_floor) {
+		this.location_floor = location_floor;
+	}
+
+
+
+	public String getLocation_stack() {
+		return location_stack;
+	}
+
+
+
+	public void setLocation_stack(String location_stack) {
+		this.location_stack = location_stack;
+	}
+
+
 
 	/**
 	 * @return the iSBN
@@ -131,20 +162,6 @@ public class Book extends BaseEntity{
 	}
 
 	/**
-	 * @return the location
-	 */
-	public String getLocation() {
-		return location;
-	}
-
-	/**
-	 * @param location the location to set
-	 */
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	/**
 	 * @return the price
 	 */
 	public String getPrice() {
@@ -170,6 +187,14 @@ public class Book extends BaseEntity{
 	 */
 	public void setCategoryNo(String categoryNo) {
 		this.categoryNo = categoryNo;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	
 	

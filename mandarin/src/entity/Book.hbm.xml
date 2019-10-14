@@ -13,9 +13,10 @@
 		<property name="description" type="text" length="100" not-null="true" />
 		<property name="reservationState" type="boolean"  not-null="true" />
 		<property name="borrowState" type="boolean"  not-null="true" />
-		<property name="location" type="string" length="100" not-null="true" />
+		<property name="location_floor" type="string" length="100" not-null="true" />
+		<property name="location_stack" type="string" length="100" not-null="true" />
 		<property name="price" type="string" length="100" not-null="true" />
 		<property name="categoryNo" type="string" length="100" not-null="true" />
-				
+		<property name="imagePath" type="string" length="100" not-null="true" />
 	</class>
 </hibernate-mapping>

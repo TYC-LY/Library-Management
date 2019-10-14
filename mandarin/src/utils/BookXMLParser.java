@@ -51,6 +51,10 @@ public class BookXMLParser extends DefaultHandler {
 			attname = atts.getValue("name");
 		} else if (name.equalsIgnoreCase("db:tag")) {
 			tags.add(atts.getValue("name"));
+		} else if (name.equalsIgnoreCase("link")) {
+			if ("image".equalsIgnoreCase(atts.getValue("rel"))) {
+				book.setImagePath(atts.getValue("href"));
+			}
 		}
 		buff.setLength(0);
 	}

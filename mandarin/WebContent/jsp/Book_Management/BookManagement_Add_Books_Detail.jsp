@@ -12,12 +12,25 @@
 						<input class="form-control" name="publisher" type="text" placeholder="publisher" required autofocus="" value="<s:property value="tempBook.publisher"/>" >
 						<label for="description">description:</label>
 						<input class="form-control" name="description" type="text" placeholder="description" required autofocus="" value="<s:property value="tempBook.description"/>" >
-						<label for="location">location:</label>
-						<input class="form-control" name="location" type="text" placeholder="location" required autofocus="" >
+						<label for="location_floor">location_floor:</label>
+				        <select class="form-control" id="location_floor" name="location_floor">
+				          <option value="1">1</option>
+				          <option value="2">2</option>
+				          <option value="3">3</option>
+				          <option value="4">4</option>
+				        </select>
+				        <label for="location_stack">location_stack:</label>
+				        <select class="form-control" id="location_stack" name="location_stack">
+				          <option value="1">1</option>
+				          <option value="2">2</option>
+				          <option value="3">3</option>
+				          <option value="4">4</option>
+				        </select>
 						<label for="price">price:</label>
 						<input class="form-control" name="price" type="text" placeholder="price" required autofocus="" value="<s:property value="tempBook.price"/>" >
 						<label for="categoryNo">categoryNo:</label>
 						<input class="form-control" name="categoryNo" type="text" placeholder="categoryNo" required autofocus="" >
+						<input class="form-control" name="imagePath" type="hidden" value="<s:property value="tempBook.imagePath"/>">
 					</div>
 					
 					<h1><p class="text-success"><s:property value="errorMessage"/></p></h1>

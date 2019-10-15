@@ -63,6 +63,15 @@
 			<result name="success" >/jsp/Book_Management/BookManagement_Add_Books_Image_Main.jsp</result>
 			<result name="input">/jsp/Book_Management/BookManagement_Add_Books_Image_Main.jsp</result>
 		</action>
+		
+		<!-- Book Management Search Books -->
+		<action name="BookManagement_Search_Books" class="BookAction" method="bookManagement_Search_Books">
+			<result name="delete">/jsp/Book_Management/Book_Management_Delete_Book_Main.jsp</result>
+			<result name="edit">/jsp/Book_Management/Book_Management_Edit_Book_Main.jsp</result>
+			<result name="success">/jsp/Book_Management/Book_Management_Delete_Book_Main.jsp</result>
+			<result name="input">/test.jsp</result>
+		</action>
+		
 		<!-- Book Management -->
 		
 		<!-- Announcement -->

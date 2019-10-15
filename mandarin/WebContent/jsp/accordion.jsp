@@ -34,7 +34,15 @@
 										<!-- 按钮：用于打开模态框 -->
 										<button type="button" class="btn btn-primary btn-block"
 											data-toggle="modal" data-target="#AddBook">Add Book</button>
-										<br>
+									</li>
+									<br>
+									
+									<li>
+										<a href="/mandarin/jsp/Book_Management/Book_Management_Delete_Book_Main.jsp">
+											<button class="btn btn-primary btn-block">Delete Book</button>
+										</a>
+									</li>
+									
 								</ul>
 
 							</div>

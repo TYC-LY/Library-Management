@@ -26,6 +26,13 @@
 				          <option value="3">3</option>
 				          <option value="4">4</option>
 				        </select>
+				        <label for="location_area">location_area:</label>
+				        <select class="form-control" id="location_area" name="location_area">
+				          <option value="1">1</option>
+				          <option value="2">2</option>
+				          <option value="3">3</option>
+				          <option value="4">4</option>
+				        </select>
 						<label for="price">price:</label>
 						<input class="form-control" name="price" type="text" placeholder="price" required autofocus="" value="<s:property value="tempBook.price"/>" >
 						<label for="categoryNo">categoryNo:</label>

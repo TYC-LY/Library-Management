@@ -10,6 +10,7 @@ public class Book extends BaseEntity{
 	private boolean borrowState;
 	private String location_floor;
 	private String location_stack;
+	private String location_area;
 	private String price;
 	private String categoryNo;
 	private String imagePath;
@@ -20,8 +21,8 @@ public class Book extends BaseEntity{
 	}
 
 	public Book(long id, String iSBN, String title, String author, String publisher, String description,
-			boolean reservationState, boolean borrowState, String location_floor, String location_stack, String price,
-			String categoryNo, String imagePath) {
+			boolean reservationState, boolean borrowState, String location_floor, String location_stack,
+			String location_area, String price, String categoryNo, String imagePath) {
 		super(id);
 		ISBN = iSBN;
 		this.title = title;
@@ -32,12 +33,11 @@ public class Book extends BaseEntity{
 		this.borrowState = borrowState;
 		this.location_floor = location_floor;
 		this.location_stack = location_stack;
+		this.location_area = location_area;
 		this.price = price;
 		this.categoryNo = categoryNo;
 		this.imagePath = imagePath;
 	}
-
-
 
 	public String getLocation_floor() {
 		return location_floor;
@@ -195,6 +195,14 @@ public class Book extends BaseEntity{
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public String getLocation_area() {
+		return location_area;
+	}
+
+	public void setLocation_area(String location_area) {
+		this.location_area = location_area;
 	}
 	
 	

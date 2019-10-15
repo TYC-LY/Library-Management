@@ -15,7 +15,7 @@
 <img src="D:/booklocation/<s:property value="id"/>.png">
 <br>
 
-<p class="text-success"><s:property value="errorMessage"/></p>
+<h2 class="text-success"><s:property value="errorMessage"/></h2>
 
 <form action="BookManagement_Add_Books_Copy">
 	<button class="btn btn-primary" name="submit" type="submit">Add

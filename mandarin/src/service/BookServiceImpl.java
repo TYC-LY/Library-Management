@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import entity.Book;
 
 public class BookServiceImpl extends BaseService<Book> implements BookService{
@@ -14,5 +16,11 @@ public class BookServiceImpl extends BaseService<Book> implements BookService{
 		book.setReservationState(false);
 		book.setBorrowState(false);
 		this.getDao().saveCopy(book);
+	}
+
+	@Override
+	public List<Book> searchBook(String condition, String content) {
+		// TODO Auto-generated method stub
+		return this.getDao().findBy(condition, content);
 	}
 }

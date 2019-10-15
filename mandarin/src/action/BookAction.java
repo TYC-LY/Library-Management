@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -32,6 +33,9 @@ public class BookAction extends BaseAction<Book, BookService> {
 	private Book tempBook;
 	private String url = "http://api.douban.com/book/subject/isbn/";
 	private String apikey = "0b2bdeda43b5688921839c8ecb20399b";
+	private String condition;											//用来保存下拉框名称
+	private String content;											//用来保存下拉框内容
+	private List<Book> books;
 
 	public String bookManagement_Find_Book_Detail() throws Exception {
 
@@ -44,26 +48,26 @@ public class BookAction extends BaseAction<Book, BookService> {
 		HttpEntity entity = response.getEntity();
 		InputStream is = entity.getContent();
 		this.tempBook = new BookXMLParser(is).getBook();
-		
-		if(tempBook.getTitle() == null) {
+
+		if (tempBook.getTitle() == null) {
 			tempBook.setTitle("null");
 		}
-		if(tempBook.getAuthor() == null) {
+		if (tempBook.getAuthor() == null) {
 			tempBook.setAuthor("null");
 		}
-		if(tempBook.getPrice() == null) {
+		if (tempBook.getPrice() == null) {
 			tempBook.setPrice("null");
 		}
-		if(tempBook.getPublisher() == null) {
+		if (tempBook.getPublisher() == null) {
 			tempBook.setPublisher("null");
 		}
-		if(tempBook.getISBN() == null) {
+		if (tempBook.getISBN() == null) {
 			tempBook.setISBN("null");
 		}
-		if(tempBook.getDescription() == null) {
+		if (tempBook.getDescription() == null) {
 			tempBook.setDescription("There is no description about the book.");
 		}
-		if(tempBook.getImagePath() == null) {
+		if (tempBook.getImagePath() == null) {
 			tempBook.setImagePath("#");
 		}
 
@@ -78,6 +82,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 		String description = this.getModel().getDescription();
 		String location_floor = this.getModel().getLocation_floor();
 		String location_stack = this.getModel().getLocation_stack();
+		String location_area = this.getModel().getLocation_area();
 		String price = this.getModel().getPrice();
 		String categoryNo = this.getModel().getCategoryNo();
 		String imagePath = this.getModel().getImagePath();
@@ -102,6 +107,9 @@ public class BookAction extends BaseAction<Book, BookService> {
 		} else if (location_stack.isEmpty()) {
 			this.errorMessage = "location_stack can not be empty";
 			return INPUT;
+		} else if (location_area.isEmpty()) {
+			this.errorMessage = "location_area can not be empty";
+			return INPUT;
 		} else if (price.isEmpty()) {
 			this.errorMessage = "price can not be empty";
 			return INPUT;
@@ -118,7 +126,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 			Map<String, Object> session = ActionContext.getContext().getSession();
 			session.put("book", this.getModel());
 			tempBook = this.getModel();
-			
+
 		} catch (Exception ex) {
 			this.addActionError(ex.getMessage());
 			this.errorMessage = "failure";
@@ -136,7 +144,8 @@ public class BookAction extends BaseAction<Book, BookService> {
 			this.errorMessage = "failure to create the barcode";
 		}
 
-		String bookLocation = "floor " + this.getModel().getLocation_floor() + " stack " + this.getModel().getLocation_stack();
+		String bookLocation = "floor " + this.getModel().getLocation_floor() + " stack "
+				+ this.getModel().getLocation_stack() + " area " + this.getModel().getLocation_area();
 		// 生成the image of the bookLoaction
 		try {
 			FontImage.createImage(bookLocation, new Font("Arial", Font.BOLD, 72),
@@ -151,11 +160,11 @@ public class BookAction extends BaseAction<Book, BookService> {
 	}
 
 	public String bookManagement_Add_Books_Copy() throws Exception {
-		
+
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		tempBook = (Book) session.get("book");
 		ActionContext.getContext().getSession().clear();
-		tempBook.setId(tempBook.getId()+1);
+		tempBook.setId(tempBook.getId() + 1);
 		// borrowState reservationState在addBook(service)中设置
 //		this.getModel().setAuthor(tempBook.getAuthor());
 //		this.getModel().setCategoryNo(tempBook.getCategoryNo());
@@ -169,7 +178,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 		// add book
 		try {
 			this.getService().addBookCopy(tempBook);
-			
+
 			Map<String, Object> session2 = ActionContext.getContext().getSession();
 			session2.put("book", tempBook);
 			//
@@ -181,16 +190,17 @@ public class BookAction extends BaseAction<Book, BookService> {
 		}
 
 		long id = tempBook.getId();
-		
+
 		// 点击add copy之后，新增的书的id变为原书的id+1
 		// 系统默认id为0
 		// 设置id的值才能保证前端页面的src能找到对应的图片
 		this.getModel().setId(id);
-		
+
 		// 根据idString和bookLocation生成对应的条形码和图片
 		String idString = String.valueOf(id);
-		String bookLocation = "floor " + this.getModel().getLocation_floor() + " stack " + this.getModel().getLocation_stack();
-		
+		String bookLocation = "floor " + this.getModel().getLocation_floor() + " stack "
+				+ this.getModel().getLocation_stack() + " area " + this.getModel().getLocation_area();
+
 		// 生成barcode
 		try {
 			BufferedImage image = BarCodeUtils.insertWords(BarCodeUtils.getBarCode(idString), idString);
@@ -199,7 +209,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 			this.addActionError(ioex.getMessage());
 			this.errorMessage = "failure to create the barcode";
 		}
-		
+
 		// 生成the image of the bookLoaction
 		try {
 			FontImage.createImage(bookLocation, new Font("Arial", Font.BOLD, 72),
@@ -214,12 +224,80 @@ public class BookAction extends BaseAction<Book, BookService> {
 
 	}
 
+	// SearchBook
+	public String bookManagement_Search_Books() throws Exception {
+
+		this.condition = this.getCondition();
+		this.content = this.getContent();
+
+		// System.out.println(condition);
+		// System.out.println(content);
+
+		// if(condition == "ISBN") {
+		// content = this.getModel().getISBN();
+		// }
+		// else if(condition == "title") {
+		// content = this.getModel().getTitle();
+		// }
+		// else if(condition == "author") {
+		// content = this.getModel().getAuthor();
+		// }
+
+		try {
+			this.setBooks(this.getService().searchBook(condition, content));
+		} catch (Exception ex) {
+			this.addActionError(ex.getMessage());
+			this.errorMessage = "failure";
+			return INPUT;
+		}
+
+		this.errorMessage = "success";
+		return SUCCESS;
+
+	}
+
 	public Book getTempBook() {
 		return tempBook;
 	}
 
 	public void setTempBook(Book tempBook) {
 		this.tempBook = tempBook;
+	}
+
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+
+	/**
+	 * @return the condition
+	 */
+	public String getCondition() {
+		return condition;
+	}
+
+	/**
+	 * @param condition the condition to set
+	 */
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
+	/**
+	 * @return the content
+	 */
+	public String getContent() {
+		return content;
+	}
+
+	/**
+	 * @param content the content to set
+	 */
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }

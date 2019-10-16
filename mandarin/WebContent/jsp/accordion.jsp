@@ -38,11 +38,28 @@
 									<br>
 									
 									<li>
-										<a href="/mandarin/jsp/Book_Management/Book_Management_Delete_Book_Main.jsp">
+										<a href="/mandarin/jsp/Book_Management/Book_Management_Delete_Books_Main.jsp">
 											<button class="btn btn-primary btn-block">Delete Book</button>
 										</a>
 									</li>
+									<br>
 									
+									<li class="nav-item">
+										<!-- 按钮：用于打开链接 -->
+										<a href="/mandarin/jsp/Book_Management/Book_Management_Edit_Books_Main.jsp">
+												<button type="button" class="btn btn-primary btn-block">Edit Book</button>
+										</a>
+									</li>
+									<br>
+									<li class="nav-item">
+										<!-- 按钮：用于打开链接 -->
+										<form action="viewDeletionRecord">
+											<a href="/mandarin/jsp/Book_Management/Book_Management_Delete_Books_DeltionRecord_Main.jsp">
+												<button type="submit" class="btn btn-primary btn-block">Book Deletion Record</button>
+											</a>
+										</form>
+									</li>
+									<br>
 								</ul>
 
 							</div>

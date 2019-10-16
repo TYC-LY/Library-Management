@@ -35,7 +35,7 @@
 				<jsp:include page="/jsp/sidebar.jsp" flush="true" />
 			</div>
 			<div class="col-sm-8">
-				<%@include file="/jsp/Book_Management/Book_Management_Delete_Book.jsp" %>
+				<%@include file="/jsp/Book_Management/Book_Management_Delete_Books.jsp" %>
 			</div>
 		</div>
 	</div>

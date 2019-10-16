@@ -12,4 +12,7 @@ public interface BookService {
 
 	public List<Book> searchBook(String condition, String content);
 
+	public void deleteBookById(long id);
+	
+	public void updateBook(Book book);
 }

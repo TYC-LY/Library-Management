@@ -66,12 +66,35 @@
 		
 		<!-- Book Management Search Books -->
 		<action name="BookManagement_Search_Books" class="BookAction" method="bookManagement_Search_Books">
-			<result name="delete">/jsp/Book_Management/Book_Management_Delete_Book_Main.jsp</result>
-			<result name="edit">/jsp/Book_Management/Book_Management_Edit_Book_Main.jsp</result>
-			<result name="success">/jsp/Book_Management/Book_Management_Delete_Book_Main.jsp</result>
-			<result name="input">/test.jsp</result>
+			<result name="delete">/jsp/Book_Management/Book_Management_Delete_Books_Main.jsp</result>
+			<result name="edit">/jsp/Book_Management/Book_Management_Edit_Books_Main.jsp</result>
+			<result name="success">/logout.jsp</result>
+			<result name="input">/logout.jsp</result>
 		</action>
 		
+		<!-- Book Management Delete Books -->
+		<action name="BookManagement_Delete_Books" class="BookAction" method="bookManagement_Detele_Books">
+			<result name="success" type="chain">
+				<param name="actionName">createDeltionRecord</param>
+			</result>
+			<result name="input">/jsp/Book_Management/Book_Management_Delete_Books_Main.jsp</result>
+		</action>
+		
+		<!-- Book Management Edit Books -->
+		<action name="BookManagement_Edit_Books" class="BookAction" method="bookManagement_Edit_Books">
+			<result name="success">/jsp/Book_Management/Book_Management_Edit_Books_Main.jsp</result>
+			<result name="failure">/jsp/Book_Management/Book_Management_Edit_Books_Main.jsp</result>
+			<result name="input">/logout.jsp</result>		
+		</action>
+		
+		<!-- BookDeleteRecord Management -->
+		<action name="createDeltionRecord" class="BookDeleteRecordAction" method="addRecord">
+			<result name="success">/jsp/Book_Management/Book_Management_Delete_Books_Main.jsp</result>
+		</action>
+		
+		<action name="viewDeletionRecord" class="BookDeleteRecordAction" method="viewRecord">
+			<result name="success" >/jsp/Book_Management/Book_Management_Delete_Books_DeletionRecord_Main.jsp</result>
+		</action>
 		<!-- Book Management -->
 		
 		<!-- Announcement -->

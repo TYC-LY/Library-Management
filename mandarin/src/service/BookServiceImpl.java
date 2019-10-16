@@ -23,4 +23,15 @@ public class BookServiceImpl extends BaseService<Book> implements BookService{
 		// TODO Auto-generated method stub
 		return this.getDao().findBy(condition, content);
 	}
+	
+	public void deleteBookById(long id) {
+		this.getDao().delete(id);
+	}
+	
+	public void updateBook(Book book) {
+		book.setReservationState(false);
+		book.setBorrowState(false);
+		book.setImagePath("6657");
+		this.getDao().merge(book);
+	}
 }

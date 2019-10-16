@@ -23,7 +23,7 @@
 	<!-- adminAction 用户操作的控制器对象 -->
 	<bean id="adminModel" class="entity.Admin"
 		scope="prototype" />
-	<bean id="adminAction" class="action.AdminAction"
+	<bean id="AdminAction" class="action.AdminAction"
 		scope="prototype">
 		<property name="service" ref="adminService" />
 		<property name="model" ref="adminModel" />
@@ -114,5 +114,25 @@
 		scope="prototype">
 		<property name="service" ref="announcementService" />
 		<property name="model" ref="announcementModel" />
+	</bean>
+	
+	<!-- BookDeleteRecord的层级结构 -->
+	<!-- BookDeleteRecord的Dao,Service,Action -->
+	<bean id="bookDeleteRecordDao" class="dao.BookDeleteRecordDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- BookDeleteRecordService 用户操作的业务对象 -->
+	<bean id="bookDeleteRecordService"
+		class="service.BookDeleteRecordServiceImpl">
+		<property name="dao" ref="bookDeleteRecordDao" />
+	</bean>
+	<!-- BookDeleteRecordAction 用户操作的控制器对象 -->
+	<bean id="bookDeleteRecordModel" class="entity.BookDeleteRecord"
+		scope="prototype" />
+		
+	<bean id="BookDeleteRecordAction" class="action.BookDeleteRecordAction"
+		scope="prototype">
+		<property name="service" ref="bookDeleteRecordService" />
+		<property name="model" ref="bookDeleteRecordModel" />
 	</bean>
 </beans>

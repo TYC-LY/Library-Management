@@ -36,6 +36,8 @@ public class BookAction extends BaseAction<Book, BookService> {
 	private String condition;											//用来保存下拉框名称
 	private String content;											//用来保存下拉框内容
 	private List<Book> books;
+	private String pageState;
+	private long tempBookId;
 
 	public String bookManagement_Find_Book_Detail() throws Exception {
 
@@ -229,6 +231,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 
 		this.condition = this.getCondition();
 		this.content = this.getContent();
+		this.pageState = this.getPageState();
 
 		// System.out.println(condition);
 		// System.out.println(content);
@@ -250,12 +253,60 @@ public class BookAction extends BaseAction<Book, BookService> {
 			this.errorMessage = "failure";
 			return INPUT;
 		}
+		if(pageState.equals("edit")){
+			return "edit";
+		}
+		else if(pageState.equals("delete")){
+			return "delete";
+		}
 
 		this.errorMessage = "success";
 		return SUCCESS;
 
 	}
 
+public String bookManagement_Detele_Books() throws Exception{
+		
+		boolean borrowState = this.getModel().isBorrowState();
+		boolean reservationState = this.getModel().isReservationState();
+//		
+//		System.out.println(borrowState);
+//		System.out.println(reservationState);
+//		System.out.println(this.getModel().getTitle());
+//		System.out.println(this.getModel().getISBN());
+//		
+		if(borrowState == false && reservationState == false){
+			this.getService().deleteBookById(this.getTempBookId());
+			return SUCCESS;
+		}
+		
+		this.errorMessage = "The book can't be deleted because it has been borrowed or reserved";
+		return INPUT;
+					
+	}
+	
+	public String bookManagement_Edit_Books() throws Exception{
+		
+		boolean borrowState = this.getModel().isBorrowState();
+		boolean reservationState = this.getModel().isReservationState();
+
+		try{
+			if(borrowState==false&&reservationState==false){
+				this.getService().updateBook(this.getModel());
+				return SUCCESS;
+			}
+			this.errorMessage = "The book can't be edited because it has been borrowed or reserved";
+			return "failure";
+			
+		}
+		catch(Exception ex) {
+			this.addActionError(ex.getMessage());
+			this.errorMessage="failure";
+			return INPUT;
+		}
+		
+	}
+		
 	public Book getTempBook() {
 		return tempBook;
 	}
@@ -298,6 +349,22 @@ public class BookAction extends BaseAction<Book, BookService> {
 	 */
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getPageState() {
+		return pageState;
+	}
+
+	public void setPageState(String pageState) {
+		this.pageState = pageState;
+	}
+
+	public long getTempBookId() {
+		return tempBookId;
+	}
+
+	public void setTempBookId(long tempBookId) {
+		this.tempBookId = tempBookId;
 	}
 
 }

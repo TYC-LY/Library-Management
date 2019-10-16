@@ -5,8 +5,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 
@@ -38,6 +40,26 @@ public class BookAction extends BaseAction<Book, BookService> {
 	private List<Book> books;
 	private String pageState;
 	private long tempBookId;
+	private long book_copy_number;
+	private List<BookCopy> idList;
+	private BookCopy tempBookCopy;
+	// 用于在BookMangement_Add_Books_Image界面显示对应的id
+	private class BookCopy {
+		private long idCopy;
+		
+		public BookCopy(long idCopy) {
+			super();
+			this.idCopy = idCopy;
+		}
+
+		public long getIdCopy() {
+			return idCopy;
+		}
+
+		public void setIdCopy(long idCopy) {
+			this.idCopy = idCopy;
+		}
+	}
 
 	public String bookManagement_Find_Book_Detail() throws Exception {
 
@@ -77,6 +99,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 	}
 
 	public String bookManagement_Add_Books() throws Exception {
+		
 		String ISBN = this.getModel().getISBN();
 		String title = this.getModel().getTitle();
 		String author = this.getModel().getAuthor();
@@ -128,7 +151,13 @@ public class BookAction extends BaseAction<Book, BookService> {
 			Map<String, Object> session = ActionContext.getContext().getSession();
 			session.put("book", this.getModel());
 			tempBook = this.getModel();
-
+			this.idList = new ArrayList<BookCopy>();
+			this.tempBookCopy = new BookCopy(tempBook.getId());
+			idList.add(tempBookCopy);
+			
+			// test
+			System.out.println(tempBook.getId());
+			
 		} catch (Exception ex) {
 			this.addActionError(ex.getMessage());
 			this.errorMessage = "failure";
@@ -136,6 +165,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 		}
 
 		long id = this.getModel().getId();
+		
 		String idString = String.valueOf(id);
 		// 生成barcode
 		try {
@@ -162,68 +192,79 @@ public class BookAction extends BaseAction<Book, BookService> {
 	}
 
 	public String bookManagement_Add_Books_Copy() throws Exception {
+		
+		this.book_copy_number = this.getBook_copy_number();
+		this.idList = new ArrayList<BookCopy>();
+		
+		// 循环加入书本
+		for(long i=0; i <= book_copy_number; i++) {
 
-		Map<String, Object> session = ActionContext.getContext().getSession();
-		tempBook = (Book) session.get("book");
-		ActionContext.getContext().getSession().clear();
-		tempBook.setId(tempBook.getId() + 1);
-		// borrowState reservationState在addBook(service)中设置
-//		this.getModel().setAuthor(tempBook.getAuthor());
-//		this.getModel().setCategoryNo(tempBook.getCategoryNo());
-//		this.getModel().setDescription(tempBook.getDescription());
-//		this.getModel().setISBN(tempBook.getISBN());
-//		this.getModel().setLocation(tempBook.getLocation());
-//		this.getModel().setPrice(tempBook.getPrice());
-//		this.getModel().setPublisher(tempBook.getPublisher());
-//		this.getModel().setTitle(tempBook.getTitle());
+			Map<String, Object> session = ActionContext.getContext().getSession();
+			tempBook = (Book) session.get("book");
+			ActionContext.getContext().getSession().clear();
+			tempBook.setId(tempBook.getId() + 1);
+			
+			this.tempBookCopy = new BookCopy(tempBook.getId());
+			idList.add(tempBookCopy);
+			
+			// borrowState reservationState在addBook(service)中设置
+//			this.getModel().setAuthor(tempBook.getAuthor());
+//			this.getModel().setCategoryNo(tempBook.getCategoryNo());
+//			this.getModel().setDescription(tempBook.getDescription());
+//			this.getModel().setISBN(tempBook.getISBN());
+//			this.getModel().setLocation(tempBook.getLocation());
+//			this.getModel().setPrice(tempBook.getPrice());
+//			this.getModel().setPublisher(tempBook.getPublisher());
+//			this.getModel().setTitle(tempBook.getTitle());
 
-		// add book
-		try {
-			this.getService().addBookCopy(tempBook);
+			// add book
+			try {
+				this.getService().addBookCopy(tempBook);
 
-			Map<String, Object> session2 = ActionContext.getContext().getSession();
-			session2.put("book", tempBook);
-			//
-//			tempBook = this.getModel();
-		} catch (Exception ex) {
-			this.addActionError(ex.getMessage());
-			this.errorMessage = "failure";
-			return INPUT;
+				Map<String, Object> session2 = ActionContext.getContext().getSession();
+				session2.put("book", tempBook);
+				//
+//				tempBook = this.getModel();
+			} catch (Exception ex) {
+				this.addActionError(ex.getMessage());
+				this.errorMessage = "failure";
+				return INPUT;
+			}
+
+			long id = tempBook.getId();
+
+			// 点击add copy之后，新增的书的id变为原书的id+1
+			// 系统默认id为0
+			// 设置id的值才能保证前端页面的src能找到对应的图片
+
+			// 根据idString和bookLocation生成对应的条形码和图片
+			String idString = String.valueOf(id);
+			String bookLocation = "floor " + tempBook.getLocation_floor() + " stack "
+					+ tempBook.getLocation_stack() + " area " + tempBook.getLocation_area();
+
+			// 生成barcode
+			try {
+				BufferedImage image = BarCodeUtils.insertWords(BarCodeUtils.getBarCode(idString), idString);
+				ImageIO.write(image, "jpg", new File("D://barcode//" + idString + ".jpg"));
+			} catch (IOException ioex) {
+				this.addActionError(ioex.getMessage());
+				this.errorMessage = "failure to create the barcode";
+			}
+
+			// 生成the image of the bookLoaction
+			try {
+				FontImage.createImage(bookLocation, new Font("Arial", Font.BOLD, 72),
+						new File("d:/booklocation/" + idString + ".png"), bookLocation.length() * 40, 200);
+			} catch (IOException ioex) {
+				this.addActionError(ioex.getMessage());
+				this.errorMessage = "failure to create the image of the book location";
+			}
+
 		}
+		
 
-		long id = tempBook.getId();
-
-		// 点击add copy之后，新增的书的id变为原书的id+1
-		// 系统默认id为0
-		// 设置id的值才能保证前端页面的src能找到对应的图片
-		this.getModel().setId(id);
-
-		// 根据idString和bookLocation生成对应的条形码和图片
-		String idString = String.valueOf(id);
-		String bookLocation = "floor " + this.getModel().getLocation_floor() + " stack "
-				+ this.getModel().getLocation_stack() + " area " + this.getModel().getLocation_area();
-
-		// 生成barcode
-		try {
-			BufferedImage image = BarCodeUtils.insertWords(BarCodeUtils.getBarCode(idString), idString);
-			ImageIO.write(image, "jpg", new File("D://barcode//" + idString + ".jpg"));
-		} catch (IOException ioex) {
-			this.addActionError(ioex.getMessage());
-			this.errorMessage = "failure to create the barcode";
-		}
-
-		// 生成the image of the bookLoaction
-		try {
-			FontImage.createImage(bookLocation, new Font("Arial", Font.BOLD, 72),
-					new File("d:/booklocation/" + idString + ".png"), bookLocation.length() * 40, 200);
-		} catch (IOException ioex) {
-			this.addActionError(ioex.getMessage());
-			this.errorMessage = "failure to create the image of the book location";
-		}
-
-		this.errorMessage = "succeed to copy the book";
+		this.errorMessage = "Succeed to add " + String.valueOf(book_copy_number) +" copy the book";
 		return SUCCESS;
-
 	}
 
 	// SearchBook
@@ -367,4 +408,40 @@ public String bookManagement_Detele_Books() throws Exception{
 		this.tempBookId = tempBookId;
 	}
 
+	/**
+	 * @return the book_copy_number
+	 */
+	public long getBook_copy_number() {
+		return book_copy_number;
+	}
+
+	/**
+	 * @param book_copy_number the book_copy_number to set
+	 */
+	public void setBook_copy_number(long book_copy_number) {
+		this.book_copy_number = book_copy_number;
+	}
+
+	/**
+	 * @return the idList
+	 */
+	public List<BookCopy> getIdList() {
+		return idList;
+	}
+
+	/**
+	 * @param idList the idList to set
+	 */
+	public void setIdList(List<BookCopy> idList) {
+		this.idList = idList;
+	}
+
+	public BookCopy getTempBookCopy() {
+		return tempBookCopy;
+	}
+
+	public void setTempBookCopy(BookCopy tempBookCopy) {
+		this.tempBookCopy = tempBookCopy;
+	}
+	
 }

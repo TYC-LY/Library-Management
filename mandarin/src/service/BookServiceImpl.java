@@ -31,7 +31,6 @@ public class BookServiceImpl extends BaseService<Book> implements BookService{
 	public void updateBook(Book book) {
 		book.setReservationState(false);
 		book.setBorrowState(false);
-		book.setImagePath("6657");
 		this.getDao().merge(book);
 	}
 }

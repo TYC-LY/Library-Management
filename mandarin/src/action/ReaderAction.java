@@ -1,9 +1,15 @@
 package action;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import entity.Reader;
 import service.ReaderService;
+import utils.BarCodeUtils;
 
 public class ReaderAction extends BaseAction<Reader, ReaderService> {
 
@@ -42,6 +48,19 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 			this.errorMessage="failure";
 			return INPUT;
 		}
+    	
+    	long id = this.getModel().getId();
+		
+		String idString = String.valueOf(id);
+		// 生成barcode
+		try {
+			BufferedImage image = BarCodeUtils.insertWords(BarCodeUtils.getBarCode(idString), idString);
+			ImageIO.write(image, "jpg", new File("D://barcode_reader//" + idString + ".jpg"));
+		} catch (IOException ioex) {
+			this.addActionError(ioex.getMessage());
+			this.errorMessage = "failure to create the barcode";
+		}
+    	
     	this.errorMessage="success";
     	return SUCCESS;
     }

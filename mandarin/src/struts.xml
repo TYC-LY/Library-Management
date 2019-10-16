@@ -44,8 +44,8 @@
 		
 		<!-- register reader -->
 		<action name="signup" class="ReaderAction" method="signup">
-			<result name="success">/logout.jsp</result>
-			<result name="input">/logout.jsp</result>
+			<result name="success">/jsp/Reader_Management/Reader_Management_RegisterReader_barcode.jsp</result>
+			<result name="input">/jsp/Reader_Management/Reader_Management_RegisterReader_barcode.jsp</result>
 		</action>
 		
 		<!-- Book Management -->

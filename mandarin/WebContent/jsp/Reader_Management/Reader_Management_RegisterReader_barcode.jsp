@@ -10,7 +10,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>BookManagement Add Books</title>
+<title>Reader Management Register Reader</title>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
@@ -35,8 +35,9 @@
 				<jsp:include page="/jsp/sidebar.jsp" flush="true" />
 			</div>
 			<div class="col-sm-8">
-				<!-- 条形码和位置图片页面 -->
-				<%@include file="/jsp/Book_Management/BookManagement_Add_Books_Image.jsp" %>
+				<h1 class="text-success"><s:property value="errorMessage"/></h1>
+				<h4>This is the barcode of the reader:</h4>
+				<img src="D:/barcode_reader/<s:property value="id"/>.jpg" width="300" height="50">
 			</div>
 		</div>
 	</div>

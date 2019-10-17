@@ -9,12 +9,11 @@ public class RecordServiceImpl extends BaseService<Record> implements RecordServ
 
 	@Override
 	public List<Record> getRecordByReader(Reader reader) {
-		List<Record> records = this.getDao().findBy("reader.id", reader.getId(), "createTime asc");
+		List<Record> records = this.getDao().findBy("reader.id", reader.getId(), "borrowDate asc");
 		return records;
 	}
 	
 	public void reserve(Record record) {
-		System.out.println("reserve failed");
 		this.getDao().save(record);		
 	}
 

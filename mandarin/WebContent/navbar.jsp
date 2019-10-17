@@ -31,12 +31,12 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<form>
+					<form action="reader-current-borrowed">
 						<button type="submit" class="btn btn-light">Current Borrowing</button>
 					</form>
 				</li>
 				<li class="nav-item">
-					<form>
+					<form action="reader-borrow-history">
 						<button type="submit" class="btn btn-light">Borrowing history</button>
 					</form>
 				</li>

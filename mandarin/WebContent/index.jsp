@@ -72,7 +72,7 @@
 					
 				<div class="mt-4 row justify-content-center">
 					<form class="form-inline" action="reader-search">
-					    <select class="custom-select mr-sm-2 rounded-right" id="inlineFormCustomSelect">
+					    <select name="option" class="custom-select mr-sm-2 rounded-right" id="inlineFormCustomSelect">
 					    	<option value="title">Book Title</option>
 					    	<option value="author">Author</option>
 					    	<option value="publisher">Publisher</option>

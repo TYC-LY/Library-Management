@@ -7,7 +7,7 @@ public class BaseService<TEntity> {
 	// 未初始化，Spring通过其setter注入
 	private BaseDao<TEntity> dao;
 
-	protected BaseDao<TEntity> getDao() {
+	public BaseDao<TEntity> getDao() {
 		return dao;
 	}
 

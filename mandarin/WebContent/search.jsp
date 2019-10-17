@@ -78,6 +78,10 @@
 										<span class="badge badge-secondary"><s:property value="price" /></span>
 									</div>
 								</div>
+									<form action="reserve" method="post">
+										<input type="hidden" name="id" value="<s:property value="id" />">
+										<button class="btn btn-primary">reserve</button>
+									</form>
 								<div>
 									<a class="btn btn-primary badge badge-primary badge-pill"
 										data-toggle="collapse"

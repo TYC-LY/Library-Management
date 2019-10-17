@@ -12,5 +12,10 @@ public class RecordServiceImpl extends BaseService<Record> implements RecordServ
 		List<Record> records = this.getDao().findBy("reader.id", reader.getId(), "createTime asc");
 		return records;
 	}
+	
+	public void reserve(Record record) {
+		System.out.println("reserve failed");
+		this.getDao().save(record);		
+	}
 
 }

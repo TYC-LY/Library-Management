@@ -71,8 +71,12 @@
 				</action> -->
 		
 
-		<!-- test.jsp================================================================= -->
-		
+		<!-- search.jsp================================================================= -->
+			<action name="reserve" class="bookAction" method="reserve">
+				<result name="login">/test-login.jsp</result>
+				<result name="reserve">/index.jsp</result>
+				<result name="input">/search.jsp</result>
+			</action>
 		
 		<!-- profile.jsp================================================================= -->
 		

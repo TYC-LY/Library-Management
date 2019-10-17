@@ -9,4 +9,6 @@ public interface RecordService {
 
 	List<Record> getRecordByReader(Reader reader);
 
+	public void reserve(Record record);
+	
 }

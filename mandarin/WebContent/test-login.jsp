@@ -51,11 +51,11 @@
   <label for="inputPassword" class="sr-only">Password</label>
   <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
   <div class="checkbox mb-3">
-    <label>
+    <!-- <label>
       <input type="checkbox" value="remember-me"> Remember me
-    </label>
+    </label>-->
   </div>
-			<button  class="btn btn-lg btn-primary btn-block" >login</button>
+			<button  class="btn btn-lg btn-primary btn-block" type="submit">login</button>
 			<a class="btn btn-lg btn-primary btn-block" href="recovery.jsp">recovery password</a>
 			<script>
 			function launch_toast() {

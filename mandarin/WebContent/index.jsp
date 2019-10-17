@@ -17,7 +17,7 @@
 
 		<header>
 			<div class="container">
-				<s:include value="navbar1.jsp" />
+				<s:include value="navbar.jsp" />
 			</div>
 		</header>
 	
@@ -38,7 +38,6 @@
 							<div class="carousel-caption text-left">
                               <h1>Welcome to Mandarin-Library Automation</h1>
                               <p>If you don't have an account, please register it first, so that you can borrow books quickly</p>
-                             <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up</a></p>
                            </div>
 						</div>
 					 <!--
@@ -56,7 +55,6 @@
 							<div class="carousel-caption text-right">
                                 <h1>Borrowing Record</h1>
                                 <p>If you want to know the books you are borrowing and the specific information about them, you can find out more here.</p>
-                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
                               </div>
                             </div>
 						</div>

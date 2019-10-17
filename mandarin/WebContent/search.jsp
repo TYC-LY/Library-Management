@@ -41,23 +41,15 @@
 		</form>
 		<div class="row">
 			<nav class="col-md-10 offset-md-1 col-lg-3 offset-lg-0 sidebar">
-				<div class="mt-3 ml-3 pd-3">
+				<div class="mt-3 ml-3 mb-3">
 					<ul class="list-group flex-column">
-						<li class="list-group-item"><a>Category 1</a></li>
-						<li class="list-group-item"><a>Category 2</a></li>
-						<li class="list-group-item"><a>Category 3</a></li>
-						<li class="list-group-item"><a>Category 4</a></li>
-						<li class="list-group-item"><a>Category 5</a></li>
-						<li class="list-group-item"><a>Category 1</a></li>
-						<li class="list-group-item"><a>Category 2</a></li>
-						<li class="list-group-item"><a>Category 3</a></li>
-						<li class="list-group-item"><a>Category 4</a></li>
-						<li class="list-group-item"><a>Category 5</a></li>
-						<li class="list-group-item"><a>Category 1</a></li>
-						<li class="list-group-item"><a>Category 2</a></li>
-						<li class="list-group-item"><a>Category 3</a></li>
-						<li class="list-group-item"><a>Category 4</a></li>
-						<li class="list-group-item"><a>Category 5</a></li>
+						<li class="list-group-item"><button class="btn btn-outline-secondary" disabled>DISABLE</button></li>
+						<li class="list-group-item"><button class="btn btn-outline-secondary" disabled>DISABLE</button></li>
+						<li class="list-group-item"><button class="btn btn-outline-secondary" disabled>DISABLE</button></li>
+						<li class="list-group-item"><button class="btn btn-outline-secondary" disabled>DISABLE</button></li>
+						<li class="list-group-item"><button class="btn btn-outline-secondary" disabled>DISABLE</button></li>
+						<li class="list-group-item"><button class="btn btn-outline-secondary" disabled>DISABLE</button></li>
+						<li class="list-group-item"><button class="btn btn-outline-secondary" disabled>DISABLE</button></li>
 						<!-- 分类检索 -->
 					</ul>
 				</div>
@@ -82,7 +74,7 @@
 										<span class="badge badge-secondary mr-2"><s:property value="isbn" /></span>
 										<span class="badge badge-primary mr-2"><s:property value="author" /></span>
 										<span class="badge badge-primary mr-2"><s:property value="publisher" /></span>
-										<span class="badge badge-secondary"><s:property value="location" /></span>
+										<span class="badge badge-secondary mr-2"><s:property value="location" /></span>
 										<span class="badge badge-secondary"><s:property value="price" /></span>
 									</div>
 								</div>

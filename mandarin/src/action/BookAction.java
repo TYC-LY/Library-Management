@@ -22,8 +22,9 @@ public class BookAction extends BaseAction<Book, BookService> {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<List<Book>> bookTable;
+	private List<List<Book>> bookTable = new ArrayList<List<Book>>();
 	private List<Book> multiBookTable;
+	private List<Book> singleBook = new ArrayList<Book>();
 	private String searchContent;
 	private String option;
 	private List<Record> currentTable;
@@ -51,8 +52,22 @@ public class BookAction extends BaseAction<Book, BookService> {
 			break;
 		}
 
-		for (int i = 0; i < multiBookTable.size(); i++) {
-			
+		for(int i = 0; ; ) {
+			System.out.println(i);
+			if(i == multiBookTable.size()) {
+				System.out.println("我要跳了！");
+				break;
+			}
+			List<Book> books = new ArrayList<Book>();
+			while (i < multiBookTable.size() - 1 && multiBookTable.get(i).getIsbn().equals(multiBookTable.get(i + 1).getIsbn())) {
+				System.out.println(i);
+				books.add(multiBookTable.get(i));
+				i++;
+			}
+			books.add(multiBookTable.get(i));
+			singleBook.add(multiBookTable.get(i));
+			i++;
+			bookTable.add(books);
 		}
 		
 		return INPUT;
@@ -79,11 +94,15 @@ public class BookAction extends BaseAction<Book, BookService> {
 		// Book reBook = this.bookser.getBookById(id); //the id of book you want to
 		// reserve
 
+		Book book = this.getService().getBookById(this.getModel().getId());
+		book.setReservationState(true);
+		this.getService().mergeBook(book);
+		
 		Record record = new Record();
 		record.setBorrowDate(borrowDate);
 		record.setDeadline(deadline);
 		record.setReader(reader);
-		record.setBook(this.getService().getBookById(this.getModel().getId()));
+		record.setBook(book);
 		record.setPayState(false);
 		record.setFineValue(0);
 		record.setReservationState(true);
@@ -174,5 +193,21 @@ public class BookAction extends BaseAction<Book, BookService> {
 
 	public void setMultiBookTable(List<Book> multiBookTable) {
 		this.multiBookTable = multiBookTable;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public List<Book> getSingleBook() {
+		return singleBook;
+	}
+
+	public void setSingleBook(List<Book> singleBook) {
+		this.singleBook = singleBook;
 	}
 }

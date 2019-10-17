@@ -2,7 +2,7 @@
     pageEncoding="utf-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -11,29 +11,48 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
-    <title>test-current-borrowed</title>
+    <title>current-borrowed</title>
 </head>
-<body>
+<body class="d-flex flex-column h-100">
 
-	<div>
-		<ul class="list-group">
-			<s:iterator value="currentTable">
-				<li class="list-group-item d-flex justify-content-between align-items-center">
-					<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-	    				<s:property value="book.title" />/
-	    				<s:property value="borrowDate" />/
-	    				啊啊啊
-	  				</a>
-				</li>
-				<div class="collapse" id="collapseExample">
-					<div class="card card-body">
-						<!-- TODO: 完善book信息 -->
-						<s:property value="location" />
-					</div>
-				</div>
-			</s:iterator>
-		</ul>
+	<header>
+		<div class="container">
+			<s:include value="navbar.jsp" />
+		</div>
+	</header>
+
+	<main role="main" class="flex-shrink-0">
+	<div class="container mt-3">
+		<table class="table table-striped table-sm">
+			<thead>
+				<tr>
+					<td>Book Name</td>
+					<td>Borrowing Date</td>
+					<td>Deadline</td>
+					<td>Fine value</td>
+				</tr>
+			</thead>
+			<tbody>
+				<s:iterator value="currentTable">
+					<tr>
+						<td><s:property value="book.title" /></td>
+						<td><s:property value="borrowDate" /></td>
+						<td><s:property value="deadline" /></td>
+						<td><s:property value="fineValue" /></td>
+					</tr>
+				</s:iterator>
+			</tbody>
+		</table>
 	</div>
+	</main>
+	
+	<footer class="footer mt-auto">
+		<div class="container text-center py-3"
+			style="background-color: #f5f5f5">
+			© 2019 <a href="http://www.nwpu.edu.cn/" target="_blank">NWPU</a>
+			Mandarin-Library Automation
+		</div>
+	</footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

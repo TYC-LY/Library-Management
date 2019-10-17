@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import entity.Book;
+import entity.Record;
 
 public class BookServiceImpl extends BaseService<Book> implements BookService {
 
@@ -29,6 +30,11 @@ public class BookServiceImpl extends BaseService<Book> implements BookService {
 	@Override
 	public List<Book> getBooksByIsbn(String searchContent) {
 		return this.getDao().findBySubString("isbn", searchContent);
+	}
+
+	@Override
+	public void mergeBook(Book book) {
+		this.getDao().save(book);
 	}
 
 }

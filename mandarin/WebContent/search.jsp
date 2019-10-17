@@ -57,7 +57,7 @@
 			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
 				<div class="py-3 mr-3">
 					<ul class="list-group">
-						<s:iterator value="bookTable" status="L">
+						<s:iterator value="singleBook" status="L">
 							<li class="list-group-item d-flex align-items-center">
 								<div class="just-content-left mr-3">
 									<img src="<s:property value="imgpath"></s:property>"
@@ -78,10 +78,7 @@
 										<span class="badge badge-secondary"><s:property value="price" /></span>
 									</div>
 								</div>
-									<form action="reserve" method="post">
-										<input type="hidden" name="id" value="<s:property value="id" />">
-										<button class="btn btn-primary">reserve</button>
-									</form>
+									
 								<div>
 									<a class="btn btn-primary badge badge-primary badge-pill"
 										data-toggle="collapse"
@@ -105,12 +102,17 @@
 											</tr>
 										</thead>
 										<tbody>
-											<s:iterator>
+											<s:iterator value="bookTable[#L.index]">
 												<tr>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
+													<td><s:property value="location" /></td>
+													<td><s:property value="borrowState" /></td>
+													<td><s:property value="reservationState" /></td>
+													<td>
+														<form action="reserve" method="post">
+															<input type="hidden" name="id" value="<s:property value="id" />">
+															<button class="btn btn-primary">reserve</button>
+														</form>
+													</td>
 												</tr>
 											</s:iterator>
 										</tbody>

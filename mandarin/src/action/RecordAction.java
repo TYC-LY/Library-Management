@@ -23,7 +23,7 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 		setRecordTable(this.getService().getRecordByReader(reader));
 		currentTable = new ArrayList<Record>();
 		for (int i = 0; i < recordTable.size(); i++) {
-			if (recordTable.get(i).getReturnDate() == null && recordTable.get(i).getBorrowState() == true) {
+			if (recordTable.get(i).getReturnDate() == null && recordTable.get(i).getBorrowState() == true && recordTable.get(i).getReturnDate() == null) {
 				currentTable.add(recordTable.get(i));
 			}
 		}
@@ -36,7 +36,7 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 		setRecordTable(this.getService().getRecordByReader(reader));
 		historyTable = new ArrayList<Record>();
 		for (int i = 0; i < recordTable.size(); i++) {
-			if (recordTable.get(i).getReturnDate() != null && recordTable.get(i).getBorrowState() == true) {
+			if (recordTable.get(i).getReturnDate() != null && recordTable.get(i).getBorrowState() == true && recordTable.get(i).getReturnDate() != null) {
 				historyTable.add(recordTable.get(i));
 			}
 		}

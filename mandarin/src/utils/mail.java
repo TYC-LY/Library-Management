@@ -11,31 +11,31 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
 public class mail {
-	public static void main() throws AddressException, MessagingException {
+	public static void main(String email) throws AddressException, MessagingException {
 		Properties properties = new Properties();
-		properties.put("mail.transport.protocol", "smtp");// 连接协议
-		properties.put("mail.smtp.host", "smtp.qq.com");// 主机名
-		properties.put("mail.smtp.port", 465);// 端口号
+		properties.put("mail.transport.protocol", "smtp");// 杩炴帴鍗忚 
+		properties.put("mail.smtp.host", "smtp.qq.com");// 涓绘満鍚�
+		properties.put("mail.smtp.port", 465);// 绔彛鍙�
 		properties.put("mail.smtp.auth", "true");
-		properties.put("mail.smtp.ssl.enable", "true");// 设置是否使用ssl安全连接
-		properties.put("mail.debug", "true");// 设置是否显示debug信息 true 会在控制台显示相关信息
-		// 得到回话对象
+		properties.put("mail.smtp.ssl.enable", "true");// 璁剧疆鏄惁浣跨敤ssl瀹夊叏杩炴帴
+		properties.put("mail.debug", "true");// 璁剧疆鏄惁鏄剧ずdebug淇℃伅 true 浼氬湪鎺у埗鍙版樉绀虹浉鍏充俊鎭�
+// 寰楀埌鍥炶瘽瀵硅薄
 		Session session = Session.getInstance(properties);
-		// 获取邮件对象
+// 鑾峰彇閭欢瀵硅薄
 		Message message = new MimeMessage(session);
-		// 设置发件人邮箱地址
+// 璁剧疆鍙戜欢浜洪偖绠卞湴鍧�
 		message.setFrom(new InternetAddress("2879313030@qq.com"));
-		// 设置收件人地址
-		message.setRecipients(RecipientType.TO, new InternetAddress[] { new InternetAddress("879409402@qq.com") });
-		// 设置邮件标题
-		message.setSubject("注册确认");
-		// 设置邮件内容
-		message.setText("您的邮箱" + "1429111498@qq.com" + "已成功重置密码，初始密码为" + "123456");
-		// 得到邮差对象
+// 璁剧疆鏀朵欢浜哄湴鍧�
+		message.setRecipients(RecipientType.TO, new InternetAddress[] { new InternetAddress(email) });
+// 璁剧疆閭欢鏍囬
+		message.setSubject("娉ㄥ唽纭");
+// 璁剧疆閭欢鍐呭
+		message.setText("鎮ㄧ殑閭" + "1429111498@qq.com" + "宸叉垚鍔熼噸缃瘑鐮侊紝鍒濆瀵嗙爜涓�" + "123456");
+// 寰楀埌閭樊瀵硅薄
 		Transport transport = session.getTransport();
-		// 连接自己的邮箱账户
-		transport.connect("2879313030@qq.com", "adsjkqncbjzsdfcc");// 密码为刚才得到的授权码
-		// 发送邮件
+// 杩炴帴鑷繁鐨勯偖绠辫处鎴�
+		transport.connect("2879313030@qq.com", "adsjkqncbjzsdfcc");// 瀵嗙爜涓哄垰鎵嶅緱鍒扮殑鎺堟潈鐮�
+// 鍙戦�侀偖浠�
 		transport.sendMessage(message, message.getAllRecipients());
 	}
 }

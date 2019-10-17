@@ -1,6 +1,7 @@
 package service;
 
 import entity.Reader;
+import entity.Record;
 
 public class ReaderServiceImpl extends BaseService<Reader> implements ReaderService {
 
@@ -27,6 +28,10 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 		}
 		return reader;
 		
+	}
+	
+	public void merge(Reader reader) {
+		this.getDao().save(reader);		
 	}
 	
 }

@@ -69,8 +69,11 @@
 				<!-- <action name="get-book-by-history-record" class="bookAction" method="getBookByHistoryRecord">
 					<result name="input">/test-borrow-history.jsp</result>
 				</action> -->
-		
-
+		<!-- search.jsp================================================================= -->
+			<action name="recovery" class="readerAction" method="reset">
+				<result name="success">/index.jsp</result>
+				<result name="input">/changeInfo.jsp</result>
+			</action>
 		<!-- search.jsp================================================================= -->
 			<action name="reserve" class="bookAction" method="reserve">
 				<result name="login">/test-login.jsp</result>

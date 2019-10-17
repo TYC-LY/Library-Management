@@ -146,15 +146,17 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 	}
 
 	public String reset() throws AddressException, MessagingException {
-//    	                String email = this.getModel().getEmail();
-//		if(email == null) {
-//			this.errorMessage="Please enter your email!";
-//			return INPUT;
-//		}
-		mail.main();
-//		Reader reader=this.getService().find(email);
-//		reader.setPassword("123456");
-		return INPUT;
+		String email = this.getModel().getEmail();
+		if (email == null) {
+			this.errorMessage = "Please enter your email!";
+			return INPUT;
+		}
+		mail.main(email);
+		Reader reader = this.getService().find(email);
+		reader.setPassword("123456");
+		this.getService().merge(reader);
+		return SUCCESS;
+
 	}
 
 	// tempReader

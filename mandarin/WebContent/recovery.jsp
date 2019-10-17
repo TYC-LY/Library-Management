@@ -15,18 +15,15 @@
 	<title>Mandarin</title>
 </head>
 <body>
-                <form action="recovery" class="readerAction" method="post">
+                <form action="recovery" class="form-recovery" method="post">
 	                <div class="input-group mb-3">
 	                    <input name="email" type="text" class="form-control" placeholder="please enter your email" aria-label="" required aria-describedby="basic-addon2">
 	                    <div class="input-group-append">
-	                        <button class="btn btn-outline-color"  type="submit" onclick=confirm()>submit</button>
+	                        <button class="btn btn-outline-color">点击修改</button>
 	                    </div>
-	                </div>  
-	             </form>>   
-<script type="text/javascript">
-function confirm(){
-	window.confirm("Your email and password will be changed");
-}
-</script>
+	                </div>     
+	             </form>           
 </body>
+<script type="text/javascript">
+</script>
 </html>

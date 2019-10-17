@@ -5,9 +5,13 @@
 		<id name="id" type="long">
 			<generator class="native" />
 		</id>
-		<property name="createTime" not-null="true"/>
+		<property name="deadline" not-null="true"/>
 		<property name="borrowDate" not-null="true"/>
 		<property name="returnDate"/>
+		<property name="payState" type="boolean"  not-null="true" />
+		<property name="fineValue" type="int" not-null="true" />
+		<property name="reservationState" type="boolean" not-null="true"/>
+		<property name="borrowState" type="boolean" not-null="true"/>
 		<many-to-one name="reader" not-null="true"></many-to-one>
 		<many-to-one name="book" not-null="true"></many-to-one>
 	</class>

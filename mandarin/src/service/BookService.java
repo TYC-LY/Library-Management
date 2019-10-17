@@ -6,8 +6,14 @@ import entity.Book;
 
 public interface BookService {
 
+	Book getBookById(long id);
+	
 	List<Book> getBooksByTitle(String searchContent);
 
-	Book getBookById(long id);
+	List<Book> getBooksByAuthor(String searchContent);
+
+	List<Book> getBooksByPublisher(String searchContent);
+
+	List<Book> getBooksByIsbn(String searchContent);
 
 }

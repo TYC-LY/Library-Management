@@ -3,6 +3,8 @@ package action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jdt.internal.compiler.ast.ThisReference;
+
 import entity.Book;
 import entity.Record;
 import service.BookService;
@@ -10,21 +12,35 @@ import service.BookService;
 public class BookAction extends BaseAction<Book, BookService> {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private List<Book> bookTable;
 	private String searchContent;
+	private String option;
 	private List<Record> currentTable;
 	private List<Record> historyTable;
 
 	public String searchTitle() throws Exception {
-		if(searchContent == "") {
+		if (searchContent == "") {
 			return INPUT;
 		}
-		setBookTable(this.getService().getBooksByTitle(searchContent));
-		
+		switch (this.getOption()) {
+			case "title":
+				setBookTable(this.getService().getBooksByTitle(searchContent));
+				break;
+			case "author":
+				setBookTable(this.getService().getBooksByAuthor(searchContent));
+				break;
+			case "publisher":
+				setBookTable(this.getService().getBooksByPublisher(searchContent));
+				break; 
+			case "isbn":
+				setBookTable(this.getService().getBooksByIsbn(searchContent));
+				break; 
+		}
+
 		return INPUT;
 	}
-	
+
 //	public String getBookByCurrentRecord() throws Exception {
 //		bookTable = new ArrayList<Book>();
 //		for (Record record : currentTable) {
@@ -40,7 +56,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 //		}
 //		return INPUT;
 //	}
-	
+
 	// bookTable
 	public List<Book> getBookTable() {
 		return bookTable;
@@ -49,7 +65,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 	public void setBookTable(List<Book> bookTable) {
 		this.bookTable = bookTable;
 	}
-	
+
 	// searchContent
 	public String getSearchContent() {
 		return searchContent;
@@ -73,5 +89,13 @@ public class BookAction extends BaseAction<Book, BookService> {
 
 	public void setHistoryTable(List<Record> historyTable) {
 		this.historyTable = historyTable;
+	}
+
+	public String getOption() {
+		return option;
+	}
+
+	public void setOption(String option) {
+		this.option = option;
 	}
 }

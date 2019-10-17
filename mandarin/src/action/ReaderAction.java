@@ -1,5 +1,6 @@
 package action;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.internal.compiler.ast.ThisReference;
@@ -7,6 +8,7 @@ import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 import com.opensymphony.xwork2.ActionContext;
 
 import entity.Reader;
+import entity.Record;
 import service.ReaderService;
 
 import utils.mail;
@@ -123,7 +125,7 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 			return "signin";
 		}
 	}
-
+	
 	// 更改信息
 	public String changeInfo() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
@@ -172,4 +174,5 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 	public void setSearchContent(String searchContent) {
 		this.searchContent = searchContent;
 	}
+
 }

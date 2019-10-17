@@ -17,7 +17,7 @@
 
 		<header>
 			<div class="container">
-				<s:include value="navbar.jsp" />
+				<s:include value="navbar1.jsp" />
 			</div>
 		</header>
 	

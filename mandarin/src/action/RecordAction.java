@@ -18,32 +18,28 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 	private List<Record> historyTable;
 
 	public String getCurrentBorrowed() throws Exception {
-		System.out.println("bbbbb");
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		Reader reader = (Reader) session.get("reader");
 		setRecordTable(this.getService().getRecordByReader(reader));
 		currentTable = new ArrayList<Record>();
 		for (int i = 0; i < recordTable.size(); i++) {
-			if (recordTable.get(i).getReturnDate() == null) {
+			if (recordTable.get(i).getReturnDate() == null && recordTable.get(i).getBorrowState() == true) {
 				currentTable.add(recordTable.get(i));
 			}
 		}
-		System.out.println("aaaaa");
 		return INPUT;
 	}
 	
 	public String getBorrowHistory() throws Exception {
-		System.out.println("bbbbb");
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		Reader reader = (Reader) session.get("reader");
 		setRecordTable(this.getService().getRecordByReader(reader));
 		historyTable = new ArrayList<Record>();
 		for (int i = 0; i < recordTable.size(); i++) {
-			if (recordTable.get(i).getReturnDate() != null) {
+			if (recordTable.get(i).getReturnDate() != null && recordTable.get(i).getBorrowState() == true) {
 				historyTable.add(recordTable.get(i));
 			}
 		}
-		System.out.println("aaaaa");
 		return INPUT;
 	}
 

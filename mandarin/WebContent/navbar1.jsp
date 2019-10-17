@@ -4,10 +4,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <nav class="navbar navbar-expand-lg navbar-light">
-
-
 
 	<img alt="logo" src="pic/b.png">
 	
@@ -45,7 +42,11 @@
 <!-- 			<button class="btn btn-outline-primary my-2 my-sm-0" onclick=window.location.href=<%=request.getContextPath() %>/test-login.jsp>login</button> -->
 	
 	<form action="in" class="form-login" method="post"> 
-		<c:set var="emaill"  scope="session" value="#session.reader.getUsername()"/>
+		<%
+			session=request.getSession();
+			Reader reader= (Reader)session.getAttribute("reader");
+		%>
+		<c:set var="emaill"  scope="session" value="${sessionScope.reader.getEmail()}"/>
 		<c:if test="${empty emaill}">  <!-- 判断当session中不存在reader对象时生成login按钮 -->
 			<button class="btn btn-outline-primary my-2 my-sm-0" id="btn-login" >login</button>
 		</c:if>
@@ -55,7 +56,7 @@
 		<c:if test="${not empty emaill}">  <!-- 判断当session中存在reader对象时生成logout按钮 -->
 			<button class="btn btn-outline-primary my-2 my-sm-0" >logout			
 			</button>
-			<a class="btn btn-outline-primary my-2 my-sm-0" id="btn-login" href="profile.jsp">
+			<a class="btn btn-outline-primary my-2 my-sm-0" id="btn-login" >
 			<font color='white'> <s:property value="#session.reader.getUsername()"></s:property></font> <!-- 获取session中reader的username -->
 			</a>
 
@@ -63,6 +64,5 @@
 		
 		
 	</form>
-	<link rel="stylesheet" href="css/navbar.css" type="text/css" />
 
 </nav>

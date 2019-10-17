@@ -27,8 +27,7 @@
 	<div class="container">
 		<form class="m-3" action="reader-search">
 			<div class="input-group mt-3">
-				<select class="rounded-left btn-outline-primary"
-					id="inlineFormCustomSelect">
+				<select name="option" class="rounded-left btn-outline-primary">
 					<option value="title">Book Title</option>
 					<option value="author">Author</option>
 					<option value="publisher">Publisher</option>
@@ -42,7 +41,7 @@
 		</form>
 		<div class="row">
 			<nav class="col-md-10 offset-md-1 col-lg-3 offset-lg-0 sidebar">
-				<div class="mt-3 ml-3">
+				<div class="mt-3 ml-3 pd-3">
 					<ul class="list-group flex-column">
 						<li class="list-group-item"><a>Category 1</a></li>
 						<li class="list-group-item"><a>Category 2</a></li>
@@ -80,10 +79,11 @@
 										</h4>
 									</div>
 									<div class="row">
-										<span class="badge badge-primary mr-2"><s:property
-												value="author" /></span> <span class="badge badge-primary mr-2"><s:property
-												value="publisher" /></span> <span class="badge badge-secondary"><s:property
-												value="location" /></span>
+										<span class="badge badge-secondary mr-2"><s:property value="isbn" /></span>
+										<span class="badge badge-primary mr-2"><s:property value="author" /></span>
+										<span class="badge badge-primary mr-2"><s:property value="publisher" /></span>
+										<span class="badge badge-secondary"><s:property value="location" /></span>
+										<span class="badge badge-secondary"><s:property value="price" /></span>
 									</div>
 								</div>
 								<div>
@@ -99,13 +99,23 @@
 								id="collapseExample<s:property value="#L.index+1"></s:property>">
 								<div class="card card-body">
 									<!-- TODO: 完善book馆藏信息 -->
-									<table>
+									<table class="table table-striped table-sm">
 										<thead>
-
+											<tr>
+												<td>Location</td>
+												<td>is Borrowed</td>
+												<td>is Reversed</td>
+												<td>Action</td>
+											</tr>
 										</thead>
 										<tbody>
 											<s:iterator>
-
+												<tr>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
 											</s:iterator>
 										</tbody>
 									</table>

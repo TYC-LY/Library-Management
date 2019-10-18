@@ -18,6 +18,7 @@
                 <form action="recovery" class="readerAction" method="post">
 	                <div class="input-group mb-3">
 	                    <input name="email" type="text" class="form-control" placeholder="please enter your email" aria-label="" required aria-describedby="basic-addon2">
+	                    <input name="email" type="text" class="form-control" placeholder="please enter your ID card number" aria-label="" required aria-describedby="basic-addon2">
 	                    <div class="input-group-append">
 	                        <button class="btn btn-outline-color"  type="submit" onclick=confirm()>submit</button>
 	                    </div>

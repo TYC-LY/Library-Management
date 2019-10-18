@@ -30,7 +30,7 @@ public class mail {
 // 璁剧疆閭欢鏍囬
 		message.setSubject("娉ㄥ唽纭");
 // 璁剧疆閭欢鍐呭
-		message.setText("鎮ㄧ殑閭" + "1429111498@qq.com" + "宸叉垚鍔熼噸缃瘑鐮侊紝鍒濆瀵嗙爜涓�" + "123456");
+		message.setText("你账号：" + email + "的密码已经重置为" + "123456");
 // 寰楀埌閭樊瀵硅薄
 		Transport transport = session.getTransport();
 // 杩炴帴鑷繁鐨勯偖绠辫处鎴�

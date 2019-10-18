@@ -109,6 +109,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 		record.setBorrowState(false);
 		
 		this.getRecordser().reserve(record);
+		setErrorMessage("Reservation Complete!!!");
 		
 		return INPUT;
 	}

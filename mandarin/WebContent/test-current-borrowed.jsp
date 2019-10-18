@@ -26,10 +26,10 @@
 		<table class="table table-striped table-sm">
 			<thead>
 				<tr>
-					<td>Book Name</td>
-					<td>Borrowing Date</td>
-					<td>Deadline</td>
-					<td>Fine value</td>
+					<th>Book Name</th>
+					<th>Borrowing Date</th>
+					<th>Deadline</th>
+					<th>Fine value</th>
 				</tr>
 			</thead>
 			<tbody>

@@ -12,10 +12,15 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/toast.css">
 
 <title>Mandarin</title>
 </head>
 <body class="d-flex flex-column h-100">
+
+	<div id="toast">
+		<div id="desc"></div>
+	</div>
 
 	<header>
 		<div class="container">
@@ -110,7 +115,7 @@
 													<td>
 														<form action="reserve" method="post">
 															<input type="hidden" name="id" value="<s:property value="id" />">
-															<button class="btn btn-primary">reserve</button>
+															<button class="badge badge-primary badge-pill" type="submit">reserve</button>
 														</form>
 													</td>
 												</tr>
@@ -144,6 +149,25 @@
 		$(document).ready(function() {
 			$('[data-toggle="tooltip"]').tooltip();
 		});
+	</script>
+	<script>
+		function launch_toast() {
+			var x = document.getElementById("toast")
+			x.className = "show";
+			var desc = document.getElementById("desc");
+			desc.innerHTML = "<s:property value="errorMessage"></s:property>";
+			setTimeout(function() {
+				x.className = x.className.replace("show", "");
+			}, 5000);
+		};
+		console.log("launch_toast defined");
+		(function() {
+			if ("<s:property value="errorMessage"></s:property>" == "") {
+				console.log("no error");
+			} else {
+				launch_toast();
+			}
+		})();
 	</script>
 </body>
 </html>

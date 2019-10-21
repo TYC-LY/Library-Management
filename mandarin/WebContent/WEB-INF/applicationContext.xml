@@ -135,4 +135,26 @@
 		<property name="service" ref="bookDeleteRecordService" />
 		<property name="model" ref="bookDeleteRecordModel" />
 	</bean>
+	
+	
+	<!-- Record的层级结构 -->
+	<!--Record的Dao,Service,Action -->
+	<bean id="recordDao" class="dao.RecordDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- RecordService 用户操作的业务对象 -->
+	<bean id="recordService"
+		class="service.RecordServiceImpl">
+		<property name="dao" ref="recordDao" />
+	</bean>
+
+	<!-- RecordAction 用户操作的控制器对象 -->
+	<bean id="recordModel" class="entity.Record"
+		scope="prototype" />
+		
+	<bean id="RecordAction" class="action.RecordAction"
+		scope="prototype">
+		<property name="service" ref="recordService" />
+		<property name="model" ref="recordModel" />
+	</bean>
 </beans>

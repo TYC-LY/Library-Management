@@ -53,6 +53,7 @@ public class AnnouncementAction extends BaseAction<Announcement, AnnouncementSer
 	public String deleteAnnouncement() throws Exception{
 		
 		this.getService().deleteAnnouncementById(this.getModel().getId());
+		this.errorMessage = "success";
 		return SUCCESS;
 		
 	}

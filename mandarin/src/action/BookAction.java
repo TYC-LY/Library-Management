@@ -43,6 +43,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 	private long book_copy_number;
 	private List<BookCopy> idList;
 	private BookCopy tempBookCopy;
+	private long bookId;
 	// 用于在BookMangement_Add_Books_Image界面显示对应的id
 	private class BookCopy {
 		private long idCopy;
@@ -318,6 +319,7 @@ public String bookManagement_Detele_Books() throws Exception{
 //		
 		if(borrowState == false && reservationState == false){
 			this.getService().deleteBookById(this.getTempBookId());
+			this.errorMessage = "success";
 			return SUCCESS;
 		}
 		
@@ -334,6 +336,7 @@ public String bookManagement_Detele_Books() throws Exception{
 		try{
 			if(borrowState==false&&reservationState==false){
 				this.getService().updateBook(this.getModel());
+				this.errorMessage = "success";
 				return SUCCESS;
 			}
 			this.errorMessage = "The book can't be edited because it has been borrowed or reserved";
@@ -347,7 +350,50 @@ public String bookManagement_Detele_Books() throws Exception{
 		}
 		
 	}
+	
+	public String borrow_FindBook() {
+		Book book = this.getService().confirmBookAuthority(bookId);
+		if (book != null) {
+			return SUCCESS;
+		}
+		this.errorMessage = "It's a wrong ID of book. or The book has been deleted";
+		return INPUT;
+	}
+
+	//update book data after borrowing
+	public String borrow_BookUpdate() {
+		tempBook = this.getService().getBookById(bookId);
+		if(tempBook.isBorrowState() == true) {
+			this.errorMessage = "The book has been borrowed.";
+			return INPUT;
+		}
+		if(tempBook.isReservationState() == true) {
+			this.errorMessage = "The book has been reserved.";
+			return INPUT;
+		}
+    	tempBook.setReservationState(false);
+    	tempBook.setBorrowState(true);
+    	this.getService().mergeBook(tempBook);
+    	this.errorMessage = "success";
+    	return SUCCESS;
+	}
+	
+
+	//update book data after returning
+	public String return_BookUpdate() {
+		bookId = this.getBookId();
+//		System.out.println(bookId);
 		
+	   	try{
+	   		tempBook = this.getService().getBookById(bookId);
+	   		this.getService().updateReturnBook(tempBook);
+	   	} catch(Exception e1) {
+	   		this.errorMessage = "It is the wrong Id of book. or The record of this book may have been deleted.";
+			return INPUT;
+	   	}
+	   	return SUCCESS;
+	}
+	
 	public Book getTempBook() {
 		return tempBook;
 	}
@@ -442,6 +488,20 @@ public String bookManagement_Detele_Books() throws Exception{
 
 	public void setTempBookCopy(BookCopy tempBookCopy) {
 		this.tempBookCopy = tempBookCopy;
+	}
+
+	/**
+	 * @return the bookId
+	 */
+	public long getBookId() {
+		return bookId;
+	}
+
+	/**
+	 * @param bookId the bookId to set
+	 */
+	public void setBookId(long bookId) {
+		this.bookId = bookId;
 	}
 	
 }

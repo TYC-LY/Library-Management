@@ -100,4 +100,32 @@
 							</div>
 						</div>
 					</div>
+					<div class="card">
+						<div class="card-header">
+							<a class="card-link" data-toggle="collapse"
+								href="#collapseFour">Lend Book or Return Book
+							</a>
+						</div>
+						<div id="collapseFour" class="collapse show"
+							data-parent="#accordion">
+							<div class="card-body">
+								<ul class="nav nav-pills flex-column">
+									<li class="nav-item">
+										<!-- 按钮：用于打开链接 -->
+										<a href="/mandarin/jsp/Lend_Book_Return_Book/Lend_Book.jsp">
+												<button class="btn btn-primary btn-block">Lend Book</button>
+										</a>
+									</li>
+									<br>
+									<li class="nav-item">
+										<!-- 按钮：用于打开链接 -->
+										<a href="/mandarin/jsp/Lend_Book_Return_Book/Return_Book.jsp">
+												<button class="btn btn-primary btn-block">Return Book</button>
+										</a>
+									</li>
+								</ul>
+
+							</div>
+						</div>
+					</div>
 				</div>

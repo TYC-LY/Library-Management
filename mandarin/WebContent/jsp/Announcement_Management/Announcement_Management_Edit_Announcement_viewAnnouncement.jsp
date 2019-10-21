@@ -41,7 +41,8 @@
 					<label for="content">content:</label><br/>
 					<textarea class="form-control" name="content" type="text" style="width:500px;height:300px;" /><s:property value="announcement.content"/></textarea><br/><br/>
 					
-					<s:property value="errorMessage"/>
+					<h1><p class="text-success"><s:property value="errorMessage"/></p></h1>
+					<br>
 					
 					<button type="submit" class="btn btn-primary">Edit</button>
 			  </form>

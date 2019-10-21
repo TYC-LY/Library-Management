@@ -32,7 +32,7 @@
 			<result name="input">/jsp/Recovery_Forget_Password/changePassword.jsp</result>
 		</action>
 		
-		<!-- management reader -->
+ 		<!-- management reader -->
 		<action name="checkReader" class="ReaderAction" method="pass">
 			<result name="success" type="chain">
 				<param name="actionName">readerInformation</param>
@@ -141,6 +141,74 @@
 			<result name="input">/logout.jsp</result>
 		</action>
 		<!-- /Announcement -->
+		
+		
+		<!-- borrow book -->
+		<action name="borrow_FindReader" class="ReaderAction" method="borrow_FindReader">
+			<result name="success" type="chain">
+				<param name="actionName">borrow_FindBook</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+		
+		<action name="borrow_FindBook" class="BookAction" method="borrow_FindBook">
+			<result name="success" type="chain">
+				<param name="actionName">borrow_BookUpdate</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+		
+		<action name="makeNewRecord" class="RecordAction" method="makeNewRecord">
+			<result name="success" type="chain">
+				<param name="actionName">searchBorrowRecord_Lend</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+			
+		<action name="borrow_ReaderUpdate" class="ReaderAction" method="borrow_ReaderUpdate">
+			<result name="success" type="chain">
+				<param name="actionName">makeNewRecord</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+		
+		<action name="borrow_BookUpdate" class="BookAction" method="borrow_BookUpdate">
+			<result name="success" type="chain">
+				<param name="actionName">borrow_ReaderUpdate</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+		
+		<!-- view record -->
+		<action name="searchBorrowRecord_Lend" class="RecordAction" method="searchBorrowRecord_Lend">
+			<result name="success">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+		
+		<action name="searchBorrowRecord" class="RecordAction" method="searchBorrowRecord">
+			<result name="success">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+		</action>
+		
+		<!-- return book -->
+		<action name="return_BookUpdate" class="BookAction" method="return_BookUpdate">
+			<result name="success" type="chain" >
+				<param name="actionName">return_ReaderUpdate</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+		</action>
+		
+		<action name="return_ReaderUpdate" class="ReaderAction" method="return_ReaderUpdate">
+			<result name="success">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+		</action>
+		
+		<action name="return_RecordUpdate" class="RecordAction" method="return_RecordUpdate">
+			<result name="success">
+				<param name="actionName">return_BookUpdate</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+		</action>
 		
 	</package>
 </struts>

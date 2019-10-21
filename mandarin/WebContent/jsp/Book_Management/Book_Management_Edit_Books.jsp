@@ -5,7 +5,6 @@
 			<div class="input-group mt-3 mb-3">
 				<div class="input-group-prepend">
 					<select name="condition">
-						搜索条件
 						<div class="dropdown-menu">
 							<option value="ISBN">ISBN</option>
 							<option value="title">Title</option>

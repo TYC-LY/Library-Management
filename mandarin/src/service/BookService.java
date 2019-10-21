@@ -15,4 +15,12 @@ public interface BookService {
 	public void deleteBookById(long id);
 	
 	public void updateBook(Book book);
+
+	public Book confirmBookAuthority(long bookId);
+
+	public void mergeBook(Book tempBook);
+
+	public Book getBookById(long bookId);
+
+	public void updateReturnBook(Book tempBook);
 }

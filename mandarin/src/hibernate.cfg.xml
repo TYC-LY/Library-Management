@@ -32,5 +32,6 @@
 		<mapping resource="entity/Book.hbm.xml" />
 		<mapping resource="entity/Announcement.hbm.xml" />
 		<mapping resource="entity/BookDeleteRecord.hbm.xml"/>
+		<mapping resource="entity/Record.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

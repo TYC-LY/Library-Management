@@ -3,6 +3,9 @@
 	<form action="viewAnnouncements_Delete">
 		<button type="submit" class="btn btn-primary" >Refresh</button>
 	</form>
+	
+	<h1><p class="text-success"><s:property value="errorMessage"/></p></h1>
+	
 	<table class="table table-hover">
 		<thead>
 			<tr>

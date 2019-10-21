@@ -33,4 +33,36 @@ public class BookServiceImpl extends BaseService<Book> implements BookService{
 		book.setBorrowState(false);
 		this.getDao().merge(book);
 	}
+
+	@Override
+	public Book confirmBookAuthority(long bookId) {
+		// TODO Auto-generated method stub
+		Book book = this.getDao().getSingle("id", bookId);
+		if (book != null) {
+			  return book;
+		}
+		return null;
+	}
+
+	@Override
+	public void mergeBook(Book tempBook) {
+		// TODO Auto-generated method stub
+		this.getDao().merge(tempBook);
+	}
+
+	@Override
+	public Book getBookById(long bookId) {
+		// TODO Auto-generated method stub
+		Book book = this.getDao().getSingle("id", bookId);
+		return book;
+	}
+
+	@Override
+	public void updateReturnBook(Book tempBook) {
+		// TODO Auto-generated method stub
+		tempBook.setBorrowState(false);
+		this.getDao().merge(tempBook);
+	}
+	
+	
 }

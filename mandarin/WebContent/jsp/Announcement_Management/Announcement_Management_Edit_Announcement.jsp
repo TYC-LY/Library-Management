@@ -5,7 +5,6 @@
 		<button type="submit" class="btn btn-primary">refresh</button>
 	</form>
 	
-	
 	<table class="table table-hover">
 		<thead>
 			<tr>

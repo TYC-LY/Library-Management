@@ -14,19 +14,14 @@
 							<form action="signup">
 
 								<div class="form-group">
-									<label for="username">username:</label> <input
-										class="form-control" name="username" type="text"
-										id="user-username" placeholder="username" required
-										autofocus=""> <label for="email">email:</label> <input
-										class="form-control" name="email" type="email" id="user-email"
-										placeholder="email" required autofocus=""> <label
-										for="password">password:</label> <input class="form-control"
-										name="password" type="password" id="user-pass"
-										placeholder="password" required autofocus=""> <label
-										for="phoneNumber">phoneNumber:</label> <input
-										class="form-control" name="phoneNumber" type="text"
-										id="user-phoneNumber" placeholder="phoneNumber" required
-										autofocus="">
+									<label for="username">username:</label> 
+									<input class="form-control" name="username" type="text" id="user-username" placeholder="username" required autofocus=""> 
+									<label for="email">email:</label> 
+									<input class="form-control" name="email" type="email" id="user-email" placeholder="email" required autofocus=""> 
+									<label for="password">password:</label>
+									<input class="form-control" name="password" type="password" id="user-pass" placeholder="password" required autofocus="">
+									<label for="phoneNumber">phoneNumber:</label> 
+									<input class="form-control" name="phoneNumber" type="text" id="user-phoneNumber" placeholder="phoneNumber" required autofocus="">
 								</div>
 
 								<button class="btn btn-primary" type="submit">Register</button>

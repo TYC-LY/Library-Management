@@ -39,7 +39,7 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 	@Override
 	public void mergeReader(Reader reader) {
 		// TODO Auto-generated method stub
-		
+		this.getDao().merge(reader);
 	}
 
 	@Override
@@ -64,6 +64,25 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 		reader.setCreateDate("2019/10/2");
 		reader.setFineState(false);
 		this.getDao().save(reader);
+	}
+
+	@Override
+	public Reader confirmReaderAuthority(long readerId) {
+		// TODO Auto-generated method stub
+		Reader reader = this.getDao().getSingle("id", readerId);
+		if (reader != null) {
+			return reader;
+		}
+		
+		// dangerous
+		return null;
+	}
+
+	@Override
+	public void updateReturnReader(Reader reader) {
+		// TODO Auto-generated method stub
+		reader.setBorrowBookNumber(reader.getBorrowBookNumber()-1);
+		this.getDao().merge(reader);
 	}
 
 }

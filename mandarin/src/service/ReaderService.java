@@ -21,4 +21,8 @@ public interface ReaderService{
 	public List<Reader> getReaderCheckStateIsFalse();
 
 	public void register(Reader reader);
+
+	public Reader confirmReaderAuthority(long readerId);
+
+	public void updateReturnReader(Reader reader);
 }

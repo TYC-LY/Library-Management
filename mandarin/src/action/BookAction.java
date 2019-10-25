@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.internal.compiler.ast.ThisReference;
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -21,7 +21,7 @@ import service.RecordService;
 public class BookAction extends BaseAction<Book, BookService> {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private List<List<Book>> bookTable = new ArrayList<List<Book>>();
 	private List<Book> multiBookTable;
 	private List<Book> singleBook = new ArrayList<Book>();
@@ -29,7 +29,6 @@ public class BookAction extends BaseAction<Book, BookService> {
 	private String option;
 	private List<Record> currentTable;
 	private List<Record> historyTable;
-	private BookService bookser;
 	private RecordService recordser;
 	private long id;
 
@@ -73,7 +72,9 @@ public class BookAction extends BaseAction<Book, BookService> {
 		return INPUT;
 	}
 
+	//TODO: 预约 三本书 判断
 	public String reserve() throws Exception {
+		int state = 0;//ajax过程中返回状态
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 
@@ -81,6 +82,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 		Reader reader = (Reader) session.get("reader");
 		if (reader == null) {
 			System.out.println("no reader");
+			state = -1;
 			return "login";
 		}
 		
@@ -95,23 +97,28 @@ public class BookAction extends BaseAction<Book, BookService> {
 		// reserve
 
 		Book book = this.getService().getBookById(this.getModel().getId());
-		book.setReservationState(true);
-		this.getService().mergeBook(book);
+		if (book.getReservationState().equals(false)) {
+			System.out.println("aaaaaaa");
+			book.setReservationState(true);
+			this.getService().mergeBook(book);
+			
+			Record record = new Record();
+			record.setBorrowDate(borrowDate);
+			record.setDeadline(deadline);
+			record.setReader(reader);
+			record.setBook(book);
+			record.setPayState(false);
+			record.setFineValue(0);
+			record.setReservationState(true);
+			record.setBorrowState(false);
+			
+			this.getRecordser().reserve(record);
+			state = 1;
+		}
 		
-		Record record = new Record();
-		record.setBorrowDate(borrowDate);
-		record.setDeadline(deadline);
-		record.setReader(reader);
-		record.setBook(book);
-		record.setPayState(false);
-		record.setFineValue(0);
-		record.setReservationState(true);
-		record.setBorrowState(false);
-		
-		this.getRecordser().reserve(record);
 		setErrorMessage("Reservation Complete!!!");
-		
-		return INPUT;
+		ServletActionContext.getResponse().getWriter().print(state);
+		return null;
 	}
 
 //	public String getBookByCurrentRecord() throws Exception {
@@ -170,14 +177,6 @@ public class BookAction extends BaseAction<Book, BookService> {
 
 	public void setOption(String option) {
 		this.option = option;
-	}
-
-	public BookService getBookser() {
-		return bookser;
-	}
-
-	public void setBookser(BookService bookser) {
-		this.bookser = bookser;
 	}
 
 	public RecordService getRecordser() {

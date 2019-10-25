@@ -10,5 +10,7 @@ public interface RecordService {
 	List<Record> getRecordByReader(Reader reader);
 
 	public void reserve(Record record);
+
+	List<Record> getRecordByDeadline(String deadline);
 	
 }

@@ -17,4 +17,10 @@ public class RecordServiceImpl extends BaseService<Record> implements RecordServ
 		this.getDao().save(record);		
 	}
 
+	@Override
+	public List<Record> getRecordByDeadline(String deadline) {
+		List<Record> records = this.getDao().findBy("deadline", deadline, "deadline asc");
+		return records;
+	}
+
 }

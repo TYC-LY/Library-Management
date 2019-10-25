@@ -71,5 +71,8 @@
 		<bean id="recordDao" class="dao.RecordDaoImpl">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
+	
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	
 		
 </beans>

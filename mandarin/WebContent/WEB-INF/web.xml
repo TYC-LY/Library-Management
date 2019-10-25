@@ -23,6 +23,10 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
+	<listener>
+	  <listener-class>utils.MyServletContextListener</listener-class>
+	</listener>
+	
 	<!-- 设置sesion永不过期 -->
 	<session-config>
 		<session-timeout>-1</session-timeout>

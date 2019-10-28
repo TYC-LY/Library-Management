@@ -17,6 +17,19 @@
 											Reader</button>
 									</li>
 									<br>
+									<li class="nav-item">
+										<!-- 按钮：用于打开模态框 -->
+										<a href="/mandarin/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp">
+										<button type="button" class="btn btn-primary btn-block">
+											Edit Reader
+										</button>
+									</li>
+									<br>
+									<li>
+										<a href="/mandarin/jsp/Reader_Management/Reader_Management_ReaderHistory_Main.jsp">
+											<button class="btn btn-primary btn-block">Reader History</button>
+										</a>
+									</li>
 								</ul>
 
 							</div>

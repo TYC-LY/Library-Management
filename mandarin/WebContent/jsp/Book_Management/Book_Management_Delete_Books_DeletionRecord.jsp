@@ -20,8 +20,7 @@
 						</td>
 						<td>
 							 <s:property value="librarianId"/>
-						</td>		
-					<br>
+						</td>
 				</tr>
 			</s:iterator>
 		</tbody>

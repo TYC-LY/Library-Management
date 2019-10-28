@@ -100,4 +100,22 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 		return this.getDao().findByDuration("createDate", startDate, endDate, null, null, "createDate");
 	}
 
+	@Override
+	public Reader searchReader(String condition, String content) {
+		// TODO Auto-generated method stub
+		return this.getDao().getSingle(condition, content);
+	}
+
+	@Override
+	public void editReader(Reader reader) {
+		// TODO Auto-generated method stub
+		this.getDao().merge(reader);
+	}
+
+	@Override
+	public void deleteReaderById(long id) {
+		// TODO Auto-generated method stub
+		this.getDao().delete(id);
+	}
+
 }

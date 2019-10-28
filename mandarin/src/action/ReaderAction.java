@@ -21,6 +21,8 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 	private long readerId;
 	private String startDate;
 	private String endDate;
+	private String condition;											//用来保存下拉框名称
+	private String content;
 
 	public String signup() throws Exception {
 		String username = this.getModel().getUsername();
@@ -127,6 +129,67 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 		return SUCCESS;
 	}
 
+
+	public String readerManagement_Search() throws Exception {
+		condition = this.getCondition();
+		content = this.getContent();
+		if(content.isEmpty()) {
+			this.errorMessage = "no input";
+			return INPUT;	
+		}
+		else {
+			if(condition.equals("id")){
+				readerId = Long.parseLong(content);
+				tempReader = this.getService().getReaderById(readerId);
+			}
+			else tempReader = this.getService().searchReader(condition, content);
+		}
+		if (tempReader != null) {
+			this.errorMessage = "success";
+			return SUCCESS;
+		}
+		this.errorMessage = "fail to get a reader";
+		return INPUT;
+		
+	}
+
+	public String readerManagement_Edit() {
+		tempReader = this.getModel();
+		try {
+			this.getService().editReader(tempReader);
+		}catch(Exception e2) {
+			this.errorMessage = "failed to edit";
+			return INPUT;
+		}
+		this.errorMessage = "success";
+		return SUCCESS;
+	}
+	
+	public String readerManagement_Delete() throws Exception{
+		int borrowBookNumber = this.getModel().getBorrowBookNumber();
+		boolean fineState = this.getModel().isFineState();
+		
+		//System.out.println(borrowBookNumber);
+		//System.out.println(fineState);
+		
+		if(fineState == true && borrowBookNumber != 0){
+			this.errorMessage = "The reader needs to pay the fine and return all the books.";
+			return INPUT;
+		}else if(fineState == true){
+			this.errorMessage = "The reader needs to pay the fine.";
+			return INPUT;
+		}else if(borrowBookNumber != 0){
+			this.errorMessage = "The reader needs to return all the books.";
+			return INPUT;
+		}
+			
+		System.out.println(this.getModel().getId()); //获取不到readerId
+		this.getService().deleteReaderById(this.getModel().getId());
+			
+		this.errorMessage = "success";
+		return SUCCESS;
+	}
+	
 	public Reader getTempReader() {
 		return tempReader;
 	}
@@ -192,4 +255,33 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+
+	/**
+	 * @return the condition
+	 */
+	public String getCondition() {
+		return condition;
+	}
+
+	/**
+	 * @param condition the condition to set
+	 */
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
+	/**
+	 * @return the content
+	 */
+	public String getContent() {
+		return content;
+	}
+
+	/**
+	 * @param content the content to set
+	 */
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
 }

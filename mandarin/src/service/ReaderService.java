@@ -27,4 +27,10 @@ public interface ReaderService{
 	public void updateReturnReader(Reader reader);
 
 	public List<Reader> viewReaderByDuration(String startDate, String endDate);
+	
+	public Reader searchReader(String condition, String content);
+	
+	public void editReader(Reader reader);
+	
+	public void deleteReaderById(long id);
 }

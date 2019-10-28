@@ -222,5 +222,43 @@
 			<result name="success">/jsp/View_Library_Income_History/View_Library_Income_History_Main.jsp</result>
 			<result name="input">/jsp/View_Library_Income_History/View_Library_Income_History_Main.jsp</result>
 		</action>
+		
+		<!-- searchReader -->
+		<action name="readerManagement_Search" class="ReaderAction" method="readerManagement_Search">
+			<result name="success">/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp</result>
+			<result name="input">/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp</result>
+		</action>
+		
+		<!-- editReader -->
+		<action name="readerManagement_Edit" class="ReaderAction" method="readerManagement_Edit">
+			<result name="success">/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp</result>
+			<result name="input">/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp</result>
+		</action>
+		
+		<!-- deleteReader -->
+		<action name="readerManagement_Delete" class="ReaderAction" method="readerManagement_Delete">
+			<result name="success">/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp</result>
+			<result name="input">/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp</result>
+		</action>
+		
+		<!--view borrow record -->
+		<action name="searchBorrowRecords" class="RecordAction" method="searchBorrowRecords">
+			<result name="success" type="chain">
+				<param name="actionName">viewBorrowInfo</param>
+			</result>
+			<result name="input">/jsp/Reader_Management/Reader_Management_ReaderHistory_Main.jsp</result>
+		</action>
+		
+		<action name="viewBorrowInfo" class="BookAction" method="viewBorrowInfo">
+			<result name="success">/jsp/Reader_Management/Reader_Management_ReaderHistory_Main.jsp</result>
+		</action>
+		
+		<!--clear fine  -->
+		<action name="clearFine" class="RecordAction" method="clearFine">
+			<result name="success" type="chain">
+				<param name="actionName">searchBorrowRecords</param>
+			</result>
+		</action>
+		
 	</package>
 </struts>

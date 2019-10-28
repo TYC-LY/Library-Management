@@ -44,7 +44,7 @@
 		<label for="fineValue">FineValue:</label>
 		<input class="form-control" value="<s:property value="tempRecord.fineValue"/>" />
 		<br>
-  </div> 
+  </div>
   <div class="card-footer">
   </div>
 </div>

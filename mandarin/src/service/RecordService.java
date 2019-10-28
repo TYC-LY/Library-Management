@@ -15,4 +15,8 @@ public interface RecordService {
 	public Record getRecordById(long id);
 
 	public List<Record> viewFineListByDuration(String startDate, String endDate);
+	
+	public List<Record> getRecordByReaderId(long readerId);
+	
+	public void clearFineById(long id);
 }

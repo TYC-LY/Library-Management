@@ -1,6 +1,7 @@
 package action;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entity.Record;
@@ -15,6 +16,8 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 	private List<Record> fineList;
 	private String startDate;
 	private String endDate;
+	private List<Record> records = new ArrayList<Record>();
+	private long readerId;
 	
 	public String makeNewRecord() {
 		//System.out.println("go to here");
@@ -64,6 +67,29 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 		return SUCCESS;
 	}
 	
+	public String searchBorrowRecords() {
+		
+		try {
+				this.records = this.getService().getRecordByReaderId(this.getModel().getReaderId());
+				if(this.records.isEmpty()){
+					this.errorMessage = "There is no related reader, or there is no history of this reader.";
+				}
+		}
+		catch(Exception e1) {
+			this.errorMessage = "It is the wrong Id of record. or This record may have been deleted.";
+			return INPUT;
+		}
+		
+		return SUCCESS;
+	}
+	
+	public String clearFine() {
+		
+		this.getService().clearFineById(this.getModel().getId());
+		return SUCCESS;
+		
+	}
+
 	public Record getTempRecord() {
 		return tempRecord;
 	}
@@ -112,5 +138,33 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 	 */
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+
+	/**
+	 * @return the readerId
+	 */
+	public long getReaderId() {
+		return readerId;
+	}
+
+	/**
+	 * @param readerId the readerId to set
+	 */
+	public void setReaderId(long readerId) {
+		this.readerId = readerId;
+	}
+
+	/**
+	 * @return the records
+	 */
+	public List<Record> getRecords() {
+		return records;
+	}
+
+	/**
+	 * @param records the records to set
+	 */
+	public void setRecords(List<Record> records) {
+		this.records = records;
 	}
 }

@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -20,6 +21,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import com.opensymphony.xwork2.ActionContext;
 
 import entity.Book;
+import entity.Record;
 import service.BookService;
 import utils.BarCodeUtils;
 import utils.BookXMLParser;
@@ -35,8 +37,8 @@ public class BookAction extends BaseAction<Book, BookService> {
 	private Book tempBook;
 	private String url = "http://api.douban.com/book/subject/isbn/";
 	private String apikey = "0b2bdeda43b5688921839c8ecb20399b";
-	private String condition;											//用来保存下拉框名称
-	private String content;											//用来保存下拉框内容
+	private String condition; // 用来保存下拉框名称
+	private String content; // 用来保存下拉框内容
 	private List<Book> books;
 	private String pageState;
 	private long tempBookId;
@@ -44,10 +46,168 @@ public class BookAction extends BaseAction<Book, BookService> {
 	private List<BookCopy> idList;
 	private BookCopy tempBookCopy;
 	private long bookId;
+
+	private List<Record> records;
+	private List<BorrowInfo> payedFine = new ArrayList<BorrowInfo>();
+	private List<BorrowInfo> unPayedFine = new ArrayList<BorrowInfo>();
+
+	private class BorrowInfo {
+		private long id;
+		private long bookId;
+		private long readerId;
+		private String bookName;
+		private int fineValue;
+		private Date borrowDate;
+		private Date deadline;
+		private Date returnDate;
+		private boolean payState;
+
+		public BorrowInfo(long id, long bookId, long readerId, String bookName, int fineValue, Date borrowDate,
+				Date deadline, Date returnDate, boolean payState) {
+			super();
+			this.id = id;
+			this.bookId = bookId;
+			this.readerId = readerId;
+			this.bookName = bookName;
+			this.fineValue = fineValue;
+			this.borrowDate = borrowDate;
+			this.deadline = deadline;
+			this.returnDate = returnDate;
+			this.payState = payState;
+		}
+
+		/**
+		 * @return the id
+		 */
+		public long getId() {
+			return id;
+		}
+
+		/**
+		 * @param id the id to set
+		 */
+		public void setId(long id) {
+			this.id = id;
+		}
+
+		/**
+		 * @return the bookId
+		 */
+		public long getBookId() {
+			return bookId;
+		}
+
+		/**
+		 * @param bookId the bookId to set
+		 */
+		public void setBookId(long bookId) {
+			this.bookId = bookId;
+		}
+
+		/**
+		 * @return the readerId
+		 */
+		public long getReaderId() {
+			return readerId;
+		}
+
+		/**
+		 * @param readerId the readerId to set
+		 */
+		public void setReaderId(long readerId) {
+			this.readerId = readerId;
+		}
+
+		/**
+		 * @return the bookName
+		 */
+		public String getBookName() {
+			return bookName;
+		}
+
+		/**
+		 * @param bookName the bookName to set
+		 */
+		public void setBookName(String bookName) {
+			this.bookName = bookName;
+		}
+
+		/**
+		 * @return the fineValue
+		 */
+		public int getFineValue() {
+			return fineValue;
+		}
+
+		/**
+		 * @param fineValue the fineValue to set
+		 */
+		public void setFineValue(int fineValue) {
+			this.fineValue = fineValue;
+		}
+
+		/**
+		 * @return the borrowDate
+		 */
+		public Date getBorrowDate() {
+			return borrowDate;
+		}
+
+		/**
+		 * @param borrowDate the borrowDate to set
+		 */
+		public void setBorrowDate(Date borrowDate) {
+			this.borrowDate = borrowDate;
+		}
+
+		/**
+		 * @return the deadline
+		 */
+		public Date getDeadline() {
+			return deadline;
+		}
+
+		/**
+		 * @param deadline the deadline to set
+		 */
+		public void setDeadline(Date deadline) {
+			this.deadline = deadline;
+		}
+
+		/**
+		 * @return the returnDate
+		 */
+		public Date getReturnDate() {
+			return returnDate;
+		}
+
+		/**
+		 * @param returnDate the returnDate to set
+		 */
+		public void setReturnDate(Date returnDate) {
+			this.returnDate = returnDate;
+		}
+
+		/**
+		 * @return the payState
+		 */
+		public boolean isPayState() {
+			return payState;
+		}
+
+		/**
+		 * @param payState the payState to set
+		 */
+		public void setPayState(boolean payState) {
+			this.payState = payState;
+		}
+
+	}
+
 	// 用于在BookMangement_Add_Books_Image界面显示对应的id
 	private class BookCopy {
 		private long idCopy;
-		
+
 		public BookCopy(long idCopy) {
 			super();
 			this.idCopy = idCopy;
@@ -100,7 +260,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 	}
 
 	public String bookManagement_Add_Books() throws Exception {
-		
+
 		String ISBN = this.getModel().getISBN();
 		String title = this.getModel().getTitle();
 		String author = this.getModel().getAuthor();
@@ -155,10 +315,10 @@ public class BookAction extends BaseAction<Book, BookService> {
 			this.idList = new ArrayList<BookCopy>();
 			this.tempBookCopy = new BookCopy(tempBook.getId());
 			idList.add(tempBookCopy);
-			
+
 			// test
 			System.out.println(tempBook.getId());
-			
+
 		} catch (Exception ex) {
 			this.addActionError(ex.getMessage());
 			this.errorMessage = "failure";
@@ -166,7 +326,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 		}
 
 		long id = this.getModel().getId();
-		
+
 		String idString = String.valueOf(id);
 		// 生成barcode
 		try {
@@ -193,21 +353,21 @@ public class BookAction extends BaseAction<Book, BookService> {
 	}
 
 	public String bookManagement_Add_Books_Copy() throws Exception {
-		
+
 		this.book_copy_number = this.getBook_copy_number();
 		this.idList = new ArrayList<BookCopy>();
-		
+
 		// 循环加入书本
-		for(long i=0; i <= book_copy_number; i++) {
+		for (long i = 0; i <= book_copy_number; i++) {
 
 			Map<String, Object> session = ActionContext.getContext().getSession();
 			tempBook = (Book) session.get("book");
 			ActionContext.getContext().getSession().clear();
 			tempBook.setId(tempBook.getId() + 1);
-			
+
 			this.tempBookCopy = new BookCopy(tempBook.getId());
 			idList.add(tempBookCopy);
-			
+
 			// borrowState reservationState在addBook(service)中设置
 //			this.getModel().setAuthor(tempBook.getAuthor());
 //			this.getModel().setCategoryNo(tempBook.getCategoryNo());
@@ -240,8 +400,8 @@ public class BookAction extends BaseAction<Book, BookService> {
 
 			// 根据idString和bookLocation生成对应的条形码和图片
 			String idString = String.valueOf(id);
-			String bookLocation = "floor " + tempBook.getLocation_floor() + " stack "
-					+ tempBook.getLocation_stack() + " area " + tempBook.getLocation_area();
+			String bookLocation = "floor " + tempBook.getLocation_floor() + " stack " + tempBook.getLocation_stack()
+					+ " area " + tempBook.getLocation_area();
 
 			// 生成barcode
 			try {
@@ -262,9 +422,8 @@ public class BookAction extends BaseAction<Book, BookService> {
 			}
 
 		}
-		
 
-		this.errorMessage = "Succeed to add " + String.valueOf(book_copy_number) +" copy the book";
+		this.errorMessage = "Succeed to add " + String.valueOf(book_copy_number) + " copy the book";
 		return SUCCESS;
 	}
 
@@ -295,10 +454,9 @@ public class BookAction extends BaseAction<Book, BookService> {
 			this.errorMessage = "failure";
 			return INPUT;
 		}
-		if(pageState.equals("edit")){
+		if (pageState.equals("edit")) {
 			return "edit";
-		}
-		else if(pageState.equals("delete")){
+		} else if (pageState.equals("delete")) {
 			return "delete";
 		}
 
@@ -307,8 +465,8 @@ public class BookAction extends BaseAction<Book, BookService> {
 
 	}
 
-public String bookManagement_Detele_Books() throws Exception{
-		
+	public String bookManagement_Detele_Books() throws Exception {
+
 		boolean borrowState = this.getModel().isBorrowState();
 		boolean reservationState = this.getModel().isReservationState();
 //		
@@ -317,40 +475,39 @@ public String bookManagement_Detele_Books() throws Exception{
 //		System.out.println(this.getModel().getTitle());
 //		System.out.println(this.getModel().getISBN());
 //		
-		if(borrowState == false && reservationState == false){
+		if (borrowState == false && reservationState == false) {
 			this.getService().deleteBookById(this.getTempBookId());
 			this.errorMessage = "success";
 			return SUCCESS;
 		}
-		
+
 		this.errorMessage = "The book can't be deleted because it has been borrowed or reserved";
 		return INPUT;
-					
+
 	}
-	
-	public String bookManagement_Edit_Books() throws Exception{
-		
+
+	public String bookManagement_Edit_Books() throws Exception {
+
 		boolean borrowState = this.getModel().isBorrowState();
 		boolean reservationState = this.getModel().isReservationState();
 
-		try{
-			if(borrowState==false&&reservationState==false){
+		try {
+			if (borrowState == false && reservationState == false) {
 				this.getService().updateBook(this.getModel());
 				this.errorMessage = "success";
 				return SUCCESS;
 			}
 			this.errorMessage = "The book can't be edited because it has been borrowed or reserved";
 			return "failure";
-			
-		}
-		catch(Exception ex) {
+
+		} catch (Exception ex) {
 			this.addActionError(ex.getMessage());
-			this.errorMessage="failure";
+			this.errorMessage = "failure";
 			return INPUT;
 		}
-		
+
 	}
-	
+
 	public String borrow_FindBook() {
 		Book book = this.getService().confirmBookAuthority(bookId);
 		if (book != null) {
@@ -360,40 +517,70 @@ public String bookManagement_Detele_Books() throws Exception{
 		return INPUT;
 	}
 
-	//update book data after borrowing
+	// update book data after borrowing
 	public String borrow_BookUpdate() {
 		tempBook = this.getService().getBookById(bookId);
-		if(tempBook.isBorrowState() == true) {
+		if (tempBook.isBorrowState() == true) {
 			this.errorMessage = "The book has been borrowed.";
 			return INPUT;
 		}
-		if(tempBook.isReservationState() == true) {
+		if (tempBook.isReservationState() == true) {
 			this.errorMessage = "The book has been reserved.";
 			return INPUT;
 		}
-    	tempBook.setReservationState(false);
-    	tempBook.setBorrowState(true);
-    	this.getService().mergeBook(tempBook);
-    	this.errorMessage = "success";
-    	return SUCCESS;
+		tempBook.setReservationState(false);
+		tempBook.setBorrowState(true);
+		this.getService().mergeBook(tempBook);
+		this.errorMessage = "success";
+		return SUCCESS;
 	}
-	
 
-	//update book data after returning
+	// update book data after returning
 	public String return_BookUpdate() {
 		bookId = this.getBookId();
 //		System.out.println(bookId);
-		
-	   	try{
-	   		tempBook = this.getService().getBookById(bookId);
-	   		this.getService().updateReturnBook(tempBook);
-	   	} catch(Exception e1) {
-	   		this.errorMessage = "It is the wrong Id of book. or The record of this book may have been deleted.";
+
+		try {
+			tempBook = this.getService().getBookById(bookId);
+			this.getService().updateReturnBook(tempBook);
+		} catch (Exception e1) {
+			this.errorMessage = "It is the wrong Id of book. or The record of this book may have been deleted.";
 			return INPUT;
-	   	}
-	   	return SUCCESS;
+		}
+		return SUCCESS;
 	}
-	
+
+	public String viewBorrowInfo() {
+
+//		System.out.println(records.listIterator().next().getBookId());
+//		System.out.println("test");
+//		Iterator<Record> listIterator = records.iterator();
+//		
+//		public BorrowInfo(long id, long bookId, long readerId, String bookName, int fineValue, String borrowDate,
+//				String deadline, String returnDate, boolean payState) {
+
+		for (int i = 0; i < records.size(); i++) {
+			// 将已还罚金记录和未还罚金记录分组
+			// payState为1表示已经提交罚金
+			if (records.get(i).isPayState() == true) {
+				payedFine.add(
+						new BorrowInfo(records.get(i).getId(), records.get(i).getBookId(), records.get(i).getReaderId(),
+								this.getService().getBookById(records.get(i).getBookId()).getTitle(),
+								records.get(i).getFineValue(), records.get(i).getBorrowDate(),
+								records.get(i).getDeadline(), records.get(i).getReturnDate(), true));
+			}
+			// 罚金不为零时，才显示罚金记录
+			else if(records.get(i).getFineValue() != 0) {
+				unPayedFine.add(
+						new BorrowInfo(records.get(i).getId(), records.get(i).getBookId(), records.get(i).getReaderId(),
+								this.getService().getBookById(records.get(i).getBookId()).getTitle(),
+								records.get(i).getFineValue(), records.get(i).getBorrowDate(),
+								records.get(i).getDeadline(), records.get(i).getReturnDate(), true));
+			}
+		}
+		return SUCCESS;
+	}
+
 	public Book getTempBook() {
 		return tempBook;
 	}
@@ -502,6 +689,48 @@ public String bookManagement_Detele_Books() throws Exception{
 	 */
 	public void setBookId(long bookId) {
 		this.bookId = bookId;
+	}
+
+	/**
+	 * @return the records
+	 */
+	public List<Record> getRecords() {
+		return records;
+	}
+
+	/**
+	 * @param records the records to set
+	 */
+	public void setRecords(List<Record> records) {
+		this.records = records;
+	}
+
+	/**
+	 * @return the payedFine
+	 */
+	public List<BorrowInfo> getPayedFine() {
+		return payedFine;
+	}
+
+	/**
+	 * @param payedFine the payedFine to set
+	 */
+	public void setPayedFine(List<BorrowInfo> payedFine) {
+		this.payedFine = payedFine;
+	}
+
+	/**
+	 * @return the unPayedFine
+	 */
+	public List<BorrowInfo> getUnPayedFine() {
+		return unPayedFine;
+	}
+
+	/**
+	 * @param unPayedFine the unPayedFine to set
+	 */
+	public void setUnPayedFine(List<BorrowInfo> unPayedFine) {
+		this.unPayedFine = unPayedFine;
 	}
 	
 }

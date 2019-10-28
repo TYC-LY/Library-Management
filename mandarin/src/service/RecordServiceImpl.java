@@ -70,4 +70,18 @@ public class RecordServiceImpl extends BaseService<Record> implements RecordServ
 		return this.getDao().findByDuration("returnDate", startDate, endDate, "payState", true, "returnDate");
 	}
 
+	@Override
+	public List<Record> getRecordByReaderId(long readerId) {
+		// TODO Auto-generated method stub
+		return this.getDao().findBy("readerId", readerId);
+	}
+
+	@Override
+	public void clearFineById(long id) {
+		// TODO Auto-generated method stub
+		Record record = this.getDao().getSingle("id", id);
+		record.setPayState(true);
+		this.getDao().merge(record);
+	}
+
 }

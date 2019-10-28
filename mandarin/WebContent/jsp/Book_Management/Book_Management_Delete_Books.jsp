@@ -76,7 +76,6 @@
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Cancel</button>
 									</div>
-
 								</div>
 							</div>
 						</div>

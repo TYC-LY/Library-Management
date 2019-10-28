@@ -25,4 +25,6 @@ public interface ReaderService{
 	public Reader confirmReaderAuthority(long readerId);
 
 	public void updateReturnReader(Reader reader);
+
+	public List<Reader> viewReaderByDuration(String startDate, String endDate);
 }

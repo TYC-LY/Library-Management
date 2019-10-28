@@ -11,7 +11,7 @@ public class Reader extends BaseEntity{
 	private String phoneNumber;
 	private int borrowBookNumber;
 	private boolean fineState;
-	private String createDate;
+	private Date createDate;
 	private boolean checkState;
 	
 	public Reader() {
@@ -20,7 +20,7 @@ public class Reader extends BaseEntity{
 	}
 
 	public Reader(long id, String username, String password, String email, String phoneNumber, int borrowBookNumber,
-			boolean fineState, String createDate, boolean checkState) {
+			boolean fineState, Date createDate, boolean checkState) {
 		super(id);
 		this.username = username;
 		this.password = password;
@@ -28,9 +28,10 @@ public class Reader extends BaseEntity{
 		this.phoneNumber = phoneNumber;
 		this.borrowBookNumber = borrowBookNumber;
 		this.fineState = fineState;
-		SimpleDateFormat bjsdf =   new SimpleDateFormat( "yyyy/MM/dd  HH:mm:ss" ); 
-		bjsdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
-		this.setCreateDate(bjsdf.format(new Date()));
+		//SimpleDateFormat bjsdf =   new SimpleDateFormat( "yyyy/MM/dd  HH:mm:ss" ); 
+		//bjsdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+		//this.setCreateDate(bjsdf.format(new Date()));
+		this.setCreateDate(new Date());
 		this.checkState = checkState;
 	}
 
@@ -82,11 +83,11 @@ public class Reader extends BaseEntity{
 		this.fineState = fineState;
 	}
 
-	public String getCreateDate() {
-		return createDate;
+	public Date getCreateDate() {
+		return this.createDate;
 	}
 
-	public void setCreateDate(String createDate) {
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 

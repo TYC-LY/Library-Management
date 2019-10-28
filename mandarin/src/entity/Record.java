@@ -6,9 +6,9 @@ import java.util.TimeZone;
 
 public class Record extends BaseEntity {
 
-	private String borrowDate;
-	private String deadline;
-	private String returnDate;
+	private Date borrowDate;
+	private Date deadline;
+	private Date returnDate;
 	private long readerId;
 	private long bookId;
 	private boolean payState;
@@ -20,7 +20,7 @@ public class Record extends BaseEntity {
 		super(0);
 	}
 	
-	public Record(long id, String borrowDate, String deadline, String returnDate, long readerId, long bookId, boolean payState,
+	public Record(long id, String borrowDate, Date deadline, String returnDate, long readerId, long bookId, boolean payState,
 			int fineValue, boolean reservationState, boolean borrowState) {
 		super(id);
 		// TODO Auto-generated constructor stub
@@ -31,38 +31,61 @@ public class Record extends BaseEntity {
 		this.fineValue = fineValue;
 		this.reservationState = reservationState;
 		this.borrowState = borrowState;
-		SimpleDateFormat bjsdf =   new SimpleDateFormat( "yyyy/MM/dd" ); 
-		bjsdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
-		this.setBorrowDate(bjsdf.format(new Date()));
-		this.setDeadline(bjsdf.format(new Date()));
-		this.setReturnDate(bjsdf.format(new Date()));
+//		SimpleDateFormat bjsdf =   new SimpleDateFormat( "yyyy/MM/dd" ); 
+//		bjsdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+//		this.setBorrowDate(bjsdf.format(new Date()));
+//		this.setDeadline(bjsdf.format(new Date()));
+//		this.setReturnDate(bjsdf.format(new Date()));
+		
+		// 修改：
+		this.setBorrowDate(new Date());
+		this.setDeadline(new Date());
+		this.setReturnDate(null);
+		
 	}
 
-	public void setReturnDate(String returnDate) {
-		// TODO Auto-generated method stub
-		this.returnDate = returnDate;
+	
+	
+	/**
+	 * @return the borrowDate
+	 */
+	public Date getBorrowDate() {
+		return borrowDate;
 	}
 
-	public String getReturnDate() {
-		return returnDate;
-	}
-	
-	public void setDeadline(String deadline) {
-		// TODO Auto-generated method stub
-		this.deadline = deadline;
-	}
-	
-	public String getDeadline() {
-		return deadline;
-	}
-	
-	public void setBorrowDate(String borrowDate) {
-		// TODO Auto-generated method stub
+	/**
+	 * @param borrowDate the borrowDate to set
+	 */
+	public void setBorrowDate(Date borrowDate) {
 		this.borrowDate = borrowDate;
 	}
 
-	public String getBorrowDate() {
-		return borrowDate;
+	/**
+	 * @return the deadline
+	 */
+	public Date getDeadline() {
+		return deadline;
+	}
+
+	/**
+	 * @param deadline the deadline to set
+	 */
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
+	}
+
+	/**
+	 * @return the returnDate
+	 */
+	public Date getReturnDate() {
+		return returnDate;
+	}
+
+	/**
+	 * @param returnDate the returnDate to set
+	 */
+	public void setReturnDate(Date returnDate) {
+		this.returnDate = returnDate;
 	}
 
 	public long getReaderId() {

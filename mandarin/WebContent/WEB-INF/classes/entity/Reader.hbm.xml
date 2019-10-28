@@ -12,6 +12,7 @@
 		<property name="phoneNumber" type="string" not-null="false"/>
 		<property name="borrowBookNumber" type="int" not-null="true"></property>
 		<property name="fineState" type="boolean" not-null="true"></property>
-		<property name="createDate" not-null="true" />
+		<property name="createDate" type="date" not-null="true" />
+		<property name="checkState" type="boolean" not-null="true"></property>
 	</class>
 </hibernate-mapping>

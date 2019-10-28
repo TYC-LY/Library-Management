@@ -21,13 +21,13 @@
   <div class="card-body">
   	<form action="return_RecordUpdate" >
 		<label for="RecordId">RecordId:</label> 
-		<input class="form-control" value="<s:property value="tempRecord.id"/>" />
+		<input class="form-control" name="id" value="<s:property value="tempRecord.id"/>" />
 		<br>
 		<label for="ReaderId">ReaderId:</label>
-		<input class="form-control" value="<s:property value="tempRecord.readerId"/>" />
+		<input class="form-control" name="readerId" value="<s:property value="tempRecord.readerId"/>" />
 		<br>
 		<label for="BookId">BookId:</label>
-		<input class="form-control" value="<s:property value="tempRecord.bookId"/>" />
+		<input class="form-control" name="bookId" value="<s:property value="tempRecord.bookId"/>" />
 		<br>
 		<label for="BorrowDate">BorrowDate:</label>
 		<input class="form-control" value="<s:property value="tempRecord.borrowDate"/>" />

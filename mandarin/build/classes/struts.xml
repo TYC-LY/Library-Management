@@ -192,7 +192,7 @@
 		
 		<!-- return book -->
 		<action name="return_BookUpdate" class="BookAction" method="return_BookUpdate">
-			<result name="success" type="chain" >
+			<result name="success" type="chain">
 				<param name="actionName">return_ReaderUpdate</param>
 			</result>
 			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
@@ -204,11 +204,23 @@
 		</action>
 		
 		<action name="return_RecordUpdate" class="RecordAction" method="return_RecordUpdate">
-			<result name="success">
+			<result name="success" type="chain">
 				<param name="actionName">return_BookUpdate</param>
 			</result>
 			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
 		</action>
 		
+		<!-- View Library Income History -->
+		<action name="viewDeposit" class="ReaderAction" method="viewDeposit">
+			<result name="success" type="chain">
+				<param name="actionName">viewFineValue</param>
+			</result>
+			<result name="input">/jsp/View_Library_Income_History/View_Library_Income_History_Main.jsp</result>
+		</action>
+		
+		<action name="viewFineValue" class="RecordAction" method="viewFineValue">
+			<result name="success">/jsp/View_Library_Income_History/View_Library_Income_History_Main.jsp</result>
+			<result name="input">/jsp/View_Library_Income_History/View_Library_Income_History_Main.jsp</result>
+		</action>
 	</package>
 </struts>

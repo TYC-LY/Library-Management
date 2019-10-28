@@ -4,9 +4,9 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>Book ID</th><br/>
-				<th>ISBN</th><br/>
-				<th>Librarian ID</th><br/>
+				<th>Book ID</th>
+				<th>ISBN</th>
+				<th>Librarian ID</th>
 			</tr>
 		</thead>
 		<tbody>

@@ -1,6 +1,8 @@
 package action;
 
 
+import java.util.List;
+
 import entity.Record;
 import service.RecordService;
 
@@ -10,6 +12,9 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 	private static final long serialVersionUID = 1L;
 	
 	private Record tempRecord;
+	private List<Record> fineList;
+	private String startDate;
+	private String endDate;
 	
 	public String makeNewRecord() {
 		//System.out.println("go to here");
@@ -50,11 +55,62 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 		return SUCCESS;
 	}
 	
+	public String viewFineValue() {
+		this.startDate = this.getStartDate();
+		this.endDate = this.getEndDate();
+		
+		this.fineList = this.getService().viewFineListByDuration(startDate,endDate);
+		
+		return SUCCESS;
+	}
+	
 	public Record getTempRecord() {
 		return tempRecord;
 	}
 
 	public void setTempRecord(Record tempRecord) {
 		this.tempRecord = tempRecord;
+	}
+
+	/**
+	 * @return the fineList
+	 */
+	public List<Record> getFineList() {
+		return fineList;
+	}
+
+	/**
+	 * @param fineList the fineList to set
+	 */
+	public void setFineList(List<Record> fineList) {
+		this.fineList = fineList;
+	}
+
+	/**
+	 * @return the startDate
+	 */
+	public String getStartDate() {
+		return startDate;
+	}
+
+	/**
+	 * @param startDate the startDate to set
+	 */
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	/**
+	 * @return the endDate
+	 */
+	public String getEndDate() {
+		return endDate;
+	}
+
+	/**
+	 * @param endDate the endDate to set
+	 */
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 }

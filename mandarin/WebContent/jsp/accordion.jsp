@@ -128,4 +128,26 @@
 							</div>
 						</div>
 					</div>
+					<div class="card">
+						<div class="card-header">
+							<a class="card-link" data-toggle="collapse"
+								href="#collapseFive">View Library Income History
+							</a>
+						</div>
+						<div id="collapseFive" class="collapse"
+							data-parent="#accordion">
+							<div class="card-body">
+								<ul class="nav nav-pills flex-column">
+									<li class="nav-item">
+										<!-- 按钮：用于打开链接 -->
+										<a href="/mandarin/jsp/View_Library_Income_History/View_Library_Income_History_Main.jsp">
+												<button class="btn btn-primary btn-block">View Library Income History</button>
+										</a>
+									</li>
+								</ul>
+
+							</div>
+						</div>
+					</div>
+					
 				</div>

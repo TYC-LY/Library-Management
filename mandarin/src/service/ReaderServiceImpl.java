@@ -1,6 +1,9 @@
 package service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import entity.Reader;
 
@@ -61,7 +64,13 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 		// TODO Auto-generated method stub
 		reader.setBorrowBookNumber(0);
 		reader.setCheckState(true);
-		reader.setCreateDate("2019/10/2");
+		
+		// modify time:2019.10.23
+		// To make the date automatically created by local time
+//		SimpleDateFormat bjsdf = new SimpleDateFormat( "yyyy-MM-dd  HH:mm:ss" );
+//		bjsdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+//		reader.setCreateDate(bjsdf.format(new Date()));
+		reader.setCreateDate(new Date());
 		reader.setFineState(false);
 		this.getDao().save(reader);
 	}
@@ -83,6 +92,12 @@ public class ReaderServiceImpl extends BaseService<Reader> implements ReaderServ
 		// TODO Auto-generated method stub
 		reader.setBorrowBookNumber(reader.getBorrowBookNumber()-1);
 		this.getDao().merge(reader);
+	}
+
+	@Override
+	public List<Reader> viewReaderByDuration(String startDate, String endDate) {
+		// TODO Auto-generated method stub
+		return this.getDao().findByDuration("createDate", startDate, endDate, null, null, "createDate");
 	}
 
 }

@@ -9,10 +9,8 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="referrer" content="no-referrer" />
-	
 
-<title>BookManagement Add Books</title>
+<title>View Library Income History</title>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
@@ -22,13 +20,18 @@
 	src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 <script
 	src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
+<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+ 
 
 </head>
 <body>
 
 	<!-- 导航栏 -->
-	<jsp:include page="/jsp/header.jsp" flush="true"/>
-	
+	<jsp:include page="/jsp/header.jsp" flush="true" />
+
 	<!-- 主体部分 -->
 	<div class="container" style="margin-top: 30px">
 		<div class="row">
@@ -36,9 +39,10 @@
 				<!-- 侧边栏 -->
 				<jsp:include page="/jsp/sidebar.jsp" flush="true" />
 			</div>
+
 			<div class="col-sm-8">
-				<!-- 条形码和位置图片页面 -->
-				<%@include file="/jsp/Book_Management/BookManagement_Add_Books_Image.jsp" %>
+				<%@include file="/jsp/View_Library_Income_History/View_Library_Income_History.jsp" %>
+			
 			</div>
 		</div>
 	</div>

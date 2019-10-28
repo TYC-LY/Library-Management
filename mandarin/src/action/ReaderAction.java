@@ -19,6 +19,8 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 	private List<Reader> Readers;
 	private Reader tempReader;
 	private long readerId;
+	private String startDate;
+	private String endDate;
 
 	public String signup() throws Exception {
 		String username = this.getModel().getUsername();
@@ -38,13 +40,13 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 			this.errorMessage = "phoneNumber can not be empty";
 			return INPUT;
 		}
-		try {
+		//try {
 			this.getService().register(this.getModel());
-		} catch (Exception ex) {
-			this.addActionError(ex.getMessage());
-			this.errorMessage = "failure";
-			return INPUT;
-		}
+//		} catch (Exception ex) {
+//			this.addActionError(ex.getMessage());
+//			this.errorMessage = "failure";
+//			return INPUT;
+//		}
 
 		long id = this.getModel().getId();
 
@@ -115,6 +117,15 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 		this.errorMessage = "You succeed in returning the book";
 		return SUCCESS;
 	}
+	
+	public String viewDeposit() {
+		this.startDate = this.getStartDate();
+		this.endDate = this.getEndDate();
+		
+		Readers = this.getService().viewReaderByDuration(startDate,endDate);
+		
+		return SUCCESS;
+	}
 
 	public Reader getTempReader() {
 		return tempReader;
@@ -152,5 +163,33 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 
 	public void setReaders(List<Reader> readers) {
 		Readers = readers;
+	}
+
+	/**
+	 * @return the startDate
+	 */
+	public String getStartDate() {
+		return startDate;
+	}
+
+	/**
+	 * @param startDate the startDate to set
+	 */
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	/**
+	 * @return the endDate
+	 */
+	public String getEndDate() {
+		return endDate;
+	}
+
+	/**
+	 * @param endDate the endDate to set
+	 */
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 }

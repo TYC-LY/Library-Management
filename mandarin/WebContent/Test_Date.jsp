@@ -18,7 +18,7 @@
  
 	<body>
 	<div class="container">
-	<div class="col-sm-6">
+	<div class="col-sm-4">
 		<div style="position:relative;">
 			<input type='text' class="form-control" id='datetime' />
 		</div>
@@ -31,7 +31,7 @@
 			});
 		</script>
 	</div>
-	<div class="col-sm-6">
+	<div class="col-sm-8">
 		<form>
 			<div class="col-sm-4">
 			<input type='text' class="form-control" id="startdatetime" />

@@ -68,4 +68,15 @@ public interface BaseDao<TEntity> {
 	 * @param entity the entity to be saved
 	 */
 	void saveCopy(TEntity entity);
+	
+	/**
+	 * find entities within the duration
+	 * @param propertyName The default value of it is createDate. Or returnDate
+	 * @param startDate The beginning day of the duration
+	 * @param endDate The ending day of the duration 
+	 * @param propertyName_1 The name of the property, such as payState
+	 * @param propertyValue The value of the property
+	 * @param condition The standard of the ordered list
+	 */
+	List<TEntity> findByDuration(String propertyName, String startDate, String endDate, String propertyName_1, Object propertyValue, String condition);
 }

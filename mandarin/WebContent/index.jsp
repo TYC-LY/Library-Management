@@ -91,7 +91,7 @@
 	
 		<footer class="footer mt-auto">
 			<div class="container text-center py-3" style="background-color: #f5f5f5">
-				© 2019 <a href="http://www.nwpu.edu.cn/" target="_blank">NWPU</a> Mandarin-Library Automation
+				© 2019 <a href="http://www.nwpu.edu.cn/" target="_blank">XXXX</a> Mandarin-Library Automation
 			</div>
 		</footer>
 	

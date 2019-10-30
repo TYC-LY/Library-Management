@@ -65,6 +65,7 @@ public class MyServletContextListener implements ServletContextListener {
 						e.printStackTrace();
 					}
 				}
+				System.out.println("successful");
 			}
 		}, new Date(), 1000*60*60*24);// 测试使用1000 * 1
 	}

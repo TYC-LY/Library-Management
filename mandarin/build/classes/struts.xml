@@ -24,23 +24,13 @@
 				<result name="input">/test-signin.jsp</result>
 			</action> -->
 			
-			<action name="reader-search" class="readerAction" method="search">
-				<!-- TODO: 搜索种类代完善，实现需更改视图（表单添加下拉框） -->
-				<result name="isTitle" type="chain">
-					<param name="actionName">searchTitle</param>
-				</result>
-				<!-- <result name="isAuthor" type="chain">
-					<param name="actionName">searchAuthor</param>
-				</result> -->
-			</action>
-			
-				<action name="searchTitle" class="bookAction" method="searchTitle">
+				<action name="search" class="bookAction" method="search">
 					<result name="input">/search.jsp</result>
 				</action>
 				
-				<!-- <action name="searchTitle" class="bookAction" method="searchAuthor">
-					<result name="input">/test-search.jsp</result>
-				</action> -->
+				<action name="screen" class="bookAction" method="screen">
+					<result name="input">/search.jsp</result>
+				</action>
 			
 			<action name="reader-current-borrowed" class="readerAction" method="currentBorrowed">
 				<result name="success" type="chain">
@@ -80,6 +70,8 @@
 				<result name="reserve">/index.jsp</result>
 				<result name="input">/search.jsp</result>
 			</action>
+			
+			
 		
 		<!-- profile.jsp================================================================= -->
 		

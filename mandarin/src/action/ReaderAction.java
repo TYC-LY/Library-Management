@@ -78,32 +78,6 @@ public class ReaderAction extends BaseAction<Reader, ReaderService> {
 //		return INPUT;
 //	}
 
-	public String search() throws Exception {
-		if (this.searchContent == null) {
-			return NONE;
-		}
-		System.out.println(searchContent);
-		return "isTitle";
-//		if(searchContent.length()>=7  && searchContent.substring(0,7).equals("@email ")) {
-//			String emailString = this.searchContent.substring(7).strip();
-//			this.tempUser = this.getService().getUserByEmail(emailString);
-//			if(this.tempUser==null) {
-//				return NONE;
-//			}
-//			else {
-//				Map<String, Object> session = ActionContext.getContext().getSession();
-//		    	User user = (User) session.get("user");
-//		    	if(user==null) {
-//		    		return INPUT;
-//		    	}
-//				return "isuser";
-//			}
-//		}
-//		else{
-//			return "istheme";		
-//		}
-	}
-
 	public String currentBorrowed() throws Exception {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		Reader reader = (Reader) session.get("reader");

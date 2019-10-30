@@ -110,7 +110,7 @@
 
 	<main role="main" class="flex-shrink-0">
 	<div class="container">
-		<form class="m-3" action="reader-search">
+		<form class="m-3" action="search">
 			<div class="input-group mt-3">
 				<select name="option" class="rounded-left btn-outline-primary">
 					<option value="title">Book Title</option>
@@ -118,32 +118,42 @@
 					<option value="publisher">Publisher</option>
 					<option value="isbn">ISBN</option>
 				</select> <input type="text" name="searchContent"
+					value="<s:property value="searchContent" />"
 					class="form-control mr-3 rounded-right"
-					placeholder="Put some information here." aria-label="Search"
-					autocomplete="off">
+					placeholder="Put some information here." aria-label="Search">
+					<!-- 若要关闭自动填充关闭autocomplete="off" -->
 				<button class="btn btn-outline-primary" type="submit">Search</button>
 			</div>
 		</form>
 		<div class="row">
 			<nav class="col-md-10 offset-md-1 col-lg-3 offset-lg-0 sidebar">
 				<div class="mt-3 ml-3 mb-3">
-					<ul class="list-group flex-column">
-						<li class="list-group-item"><button
-								class="btn btn-outline-secondary" disabled>DISABLE</button></li>
-						<li class="list-group-item"><button
-								class="btn btn-outline-secondary" disabled>DISABLE</button></li>
-						<li class="list-group-item"><button
-								class="btn btn-outline-secondary" disabled>DISABLE</button></li>
-						<li class="list-group-item"><button
-								class="btn btn-outline-secondary" disabled>DISABLE</button></li>
-						<li class="list-group-item"><button
-								class="btn btn-outline-secondary" disabled>DISABLE</button></li>
-						<li class="list-group-item"><button
-								class="btn btn-outline-secondary" disabled>DISABLE</button></li>
-						<li class="list-group-item"><button
-								class="btn btn-outline-secondary" disabled>DISABLE</button></li>
-						<!-- 分类检索 -->
-					</ul>
+					<form action="screen">
+						<ul class="list-group flex-column">
+							<a class="card-header" data-toggle="collapse" href="#collapseAuthor" role="button" aria-expanded="false" aria-controls="collapseAuthor">Author</a>
+								<div class="collapse mt-2" id="collapseAuthor">		
+									<s:iterator value="authorList" status="Q">
+										<p class="ml-4">
+											<input class="form-check-input" type="checkbox" name="multiAuthor" value="<s:property value="authorList[#Q.index]" />">
+											<s:property value="authorList[#Q.index]" />
+										</p>
+									</s:iterator>
+								</div>
+									
+							<a class="card-header" data-toggle="collapse" href="#collapsePublisher" role="button" aria-expanded="false" aria-controls="collapsePublisher">Publisher</a>
+								<div class="collapse mt-2" id="collapsePublisher">
+									<s:iterator value="publisherList" status="P">
+										<p class="ml-4">
+											<input class="form-check-input" type="checkbox" name="multiPublisher" value="<s:property value="publisherList[#P.index]"/>">
+											<s:property value="publisherList[#P.index]"/>
+										</p>
+									</s:iterator>
+								</div>
+							<button class="btn btn-primary mt-2" type="submit">Screen</button>
+						</ul>
+						<input type="hidden" name="screenContent" value="<s:property value="searchContent" />">
+						<input type="hidden" name="screenOption" value="<s:property value="option" />">
+					</form>
 				</div>
 			</nav>
 			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
@@ -166,9 +176,7 @@
 										<span class="badge badge-secondary mr-2"><s:property
 												value="isbn" /></span> <span class="badge badge-primary mr-2"><s:property
 												value="author" /></span> <span class="badge badge-primary mr-2"><s:property
-												value="publisher" /></span> <span
-											class="badge badge-secondary mr-2"><s:property
-												value="location" /></span> <span class="badge badge-secondary"><s:property
+												value="publisher" /></span> <span class="badge badge-secondary"><s:property
 												value="price" /></span>
 									</div>
 								</div>
@@ -270,7 +278,7 @@
 	<footer class="footer mt-auto">
 		<div class="container text-center py-3"
 			style="background-color: #f5f5f5">
-			© 2019 <a href="http://www.nwpu.edu.cn/" target="_blank">NWPU</a>
+			© 2019 <a href="http://www.nwpu.edu.cn/" target="_blank">XXXX</a>
 			Mandarin-Library Automation
 		</div>
 	</footer>

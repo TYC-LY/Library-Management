@@ -29,7 +29,9 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 		long tempId = this.getModel().getBookId();
 		//System.out.println(tempId);
 		this.tempRecord = this.getService().getBorrowRecordByBookId(tempId);
-		this.getService().updateReturnRecord(tempRecord);
+		// 不明白当时为什么加上这一句？
+		// 原因：复制searchBorrowRecord方法时，忘记删除这一句
+		//this.getService().updateReturnRecord(tempRecord);
 		return SUCCESS;
 	}
 	
@@ -41,7 +43,8 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 			this.errorMessage = "This book has not been borrowed.";
 			return INPUT;
 		}
-		this.getService().updateReturnRecord(tempRecord);
+		// 不应该在此处更新书的借阅状态
+		//this.getService().updateReturnRecord(tempRecord);
 		return SUCCESS;
 	}
 	
@@ -53,6 +56,7 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 			this.errorMessage = "You need to pay for the fine.";
 			return INPUT;
 		}
+		// 设置书的状态为未借出
 		this.getService().updateReturnRecord(tempRecord);
 		this.errorMessage = "success";
 		return SUCCESS;

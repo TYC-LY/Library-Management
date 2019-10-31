@@ -1,6 +1,7 @@
 <h1>Reader History</h1>
 	<p>
 		<form action="searchBorrowRecords">
+			<label>Reader ID:</label>
 			<div class="input-group mt-3 mb-3">
 				<input class="form-control" required autofocus="" name="readerId" type="text"><br />
 			</div>
@@ -45,7 +46,7 @@
 						<s:property value="bookName" />
 					</td>
 					<td>
-						<s:property value="fineValue" />
+						<p class="text-danger"><s:property value="fineValue" />RMB</p>
 					</td>
 					<td>
 						<s:property value="borrowDate" />
@@ -72,6 +73,7 @@
 					<th>BorrowDate</th>
 					<th>Deadline</th>
 					<th>ReturnDate</th>
+					<th>BorrowState</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -93,7 +95,20 @@
 							<s:property value="deadline" />
 						</td>
 						<td>
-							<s:property value="returnDate" />
+							<s:if test="%{borrowState==false}">
+								<p class="text-primary"><s:property value="returnDate" /></p>
+							</s:if>
+							<s:else>
+								<p class="text-warning font-weight-bold">lending</p>
+							</s:else>
+						</td>
+						<td>
+							<s:if test="%{borrowState==false}">
+								<p class="text-danger font-weight-bold"><s:property value="borrowState"/></p>
+							</s:if>
+							<s:else>
+								<p class="text-success"><s:property value="borrowState"/></p>
+							</s:else>
 						</td>
 					</tr>
 				</s:iterator>

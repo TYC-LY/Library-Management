@@ -158,23 +158,32 @@
 			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
 		</action>
 		
-		<action name="makeNewRecord" class="RecordAction" method="makeNewRecord">
+		<action name="borrow_BookUpdate" class="BookAction" method="borrow_BookUpdate">
 			<result name="success" type="chain">
-				<param name="actionName">searchBorrowRecord_Lend</param>
-			</result>
-			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
-		</action>
-			
-		<action name="borrow_ReaderUpdate" class="ReaderAction" method="borrow_ReaderUpdate">
-			<result name="success" type="chain">
-				<param name="actionName">makeNewRecord</param>
+				<param name="actionName">borrow_ReaderUpdate</param>
 			</result>
 			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
 		</action>
 		
-		<action name="borrow_BookUpdate" class="BookAction" method="borrow_BookUpdate">
+		<action name="borrow_ReaderUpdate" class="ReaderAction" method="borrow_ReaderUpdate">
 			<result name="success" type="chain">
-				<param name="actionName">borrow_ReaderUpdate</param>
+				<param name="actionName">makeNewRecord</param>
+			</result>
+			<!-- 如果更新reader的信息失败,需要撤回book信息的修改 -->
+			<result name="input" type="chain">
+				<param name="actionName">revert_Lend_Book_Update</param>
+			</result>
+		</action>
+
+		<!-- 撤回对book信息的修改 -->
+		<action name="revert_Lend_Book_Update" class="BookAction" method="revert_Lend_Book_Update">
+			<result name="success">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+		
+		<action name="makeNewRecord" class="RecordAction" method="makeNewRecord">
+			<result name="success" type="chain">
+				<param name="actionName">searchBorrowRecord_Lend</param>
 			</result>
 			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
 		</action>
@@ -191,6 +200,13 @@
 		</action>
 		
 		<!-- return book -->
+		<action name="return_RecordUpdate" class="RecordAction" method="return_RecordUpdate">
+			<result name="success" type="chain">
+				<param name="actionName">return_BookUpdate</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+		</action>
+		
 		<action name="return_BookUpdate" class="BookAction" method="return_BookUpdate">
 			<result name="success" type="chain">
 				<param name="actionName">return_ReaderUpdate</param>
@@ -200,13 +216,6 @@
 		
 		<action name="return_ReaderUpdate" class="ReaderAction" method="return_ReaderUpdate">
 			<result name="success">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
-			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
-		</action>
-		
-		<action name="return_RecordUpdate" class="RecordAction" method="return_RecordUpdate">
-			<result name="success" type="chain">
-				<param name="actionName">return_BookUpdate</param>
-			</result>
 			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
 		</action>
 		

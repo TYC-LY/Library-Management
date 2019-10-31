@@ -27,7 +27,7 @@ public class RecordServiceImpl extends BaseService<Record> implements RecordServ
 		//record.setDeadline(bjsdf.format(date));
 		record.setDeadline(date);
 		
-		record.setReturnDate(null);
+		record.setReturnDate(new Date());
 		record.setPayState(false);
 		record.setFineValue(0);
 		record.setReservationState(false);

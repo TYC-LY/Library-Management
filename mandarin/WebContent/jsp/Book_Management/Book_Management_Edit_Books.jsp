@@ -49,10 +49,20 @@
 							<s:property value="author" />
 						</td>
 						<td>
-							<s:property value=" borrowState" />
+							<s:if test="%{borrowState==false}">
+								<p class="text-secondary"><s:property value="borrowState" /></p>
+							</s:if>
+							<s:else>
+								<p class="text-success font-weight-bold"><s:property value="borrowState"/></p>
+							</s:else>
 						</td>
 						<td>
-							<s:property value=" reservationState" />
+							<s:if test="%{reservationState==false}">
+								<p class="text-secondary"><s:property value=" reservationState" /></p>
+							</s:if>
+							<s:else>
+								<p class="text-success font-weight-bold"><s:property value=" reservationState" /></p>
+							</s:else>
 						</td>
 						<td>
 							<button type="button" class="btn btn-primary btn-block" data-toggle="modal"

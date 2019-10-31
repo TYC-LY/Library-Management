@@ -61,9 +61,10 @@ public class BookAction extends BaseAction<Book, BookService> {
 		private Date deadline;
 		private Date returnDate;
 		private boolean payState;
+		private boolean borrowState;
 
 		public BorrowInfo(long id, long bookId, long readerId, String bookName, int fineValue, Date borrowDate,
-				Date deadline, Date returnDate, boolean payState) {
+				Date deadline, Date returnDate, boolean payState, boolean borrowState) {
 			super();
 			this.id = id;
 			this.bookId = bookId;
@@ -74,6 +75,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 			this.deadline = deadline;
 			this.returnDate = returnDate;
 			this.payState = payState;
+			this.borrowState = borrowState;
 		}
 
 		/**
@@ -200,6 +202,20 @@ public class BookAction extends BaseAction<Book, BookService> {
 		 */
 		public void setPayState(boolean payState) {
 			this.payState = payState;
+		}
+
+		/**
+		 * @return the borrowState
+		 */
+		public boolean isBorrowState() {
+			return borrowState;
+		}
+
+		/**
+		 * @param borrowState the borrowState to set
+		 */
+		public void setBorrowState(boolean borrowState) {
+			this.borrowState = borrowState;
 		}
 
 	}
@@ -562,21 +578,40 @@ public class BookAction extends BaseAction<Book, BookService> {
 		for (int i = 0; i < records.size(); i++) {
 			// 将已还罚金记录和未还罚金记录分组
 			// payState为1表示已经提交罚金
-			if (records.get(i).isPayState() == true) {
-				payedFine.add(
-						new BorrowInfo(records.get(i).getId(), records.get(i).getBookId(), records.get(i).getReaderId(),
-								this.getService().getBookById(records.get(i).getBookId()).getTitle(),
-								records.get(i).getFineValue(), records.get(i).getBorrowDate(),
-								records.get(i).getDeadline(), records.get(i).getReturnDate(), true));
-			}
-			// 罚金不为零时，才显示罚金记录
-			else if(records.get(i).getFineValue() != 0) {
+			
+			//此处为添加:未交罚金
+			if (records.get(i).isPayState() != true && records.get(i).getFineValue() != 0) {
 				unPayedFine.add(
 						new BorrowInfo(records.get(i).getId(), records.get(i).getBookId(), records.get(i).getReaderId(),
 								this.getService().getBookById(records.get(i).getBookId()).getTitle(),
 								records.get(i).getFineValue(), records.get(i).getBorrowDate(),
-								records.get(i).getDeadline(), records.get(i).getReturnDate(), true));
+								records.get(i).getDeadline(), records.get(i).getReturnDate(), false, 
+								records.get(i).isBorrowState()));
 			}
+			// 犯错误:罚金不为零时，才显示罚金记录
+			//else if(records.get(i).getFineValue() != 0) {
+			
+			// 此处为添加:其他记录,包括:已交罚金或已还书籍
+			else {
+				payedFine.add(
+						new BorrowInfo(records.get(i).getId(), records.get(i).getBookId(), records.get(i).getReaderId(),
+								this.getService().getBookById(records.get(i).getBookId()).getTitle(),
+								records.get(i).getFineValue(), records.get(i).getBorrowDate(),
+								records.get(i).getDeadline(), records.get(i).getReturnDate(), true,
+								records.get(i).isBorrowState()));
+			}
+		}
+		return SUCCESS;
+	}
+	
+	public String revert_Lend_Book_Update() {
+		this.bookId = this.getBookId();
+		try {
+			tempBook = this.getService().getBookById(bookId);
+			tempBook.setBorrowState(false);
+			this.getService().mergeBook(tempBook);
+		} catch(Exception e1) {
+			return INPUT;
 		}
 		return SUCCESS;
 	}

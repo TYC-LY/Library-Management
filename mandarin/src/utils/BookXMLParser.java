@@ -60,7 +60,13 @@ public class BookXMLParser extends DefaultHandler {
 	}
 
 	public void endElement(String uri, String localName, String name) throws SAXException {
-		if (name.equalsIgnoreCase("db:attribute")) {
+		if ("entry".equalsIgnoreCase(name)) {
+			StringBuilder str = new StringBuilder();
+			for (String t : tags) {
+				str.append(t + "/");
+			}
+			book.setCategoryNo(str.toString());
+		} else if (name.equalsIgnoreCase("db:attribute")) {
 			String value = buff.toString().trim();
 			
 			// 当对应的标签存在，则直接赋值

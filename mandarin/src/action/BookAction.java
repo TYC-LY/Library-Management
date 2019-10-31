@@ -21,6 +21,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import com.opensymphony.xwork2.ActionContext;
 
 import entity.Book;
+import entity.Librarian;
 import entity.Record;
 import service.BookService;
 import utils.BarCodeUtils;
@@ -271,6 +272,9 @@ public class BookAction extends BaseAction<Book, BookService> {
 		if (tempBook.getImagePath() == null) {
 			tempBook.setImagePath("#");
 		}
+		if(tempBook.getCategoryNo() == null) {
+			tempBook.setCategoryNo("null");
+		}
 
 		return SUCCESS;
 	}
@@ -333,7 +337,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 			idList.add(tempBookCopy);
 
 			// test
-			System.out.println(tempBook.getId());
+//			System.out.println(tempBook.getId());
 
 		} catch (Exception ex) {
 			this.addActionError(ex.getMessage());
@@ -351,6 +355,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 		} catch (IOException ioex) {
 			this.addActionError(ioex.getMessage());
 			this.errorMessage = "failure to create the barcode";
+			return INPUT;
 		}
 
 		String bookLocation = "floor " + this.getModel().getLocation_floor() + " stack "
@@ -362,6 +367,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 		} catch (IOException ioex) {
 			this.addActionError(ioex.getMessage());
 			this.errorMessage = "failure to create the image of the book location";
+			return INPUT;
 		}
 
 		this.errorMessage = "success";
@@ -373,9 +379,16 @@ public class BookAction extends BaseAction<Book, BookService> {
 		this.book_copy_number = this.getBook_copy_number();
 		this.idList = new ArrayList<BookCopy>();
 
+		if( book_copy_number == 0) {
+			this.errorMessage = "Your need to type in the number.";
+			return INPUT;
+		}
+		
 		// 循环加入书本
-		for (long i = 0; i <= book_copy_number; i++) {
-
+//		for (long i = 0; i <= book_copy_number; i++) {
+		// <=是錯誤的
+		for (long i = 0; i < book_copy_number; i++) {
+			
 			Map<String, Object> session = ActionContext.getContext().getSession();
 			tempBook = (Book) session.get("book");
 			ActionContext.getContext().getSession().clear();
@@ -426,6 +439,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 			} catch (IOException ioex) {
 				this.addActionError(ioex.getMessage());
 				this.errorMessage = "failure to create the barcode";
+				return INPUT;
 			}
 
 			// 生成the image of the bookLoaction
@@ -435,6 +449,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 			} catch (IOException ioex) {
 				this.addActionError(ioex.getMessage());
 				this.errorMessage = "failure to create the image of the book location";
+				return INPUT;
 			}
 
 		}
@@ -491,6 +506,14 @@ public class BookAction extends BaseAction<Book, BookService> {
 //		System.out.println(this.getModel().getTitle());
 //		System.out.println(this.getModel().getISBN());
 //		
+		
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		Librarian librarian = (Librarian)session.get("librarian");
+		if(librarian == null) {
+			this.errorMessage = "You need to login the librarian account";
+			return INPUT;
+		}
+		
 		if (borrowState == false && reservationState == false) {
 			this.getService().deleteBookById(this.getTempBookId());
 			this.errorMessage = "success";

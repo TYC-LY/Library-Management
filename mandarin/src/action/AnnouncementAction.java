@@ -1,8 +1,12 @@
 package action;
 
 import java.util.List;
+import java.util.Map;
+
+import com.opensymphony.xwork2.ActionContext;
 
 import entity.Announcement;
+import entity.Librarian;
 import service.AnnouncementService;
 
 public class AnnouncementAction extends BaseAction<Announcement, AnnouncementService>{
@@ -78,6 +82,13 @@ public class AnnouncementAction extends BaseAction<Announcement, AnnouncementSer
 	
 	public String createAnnouncement() throws Exception{
 		
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		Librarian librarian = (Librarian)session.get("librarian");
+		if(librarian == null) {
+			this.errorMessage = "Fail to add Announcement! You need to login the librarian account";
+			return INPUT;
+		}
+		this.getModel().setAuthor(librarian.getUsername());
 		try {
 			this.getService().addAnnouncement(this.getModel());
 		}
@@ -87,7 +98,7 @@ public class AnnouncementAction extends BaseAction<Announcement, AnnouncementSer
 			System.out.println(this.errorMessage);
 			return INPUT;
 		}
-		this.errorMessage = "success";
+		this.errorMessage = "Succeed in adding an announcement!";
 		System.out.println(this.errorMessage);
 		return SUCCESS;
 		

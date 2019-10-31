@@ -5,17 +5,19 @@ public class Librarian extends BaseEntity{
 	private String password;
 	private String securityAnswer;
 	private String repeatpw;
+	private boolean checkState;
 	
 	public Librarian() {
 		super(0);
 	}
 
-	public Librarian(long id, String username, String password, String securityAnswer, String repeatpw) {
+	public Librarian(long id, String username, String password, String securityAnswer, String repeatpw,boolean checkState) {
 		this();
 		this.username = username;
 		this.password = password;
 		this.securityAnswer = securityAnswer;
 		this.repeatpw = repeatpw;
+		this.checkState = checkState;
 	}
 
 
@@ -50,6 +52,20 @@ public class Librarian extends BaseEntity{
 
 	public void setRepeatpw(String repeatpw) {
 		this.repeatpw = repeatpw;
+	}
+
+	/**
+	 * @return the checkState
+	 */
+	public boolean isCheckState() {
+		return checkState;
+	}
+
+	/**
+	 * @param checkState the checkState to set
+	 */
+	public void setCheckState(boolean checkState) {
+		this.checkState = checkState;
 	}
 	
 }

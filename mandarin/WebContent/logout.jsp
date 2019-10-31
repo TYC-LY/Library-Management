@@ -37,6 +37,8 @@
 
 			<div class="col-sm-8">
 				<h1>Librarian Personal Center</h1>
+				<br>
+				<h4 class="text-danger"><s:property value="errorMessage"/></h4>
 			</div>
 		</div>
 	</div>

@@ -42,7 +42,7 @@ public class AnnouncementServiceImpl extends BaseService<Announcement> implement
 //		SimpleDateFormat bjsdf =   new SimpleDateFormat( "yyyy/MM/dd  HH:mm:ss" ); 
 //		bjsdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
 //		announcement.setCreateDate(bjsdf.format(new Date()));
-		announcement.setAuthor("pzy");
+//		announcement.setAuthor("pzy");
 		this.getDao().save(announcement);
 	}
 	

@@ -20,4 +20,24 @@ public interface LibrarianService {
 	public void mergeLibrarian(Librarian librarian);
 
 	public Librarian verifySecurityQuestion(String username, String securityAnswer);
+
+	public void check(long id);
+	
+	public List<Librarian> getLibrarianCheckStateIsFalse();
+
+	public Librarian checkUsername(String username);
+
+	public void addLibrarian(Librarian librarian);
+
+	public void delectLibrarian(Librarian librarian);
+
+	public void changeLibrarian(long id,String username);
+    
+	public Librarian search(String username);
+
+	public String[] getAllUsername(int i);
+
+	public int count();
+
+	public Librarian getLibrarianByUsername(String username);
 }

@@ -90,6 +90,7 @@
 		<!-- BookDeleteRecord Management -->
 		<action name="createDeltionRecord" class="BookDeleteRecordAction" method="addRecord">
 			<result name="success">/jsp/Book_Management/Book_Management_Delete_Books_Main.jsp</result>
+			<result name="input">/jsp/Book_Management/Book_Management_Delete_Books_Main.jsp</result>
 		</action>
 		
 		<action name="viewDeletionRecord" class="BookDeleteRecordAction" method="viewRecord">
@@ -267,6 +268,100 @@
 			<result name="success" type="chain">
 				<param name="actionName">searchBorrowRecords</param>
 			</result>
+		</action>
+		
+		<!-- AdminLogin -->
+		<action name="AdminLogin" class="AdminAction" method="signin">
+			<result name="success">/index.jsp</result>
+			<result name="input">/AdminLogin.jsp</result>
+		</action>
+		
+		<!-- AdminLogout -->
+		<action name="AdminLogout" class="AdminAction" method="logout">
+			<result name="success">/AdminLogin.jsp</result>
+		</action>
+		
+		<!-- 超管的密码修改 -->
+		<action name="changePassword" class="AdminAction" method="changePassword">
+			<result name="success">/change_admin_password.jsp</result>
+		</action>
+		
+		<!-- 注册新的管理员账号 -->
+		<action name="registerLibrarian" class="LibrarianAction" method="checkUsername">
+			<result name="success" type="chain">
+			<param name="actionName">LibrarianResiger</param> 
+			</result>
+			<result name="input">/register_librarian_accounts.jsp</result>
+		</action>	
+		
+		<action name="LibrarianResiger" class="LibrarianAction" method="register">
+			<result name="success">/register_librarian_accounts.jsp</result>
+			<result name="input">/register_librarian_accounts.jsp</result>
+		</action>	
+		
+		<!-- 查找全部管理员账号！！！ -->
+		<action name="ManagerLibrarian" class="LibrarianAction" method="manager">
+			<result name="success">/Search_and_Manager_Librarian_Accounts.jsp</result>
+		</action>
+		
+		<!-- 查找特定管理员账号！！！ -->
+		<action name="searchLibrarian" class="LibrarianAction" method="search">
+			<result name="success">/Search_and_Manager_Librarian_Accounts.jsp</result>
+		</action>
+		
+		<!-- 删除管理员账号 -->
+		<action name="delectLibrarian" class="LibrarianAction" method="checkUsername">
+			<result name="success" type="chain">
+			<param name="actionName">LibrarianDelect</param> 
+			</result>
+			<result name="input">/delect_librarian_accounts.jsp</result>
+		</action>
+		
+		<action name="LibrarianDelect" class="LibrarianAction" method="delectLibrarian">
+			<result name="success">/delect_librarian_accounts.jsp</result>
+			<result name="input">/delect_librarian_accounts.jsp</result>
+		</action>
+		
+		<!-- 编辑管理员账号！！！ -->
+		<action name="changeLibrarian" class="LibrarianAction" method="checkUsername">
+			<result name="success" type="chain">
+			<param name="actionName">LibrarianChange</param> 
+			</result>
+			<result name="input">/change_librarian_accounts.jsp</result>
+		</action>	
+		
+		<action name="LibrarianChange" class="LibrarianAction" method="changeLibrarian">
+			<result name="success">/change_librarian_accounts.jsp</result>
+			<result name="input">/change_librarian_accounts.jsp</result>
+		</action>
+		
+		<!-- 更改fineValue -->
+		<action name="modifyFine" class="AdminAction" method="modifyFine">
+			<result name="success">/modify_finevalue.jsp</result>
+		</action>
+		<!-- 页面finevalue加载时显示数据 -->
+		<action name="onloadFine" class="AdminAction" method="onload">
+		 	<result name="success">/modify_finevalue.jsp</result>
+		 		
+		</action>
+		
+		<!-- 更改deposit -->
+		<action name="modifyDeposit" class="AdminAction" method="modifyDeposit">
+			<result name="success">/modify_deposit.jsp</result>
+			
+		</action>
+		<!-- 页面deposit加载时显示数据 -->
+		<action name="onloadDeposit" class="AdminAction" method="onload">
+			<result name="success">/modify_deposit.jsp</result>	
+		</action>
+		
+		<!-- 更改ReturnPeriod -->
+		<action name="modifyP" class="AdminAction" method="modifyP">
+			<result name="success">/modify_period.jsp</result>
+		</action>
+		<!-- 页面ReturnPeriod加载时显示数据 -->
+		<action name="onloadPeriod" class="AdminAction" method="onload">
+			<result name="success">/modify_period.jsp</result>	
 		</action>
 		
 	</package>

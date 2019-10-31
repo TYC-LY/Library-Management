@@ -8,5 +8,8 @@
 		</id>
 		<property name="password" type="string" not-null="true" length="50"/>
 		<property name="username" type="string" length="100" not-null="true" />
+		<property name="fineValue" type="int" length="100" not-null="true" />
+		<property name="deposit" type="int" length="100" not-null="true" />
+		<property name="returnPeriod" type="int" length="100" not-null="true" />
 	</class>
 </hibernate-mapping>

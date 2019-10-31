@@ -6,15 +6,18 @@
 			<generator class="native" />
 		</id>
 		<property name="createTime" not-null="true"/>
-		<property name="isbn" type="string" not-null="true" length="15"/>
+		<property name="ISBN" type="string" not-null="true" length="15"/>
 		<property name="title" type="string" not-null="true" length="100"/>
 		<property name="author" type="string" not-null="true" length="100"/>
 		<property name="publisher" type="string" not-null="true" length="50"/>
 		<property name="description" type="string" not-null="true" length="1000"/>
 		<property name="reservationState" type="boolean"  not-null="true" />
 		<property name="borrowState" type="boolean"  not-null="true" />
-		<property name="location" type="string" not-null="true" length="50"/>
-		<property name="price" type="string" not-null="true" length="10"/>
-		<property name="imgpath" type="string" length="100"/>
+		<property name="location_floor" type="string" length="100" not-null="true" />
+		<property name="location_stack" type="string" length="100" not-null="true" />
+		<property name="location_area" type="string" length="100" not-null="true" />
+		<property name="price" type="string" length="10" not-null="true" />
+		<property name="categoryNo" type="string" length="100" not-null="true" />
+		<property name="imagePath" type="string" length="100"/>
 	</class>
 </hibernate-mapping>

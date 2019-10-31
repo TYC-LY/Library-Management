@@ -3,7 +3,16 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <!doctype html>
 <html lang="en">
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="http://codeseven.github.io/toastr/build/toastr.min.css">  
 <link href="css/bootstrap.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+<link href="css/login.css" rel="stylesheet">
+
+<!-- JS -->
+<script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="js/toastr.min.js"></script>
 
 
     <style>
@@ -22,25 +31,20 @@
         }
       }
     </style>
-    <!-- Custom styles for this template -->
-    <link href="css/login.css" rel="stylesheet">
+	
   </head>
-  <body class="text-center">
+  <body class="text-center" background="pic/bg111.jpg">
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
 
 	<title>Mandarin</title>
 </head>
 <body>
    
 	             
-	               <form action="recovery" class="reader-login" method="post">
-  <!--  <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
+<form action="reader-recovery" class="reader-login" method="post">
   <h1 class="h3 mb-3 font-weight-normal">Mandarin</h1>
   <label for="inputEmail" class="sr-only">Email address</label>
   <input name="email" type="text" class="form-control" placeholder="please enter your email" aria-label="" required aria-describedby="basic-addon2">
@@ -49,7 +53,18 @@
       <input type="checkbox" value="remember-me"> Remember me
     </label>-->
   </div>
-		<button class="btn btn-lg btn-primary btn-block">点击修改</button>
+		<button class="btn btn-lg btn-primary btn-block" onclick="pop()">commit</button>
+		<script>
+		toastr.options = {"timeOut": "2500","preventDuplicates": true,"preventManyTimes": true,"hideDuration": "1","positionClass": "toast-top-center"};
+			function pop(){
+				if("<s:property value="errorMessage"></s:property>" == "") {
+					toastr.success("successfulli send to your email")
+		        } else {
+		            toastr.warning("<s:property value="errorMessage"></s:property>");
+		        }			  
+			}
+		</script>
+	</form>
 </body>
 <script type="text/javascript">
 </script>

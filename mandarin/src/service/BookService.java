@@ -6,8 +6,6 @@ import entity.Book;
 import entity.Record;
 
 public interface BookService {
-
-	Book getBookById(long id);
 	
 	List<Book> getBooksByTitle(String searchContent);
 
@@ -15,8 +13,27 @@ public interface BookService {
 
 	List<Book> getBooksByPublisher(String searchContent);
 
-	List<Book> getBooksByIsbn(String searchContent);
-	
-	public void mergeBook(Book book);
+	List<Book> getBooksByISBN(String searchContent);
 
+	Book getBookById_reader(long id);
+
+	void mergeBook_reader(Book book);
+
+	public void addBook(Book book);
+
+	public void addBookCopy(Book book);
+
+	public List<Book> searchBook(String condition, String content);
+
+	public void deleteBookById(long id);
+	
+	public void updateBook(Book book);
+
+	public Book confirmBookAuthority(long bookId);
+
+	public void mergeBook(Book tempBook);
+
+	public Book getBookById(long bookId);
+
+	public void updateReturnBook(Book tempBook);
 }

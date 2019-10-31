@@ -11,7 +11,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
 public class mail {
-	public static void main(String email) throws AddressException, MessagingException {
+	public static void main(String email, String context,String sub) throws AddressException, MessagingException {
 		Properties properties = new Properties();
 		properties.put("mail.transport.protocol", "smtp");// 杩炴帴鍗忚 
 		properties.put("mail.smtp.host", "smtp.qq.com");// 涓绘満鍚�
@@ -28,9 +28,9 @@ public class mail {
 // 璁剧疆鏀朵欢浜哄湴鍧�
 		message.setRecipients(RecipientType.TO, new InternetAddress[] { new InternetAddress(email) });
 // 璁剧疆閭欢鏍囬
-		message.setSubject("娉ㄥ唽纭");
+		message.setSubject(sub);
 // 璁剧疆閭欢鍐呭
-		message.setText("你账号：" + email + "的密码已经重置为" + "123456");
+		message.setText(context);
 // 寰楀埌閭樊瀵硅薄
 		Transport transport = session.getTransport();
 // 杩炴帴鑷繁鐨勯偖绠辫处鎴�

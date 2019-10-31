@@ -6,23 +6,26 @@ public class Book extends BaseEntity {
 		super(0);
 	}
 
-	private String isbn;
+	private String ISBN;
 	private String title;
 	private String author;
 	private String publisher;
 	private String description;
 	private Boolean reservationState;
 	private Boolean borrowState;
-	private String location;
+	private String location_floor;
+	private String location_stack;
+	private String location_area;
 	private String price;
-	private String imgpath;
+	private String categoryNo;
+	private String imagePath;
 
-	public String getIsbn() {
-		return isbn;
+	public String getISBN() {
+		return ISBN;
 	}
 
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
+	public void setISBN(String ISBN) {
+		this.ISBN = ISBN;
 	}
 
 	public String getTitle() {
@@ -64,21 +67,13 @@ public class Book extends BaseEntity {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-
-	public String getLocation() {
-		return location;
+	
+	public String getImagePath() {
+		return imagePath;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public String getImgpath() {
-		return imgpath;
-	}
-
-	public void setImgpath(String imgpath) {
-		this.imgpath = imgpath;
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	public Boolean getReservationState() {
@@ -95,6 +90,38 @@ public class Book extends BaseEntity {
 
 	public void setBorrowState(Boolean borrowState) {
 		this.borrowState = borrowState;
+	}
+
+	public String getLocation_floor() {
+		return location_floor;
+	}
+
+	public void setLocation_floor(String location_floor) {
+		this.location_floor = location_floor;
+	}
+
+	public String getLocation_stack() {
+		return location_stack;
+	}
+
+	public void setLocation_stack(String location_stack) {
+		this.location_stack = location_stack;
+	}
+
+	public String getLocation_area() {
+		return location_area;
+	}
+
+	public void setLocation_area(String location_area) {
+		this.location_area = location_area;
+	}
+
+	public String getCategoryNo() {
+		return categoryNo;
+	}
+
+	public void setCategoryNo(String categoryNo) {
+		this.categoryNo = categoryNo;
 	}
 
 }

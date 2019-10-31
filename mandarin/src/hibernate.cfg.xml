@@ -29,8 +29,12 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 
 		<!-- 映射实体的文件 -->
-		<mapping resource="entity/Book.hbm.xml" />
+		<mapping resource="entity/Admin.hbm.xml" />
+		<mapping resource="entity/Librarian.hbm.xml" />
 		<mapping resource="entity/Reader.hbm.xml" />
+		<mapping resource="entity/Book.hbm.xml" />
+		<mapping resource="entity/Announcement.hbm.xml" />
+		<mapping resource="entity/BookDeleteRecord.hbm.xml"/>
 		<mapping resource="entity/Record.hbm.xml" />
 
 	</session-factory>

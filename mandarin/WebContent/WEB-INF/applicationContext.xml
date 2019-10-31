@@ -74,5 +74,97 @@
 	
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	
+	
+	
+	
+	
+	
+	<!-- admin的层级结构 -->
+	<!-- 用户管理的Dao,Service,Action -->
+	<bean id="adminDao" class="dao.AdminDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- adminService 用户操作的业务对象 -->
+	<bean id="adminService"
+		class="service.AdminServiceImpl">
+		<property name="dao" ref="adminDao" />
+	</bean>
+
+	<!-- adminAction 用户操作的控制器对象 -->
+	<bean id="adminModel" class="entity.Admin"
+		scope="prototype" />
+	<bean id="adminAction" class="action.AdminAction"
+		scope="prototype">
+		<property name="service" ref="adminService" />
+		<property name="model" ref="adminModel" />
+	</bean>
+	
+	
+	
+	
+	<!-- Librarian的层级结构 -->
+	<!-- 用户管理的Dao,Service,Action -->
+	<bean id="librarianDao" class="dao.LibrarianDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- LibrarianService 用户操作的业务对象 -->
+	<bean id="librarianService"
+		class="service.LibrarianServiceImpl">
+		<property name="dao" ref="librarianDao" />
+	</bean>
+
+	<!-- adminAction 用户操作的控制器对象 -->
+	<bean id="librarianModel" class="entity.Librarian"
+		scope="prototype" />
+	<bean id="librarianAction" class="action.LibrarianAction"
+		scope="prototype">
+		<property name="service" ref="librarianService" />
+		<property name="model" ref="librarianModel" />
+	</bean>
+	
+	
+	
+	<!-- Announcement的层级结构 -->
+	<!--Announcement的Dao,Service,Action -->
+	<bean id="announcementDao" class="dao.AnnouncementDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- AnnouncementService 用户操作的业务对象 -->
+	<bean id="announcementService"
+		class="service.AnnouncementServiceImpl">
+		<property name="dao" ref="announcementDao" />
+	</bean>
+
+	<!-- AnnouncementAction 用户操作的控制器对象 -->
+	<bean id="announcementModel" class="entity.Announcement"
+		scope="prototype" />
 		
+	<bean id="announcementAction" class="action.AnnouncementAction"
+		scope="prototype">
+		<property name="service" ref="announcementService" />
+		<property name="model" ref="announcementModel" />
+	</bean>
+	
+	<!-- BookDeleteRecord的层级结构 -->
+	<!-- BookDeleteRecord的Dao,Service,Action -->
+	<bean id="bookDeleteRecordDao" class="dao.BookDeleteRecordDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- BookDeleteRecordService 用户操作的业务对象 -->
+	<bean id="bookDeleteRecordService"
+		class="service.BookDeleteRecordServiceImpl">
+		<property name="dao" ref="bookDeleteRecordDao" />
+	</bean>
+	<!-- BookDeleteRecordAction 用户操作的控制器对象 -->
+	<bean id="bookDeleteRecordModel" class="entity.BookDeleteRecord"
+		scope="prototype" />
+		
+	<bean id="bookDeleteRecordAction" class="action.BookDeleteRecordAction"
+		scope="prototype">
+		<property name="service" ref="bookDeleteRecordService" />
+		<property name="model" ref="bookDeleteRecordModel" />
+	</bean>
+	
 </beans>

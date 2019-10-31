@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Date;
+
 public class Record extends BaseEntity {
 	
 	public Record() {
@@ -10,37 +12,37 @@ public class Record extends BaseEntity {
 		super(id);
 	}
 
-	private Reader reader;
-	private Book book;
-	private String borrowDate;
-	private String deadline;
-	private String returnDate;
+	private long readerId;
+	private long bookId;
+	private Date borrowDate;
+	private Date deadline;
+	private Date returnDate;
 	private Boolean payState;
 	private Integer fineValue;
 	private Boolean reservationState;
 	private Boolean borrowState;
 
-	public String getBorrowDate() {
+	public Date getBorrowDate() {
 		return borrowDate;
 	}
 
-	public void setBorrowDate(String borrowDate) {
+	public void setBorrowDate(Date borrowDate) {
 		this.borrowDate = borrowDate;
 	}
 
-	public String getReturnDate() {
+	public Date getReturnDate() {
 		return returnDate;
 	}
 
-	public void setReturnDate(String returnDate) {
+	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
 
-	public String getDeadline() {
+	public Date getDeadline() {
 		return deadline;
 	}
 
-	public void setDeadline(String deadline) {
+	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
 	}
 
@@ -50,22 +52,6 @@ public class Record extends BaseEntity {
 
 	public void setFineValue(Integer fineValue) {
 		this.fineValue = fineValue;
-	}
-
-	public Reader getReader() {
-		return reader;
-	}
-
-	public void setReader(Reader reader) {
-		this.reader = reader;
-	}
-
-	public Book getBook() {
-		return book;
-	}
-
-	public void setBook(Book book) {
-		this.book = book;
 	}
 
 	public Boolean getPayState() {
@@ -90,6 +76,22 @@ public class Record extends BaseEntity {
 
 	public void setBorrowState(Boolean borrowState) {
 		this.borrowState = borrowState;
+	}
+
+	public long getReaderId() {
+		return readerId;
+	}
+
+	public void setReaderId(long readerId) {
+		this.readerId = readerId;
+	}
+
+	public long getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(long bookId) {
+		this.bookId = bookId;
 	}
 
 }

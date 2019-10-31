@@ -19,8 +19,13 @@ import org.springframework.stereotype.Component;
 import utils.MailUtils;
 
 import action.RecordAction;
+import dao.BookDaoImpl;
+import dao.ReaderDaoImpl;
 import dao.RecordDaoImpl;
 import entity.Record;
+import service.BookServiceImpl;
+import service.ReaderService;
+import service.ReaderServiceImpl;
 import service.RecordService;
 import service.RecordServiceImpl;
 
@@ -33,11 +38,20 @@ public class MyServletContextListener implements ServletContextListener {
 		final SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		String deadline = sdf.format(new Date());
 		
-		//借助RecordService完成查询
+		//借助Service完成查询
 		RecordServiceImpl recordSer = new RecordServiceImpl();
+		ReaderServiceImpl readerSer = new ReaderServiceImpl();
+		BookServiceImpl bookSer = new BookServiceImpl();
 		RecordDaoImpl recordDao = new RecordDaoImpl();
+		ReaderDaoImpl readerDao = new ReaderDaoImpl();
+		BookDaoImpl bookDao = new BookDaoImpl();
 		recordDao.setSessionFactory(HibernateHelper.getSessionFactory());
+		readerDao.setSessionFactory(HibernateHelper.getSessionFactory());
+		bookDao.setSessionFactory(HibernateHelper.getSessionFactory());
 		recordSer.setDao(recordDao);
+		readerSer.setDao(readerDao);
+		bookSer.setDao(bookDao);
+		
 		
 		timer.schedule(new TimerTask() {
 			@Override
@@ -45,7 +59,7 @@ public class MyServletContextListener implements ServletContextListener {
 				
 				//将所有deadline为当前日期的record取出
 				List<Record> records = new ArrayList<Record>();
-				records = recordSer.getRecordByDeadline(deadline);
+				records = recordSer.getRecordByDeadline(new Date());
 				
 				//筛选出借阅记录（即剔除预约记录）
 				for (int i = 0; i < records.size(); i++) {
@@ -56,9 +70,9 @@ public class MyServletContextListener implements ServletContextListener {
 				
 				//为每一条记录发送邮件
 				for (Record record : records) {
-					String emailMsg = "Dear" + record.getReader().getUsername() + ":<br/>your book " + record.getBook().getTitle() + " is expired， please return book in time.";
+					String emailMsg = "Dear" + readerSer.getReaderById(record.getReaderId()).getUsername() + ":<br/>your book " + bookSer.getBookById(record.getBookId()).getTitle() + " is expired， please return book in time.";
 					try {
-						MailUtils.sendMail(record.getReader().getEmail(), "The book due notice", emailMsg);
+						MailUtils.sendMail(readerSer.getReaderById(record.getReaderId()).getEmail(), "The book due notice", emailMsg);
 					} catch (AddressException e) {
 						e.printStackTrace();
 					} catch (MessagingException e) {

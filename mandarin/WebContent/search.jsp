@@ -14,10 +14,17 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/fontawesome.min.css">
 <link rel="stylesheet" href="css/solid.min.css">
-<link rel="stylesheet" href="css/toast.css">
+<link rel="stylesheet" type="text/css"
+	href="http://codeseven.github.io/toastr/build/toastr.min.css">
+<link href="//cdn.bootcss.com/toastr.js/latest/css/toastr.min.css"
+	rel="stylesheet">
 
-<!-- 为了中间的一些script能使用 -->
-<script src="js/jquery-3.3.1.slim.min.js"></script>
+<!-- JS -->
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="js/toastr.min.js"></script>
+
+<!-- 为了中间的一些script能使用 
+<script src="js/jquery-3.3.1.slim.min.js"></script> -->
 
 <script>
 	function createXMLHttpRequest() {
@@ -96,7 +103,7 @@
 
 <title>Mandarin</title>
 </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100" background="pic/bg111.jpg">
 
 	<div id="toast">
 		<div id="desc"></div>
@@ -110,49 +117,59 @@
 
 	<main role="main" class="flex-shrink-0">
 	<div class="container">
-		<form class="m-3" action="search">
+		<form class="m-3" action="reader-search">
 			<div class="input-group mt-3">
 				<select name="option" class="rounded-left btn-outline-primary">
 					<option value="title">Book Title</option>
 					<option value="author">Author</option>
 					<option value="publisher">Publisher</option>
-					<option value="isbn">ISBN</option>
+					<option value="ISBN">ISBN</option>
 				</select> <input type="text" name="searchContent"
 					value="<s:property value="searchContent" />"
 					class="form-control mr-3 rounded-right"
 					placeholder="Put some information here." aria-label="Search">
-					<!-- 若要关闭自动填充关闭autocomplete="off" -->
+				<!-- 若要关闭自动填充关闭autocomplete="off" -->
 				<button class="btn btn-outline-primary" type="submit">Search</button>
 			</div>
 		</form>
 		<div class="row">
 			<nav class="col-md-10 offset-md-1 col-lg-3 offset-lg-0 sidebar">
 				<div class="mt-3 ml-3 mb-3">
-					<form action="screen">
+					<form action="reader-screen">
 						<ul class="list-group flex-column">
-							<a class="card-header" data-toggle="collapse" href="#collapseAuthor" role="button" aria-expanded="false" aria-controls="collapseAuthor">Author</a>
-								<div class="collapse mt-2" id="collapseAuthor">		
-									<s:iterator value="authorList" status="Q">
-										<p class="ml-4">
-											<input class="form-check-input" type="checkbox" name="multiAuthor" value="<s:property value="authorList[#Q.index]" />">
-											<s:property value="authorList[#Q.index]" />
-										</p>
-									</s:iterator>
-								</div>
-									
-							<a class="card-header" data-toggle="collapse" href="#collapsePublisher" role="button" aria-expanded="false" aria-controls="collapsePublisher">Publisher</a>
-								<div class="collapse mt-2" id="collapsePublisher">
-									<s:iterator value="publisherList" status="P">
-										<p class="ml-4">
-											<input class="form-check-input" type="checkbox" name="multiPublisher" value="<s:property value="publisherList[#P.index]"/>">
-											<s:property value="publisherList[#P.index]"/>
-										</p>
-									</s:iterator>
-								</div>
+							<a class="card-header" data-toggle="collapse"
+								href="#collapseAuthor" role="button" aria-expanded="false"
+								aria-controls="collapseAuthor">Author</a>
+							<div class="collapse mt-2" id="collapseAuthor">
+								<s:iterator value="authorList" status="Q">
+									<p class="ml-4">
+										<input class="form-check-input" type="checkbox"
+											name="multiAuthor"
+											value="<s:property value="authorList[#Q.index]" />">
+										<s:property value="authorList[#Q.index]" />
+									</p>
+								</s:iterator>
+							</div>
+
+							<a class="card-header" data-toggle="collapse"
+								href="#collapsePublisher" role="button" aria-expanded="false"
+								aria-controls="collapsePublisher">Publisher</a>
+							<div class="collapse mt-2" id="collapsePublisher">
+								<s:iterator value="publisherList" status="P">
+									<p class="ml-4">
+										<input class="form-check-input" type="checkbox"
+											name="multiPublisher"
+											value="<s:property value="publisherList[#P.index]"/>">
+										<s:property value="publisherList[#P.index]" />
+									</p>
+								</s:iterator>
+							</div>
 							<button class="btn btn-primary mt-2" type="submit">Screen</button>
 						</ul>
-						<input type="hidden" name="screenContent" value="<s:property value="searchContent" />">
-						<input type="hidden" name="screenOption" value="<s:property value="option" />">
+						<input type="hidden" name="screenContent"
+							value="<s:property value="searchContent" />"> <input
+							type="hidden" name="screenOption"
+							value="<s:property value="option" />">
 					</form>
 				</div>
 			</nav>
@@ -162,7 +179,7 @@
 						<s:iterator value="singleBook" status="L">
 							<li class="list-group-item d-flex align-items-center">
 								<div class="just-content-left mr-3">
-									<img src="<s:property value="imgpath"></s:property>"
+									<img src="<s:property value="imagePath"></s:property>"
 										height="80px">
 								</div>
 								<div class="container">
@@ -174,7 +191,7 @@
 									</div>
 									<div class="row">
 										<span class="badge badge-secondary mr-2"><s:property
-												value="isbn" /></span> <span class="badge badge-primary mr-2"><s:property
+												value="ISBN" /></span> <span class="badge badge-primary mr-2"><s:property
 												value="author" /></span> <span class="badge badge-primary mr-2"><s:property
 												value="publisher" /></span> <span class="badge badge-secondary"><s:property
 												value="price" /></span>
@@ -197,16 +214,20 @@
 									<table class="table table-striped table-sm">
 										<thead>
 											<tr>
-												<td>Location</td>
-												<td>Borrowable</td>
-												<td>Reservable</td>
+												<td>Floor</td>
+												<td>Stack</td>
+												<td>Area</td>
+												<td>BorrowState</td>
+												<td>ReservationState</td>
 												<td>Action</td>
 											</tr>
 										</thead>
 										<tbody>
 											<s:iterator value="bookTable[#L.index]">
 												<tr>
-													<td><s:property value="location" /></td>
+													<td><s:property value="location_floor" /></td>
+													<td><s:property value="location_stack" /></td>
+													<td><s:property value="location_area" /></td>
 													<td><s:set var="borrowState" value="borrowState" /> <s:if
 															test="borrowState == true">
 															<i class="fas fa-ban" style="color: #c83025"></i>
@@ -222,12 +243,15 @@
 														</s:if></td>
 													<td>
 														<!-- 用ajax就不用表单了 --> <!-- <form action="reserve" method="post"> -->
-														<input type="hidden" name="id" id="id" value="<s:property value="id" />"> 
-														<s:if test="reservationState == true">
-															<button class="badge badge-secondary badge-pill" type="submit" disabled>reserve</button>
-														</s:if> 
-														<s:if test="reservationState == false">
-															<button class="badge badge-primary badge-pill" type="submit" id="btn<s:property value="id"></s:property>">reserve</button>
+														<input type="hidden" name="id" id="id"
+														value="<s:property value="id" />"> <s:if
+															test="reservationState == true">
+															<button class="badge badge-secondary badge-pill"
+																type="submit" disabled>reserve</button>
+														</s:if> <s:if test="reservationState == false">
+															<button class="badge badge-primary badge-pill"
+																type="submit"
+																id="btn<s:property value="id"></s:property>">reserve</button>
 														</s:if> <!-- </form> -->
 													</td>
 												</tr>
@@ -243,7 +267,7 @@
 																					.log(postdata);
 																			ajax({
 																				method : 'POST',
-																				url : '${pageContext.request.contextPath}/reserve',
+																				url : '${pageContext.request.contextPath}/reader-reserve',
 																				params : postdata,
 																				callback : function(
 																						data) {
@@ -253,6 +277,8 @@
 																								.reload();
 																					} else if (data == 0) {
 																						alert("The book has been reserved")
+																					} else if (data == 2) {
+																						alert("Fail to reserve, you have reserved or borrowed 3 books!")
 																					} else {
 																						alert("Please log in before proceeding");
 																						window.location.href = "test-login.jsp"
@@ -288,29 +314,12 @@
 	<script src="js/jquery-3.3.1.slim.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+
 	<script>
 		$(document).ready(function() {
 			$('[data-toggle="tooltip"]').tooltip();
 		});
 	</script>
-	<script>
-		function launch_toast() {
-			var x = document.getElementById("toast")
-			x.className = "show";
-			var desc = document.getElementById("desc");
-			desc.innerHTML = "<s:property value="errorMessage"></s:property>";
-			setTimeout(function() {
-				x.className = x.className.replace("show", "");
-			}, 5000);
-		};
-		console.log("launch_toast defined");
-		(function() {
-			if ("<s:property value="errorMessage"></s:property>" == "") {
-				console.log("no error");
-			} else {
-				launch_toast();
-			}
-		})();
-	</script>
+
 </body>
 </html>

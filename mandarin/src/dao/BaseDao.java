@@ -23,4 +23,9 @@ public interface BaseDao<TEntity> {
 	
 	List<TEntity> findBySubString(String propertyName, String cond);
 	
+	
+	
+	void saveCopy(TEntity entity);
+	
+	List<TEntity> findByDuration(String propertyName, String startDate, String endDate, String propertyName_1, Object propertyValue, String condition);
 }

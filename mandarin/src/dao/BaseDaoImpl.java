@@ -8,6 +8,23 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.sql.Date;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
+import com.oracle.webservices.internal.api.message.PropertySet.Property;
+
 public abstract class BaseDaoImpl<TEntity> implements BaseDao<TEntity> {
 
 	// 未初始化，将被Spring调用setSessionFactory注入
@@ -145,5 +162,52 @@ public abstract class BaseDaoImpl<TEntity> implements BaseDao<TEntity> {
 		List<TEntity> entities = this.getSession().createQuery(queryString).list();
 		return entities;
 	}
+	
+	
+	
+	@Override
+	public void saveCopy(TEntity entity) {
+		Session session = this.getSession();
+		session.beginTransaction();
+		session.save(entity);
+		session.getTransaction().commit();
+		session.close();
+	}
 
+	public List<TEntity> findByDuration(String propertyName, String startDate, String endDate, String propertyName_1, Object propertyValue, String condition)
+	{
+//		if(condition != null) {
+//			condition = " order by " + condition + " DESC";
+//		} else {
+//			condition = "";
+//		}
+//		String queryString = "from " + entityClass.getSimpleName() + " e ";
+//		queryString += "where e." + propertyName + ">=" + startDate;
+//		queryString += " and e." + propertyName + "<=" + endDate + condition;
+//		Query query = this.getSession().createQuery(queryString);
+//		List<TEntity> entities = query.list();
+//		
+//		return entities;
+		Session session = this.getSession();
+		Criteria criteria = session.createCriteria(this.entityClass);
+		
+		if(condition != null) {
+			criteria.addOrder(Order.desc(condition).ignoreCase());
+		}
+		
+		Criterion start = Restrictions.ge(propertyName, Date.valueOf(startDate));
+		Criterion end = Restrictions.le(propertyName, Date.valueOf(endDate));
+		
+		LogicalExpression andExp = Restrictions.and(start, end);
+		criteria.add(andExp);
+		
+		if(propertyName_1 != null) {
+			criteria.add(Restrictions.eq(propertyName_1, propertyValue));
+		}
+		
+		List<TEntity> entities = criteria.list();
+		
+		return entities;
+	}
+	
 }

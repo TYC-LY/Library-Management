@@ -6,99 +6,466 @@
 
 	<!-- 用Spring管理Struts -->
 	<constant name="struts.objectFactory" value="spring" />
-	
+
 	<!-- 定义所有Action -->
 	<package name="default" extends="struts-default">
+
+	<!-- search.jsp -->
+		<action name="reader-search" class="bookAction" method="search">
+			<result name="input">/search.jsp</result>
+		</action>
+
+		<action name="reader-screen" class="bookAction" method="screen">
+			<result name="input">/search.jsp</result>
+		</action>
+		
+		<action name="reader-reserve" class="bookAction" method="reserve">
+			<result name="login">/test-login.jsp</result>
+			<result name="reserve">/reader-index.jsp</result>
+			<result name="input">/search.jsp</result>
+		</action>
+
+	<!-- navbar.jsp -->
+		<action name="reader-current-borrowed" class="readerAction"
+			method="currentBorrowed">
+			<result name="success" type="chain">
+				<param name="actionName">get-current-borrowed</param>
+			</result>
+		</action>
+
+			<action name="get-current-borrowed" class="recordAction"
+				method="getCurrentBorrowed">
+				<result name="input">/test-current-borrowed.jsp</result>
+			</action>
+
+		<action name="reader-borrow-history" class="readerAction"
+			method="borrowHistory">
+			<result name="success" type="chain">
+				<param name="actionName">get-borrow-history</param>
+			</result>
+		</action>
+
+			<action name="get-borrow-history" class="recordAction"
+				method="getBorrowHistory">
+				<result name="input">/test-borrow-history.jsp</result>
+			</action>
+
+		<action name="reader-reset" class="readerAction" method="reset">
+			<result name="input">/reader-index.jsp</result>
+		</action>
+
+		<action name="reader-in" class="readerAction" method="login">
+			<result name="success">/test-login.jsp</result>
+		</action>
+
+		<action name="reader-out" class="readerAction" method="logout">
+			<result name="success">/reader-index.jsp</result>
+		</action>
+		
+		<action name="reader-send-message" class="readerAction" method="SendMessage">
+				<result name="success">/reader-index.jsp</result>
+		</action>
+		
+		
+	<!-- login.jsp -->
+		<action name="reader-recovery" class="readerAction" method="reset">
+			<result name="success">/test-login.jsp</result>
+			<result name="input">/recovery.jsp</result>
+		</action>
+
+		<action name="reader-login" class="readerAction"
+			method="signin">
+			<result name="success">/reader-index.jsp</result>
+			<result name="input">/test-login.jsp</result>
+		</action>
 	
-		<!-- <result name="success" type="chain">
-			<param name="actionName">/profile</param>
-		</result> -->
-	
-		<!-- test.jsp================================================================= -->
+	<!-- profile.jsp -->
+		<action name="reader-changeUsername" class="readerAction" method="changeUsername">
+		     <result name="success">profile.jsp</result>
+		</action>
+			
+		<action name="reader-changeEmail" class="readerAction" method="changeEmail">
+		     <result name="success">profile.jsp</result>
+		</action>	
+			
+		<action name="reader-changePassword" class="readerAction" method="changePassword">
+			<result name="input">changePassword.jsp</result>
+		     <result name="success">test-login.jsp</result>
+		</action>	
+			
+		<action name="reader-changePhoneNumber" class="readerAction" method="changePhoneNumber">
+			<result name="success">profile.jsp</result>
+		</action>
 		
-			<action name="reader-signin" class="readerAction" method="signin">
-				<result name="input">/test-signin.jsp</result>
-			</action>
-			
-			<!-- <action name="reader-login" class="readerAction" method="signin">
-				<result name="input">/test-signin.jsp</result>
-			</action> -->
-			
-				<action name="search" class="bookAction" method="search">
-					<result name="input">/search.jsp</result>
-				</action>
-				
-				<action name="screen" class="bookAction" method="screen">
-					<result name="input">/search.jsp</result>
-				</action>
-			
-			<action name="reader-current-borrowed" class="readerAction" method="currentBorrowed">
-				<result name="success" type="chain">
-					<param name="actionName">get-current-borrowed</param>
-				</result>
-			</action>
-			
-				<action name="get-current-borrowed" class="recordAction" method="getCurrentBorrowed">
-					<result name="input">/test-current-borrowed.jsp</result>
-				</action>
-				
-				<!-- <action name="get-book-by-current-record" class="bookAction" method="getBookByCurrentRecord">
-					<result name="input">/test-current-borrowed.jsp</result>
-				</action> -->
-				
-			<action name="reader-borrow-history" class="readerAction" method="borrowHistory">
-				<result name="success" type="chain">
-					<param name="actionName">get-borrow-history</param>
-				</result>
-			</action>
-			
-				<action name="get-borrow-history" class="recordAction" method="getBorrowHistory">
-					<result name="input">/test-borrow-history.jsp</result>
-				</action>
-				
-				<!-- <action name="get-book-by-history-record" class="bookAction" method="getBookByHistoryRecord">
-					<result name="input">/test-borrow-history.jsp</result>
-				</action> -->
-		<!-- search.jsp================================================================= -->
-			<action name="recovery" class="readerAction" method="reset">
-				<result name="success">/index.jsp</result>
-				<result name="input">/changeInfo.jsp</result>
-			</action>
-		<!-- search.jsp================================================================= -->
-			<action name="reserve" class="bookAction" method="reserve">
-				<result name="login">/test-login.jsp</result>
-				<result name="reserve">/index.jsp</result>
-				<result name="input">/search.jsp</result>
-			</action>
-			
-			
-		
-		<!-- profile.jsp================================================================= -->
-		
-			<action name="changeInfo" class="readerAction" method="changeInfo">
-				<result name="input">/changeInfo.jsp</result>
-				<result name="success">/index.jsp</result>
-			</action>
-			
-			<action name="reset" class="readerAction" method="reset">
-				<result name="input">/index.jsp</result>
-			</action>
-		
-		<!-- index.jsp================================================================= -->
-		
-			<action name="reader-login" class="readerAction" method="signin">
-				<result name="success">/index.jsp</result>
-				<result name="input">/test-login.jsp</result>
-			</action>
+		<action name="reader-changeInfo" class="readerAction" method="changeInfo">
+			<result name="input">/changeInfo.jsp</result>
+			<result name="success">/test-login.jsp</result>
+		</action>	
 		
 		
-			<action name="in" class="readerAction" method="login">
-				<result name="success">/test-login.jsp</result>
-			</action>
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- login -->
+		<action name="login" class="librarianAction" method="login">
+			<result name="success" type="chain">
+				<param name="actionName">viewAnnouncements</param>
+			</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		
+		<!-- logout -->
+		<action name="logout" class="librarianAction" method="logout">
+			<result name="success">/login.jsp</result>
+		</action>
+		
+		<!-- change password -->
+		<action name="answerSecurityQuestion" class="librarianAction" method="answerSecurityQuestion">
+			<result name="success">/jsp/Recovery_Forget_Password/changePassword.jsp</result>
+			<result name="input">/jsp/Recovery_Forget_Password/answerSecurityQuestion.jsp</result>
+		</action>
+		
+		<action name="changePassword" class="librarianAction" method="changePassword">
+			<result name="success">/login.jsp</result>
+			<result name="input">/jsp/Recovery_Forget_Password/changePassword.jsp</result>
+		</action>
+		
+ 		<!-- management reader -->
+		<action name="checkReader" class="readerAction" method="pass">
+			<result name="success" type="chain">
+				<param name="actionName">readerInformation</param>
+			</result>
+		</action>
+		<action name="readerInformation" class="readerAction" method="checkReader">
+			<result name="success">/checkReader.jsp</result>
+		</action>
+		
+		<!-- register reader -->
+		<action name="signup" class="readerAction" method="signup">
+			<result name="success">/jsp/Reader_Management/Reader_Management_RegisterReader_barcode.jsp</result>
+			<result name="input">/jsp/Reader_Management/Reader_Management_RegisterReader_barcode.jsp</result>
+		</action>
+		
+		<!-- Book Management -->
+		<!-- Book Management Add Books -->
+		<action name="bookManagement_Find_Book_Detail" class="bookAction" method="bookManagement_Find_Book_Detail">
+			<result name="success">/jsp/Book_Management/BookManagement_Add_Books_Detail_Main.jsp</result>
+		</action>
+		
+		<action name="BookManagement_Add_Books" class="bookAction" method="bookManagement_Add_Books">
+			<result name="success" >/jsp/Book_Management/BookManagement_Add_Books_Image_Main.jsp</result>
+			<result name="input">/jsp/Book_Management/BookManagement_Add_Books_Detail_Main.jsp</result>
+		</action>
+		
+		<action name="BookManagement_Add_Books_Copy" class="bookAction" method="bookManagement_Add_Books_Copy">
+			<result name="success" >/jsp/Book_Management/BookManagement_Add_Books_Image_Main.jsp</result>
+			<result name="input">/jsp/Book_Management/BookManagement_Add_Books_Image_Main.jsp</result>
+		</action>
+		
+		<!-- Book Management Search Books -->
+		<action name="BookManagement_Search_Books" class="bookAction" method="bookManagement_Search_Books">
+			<result name="delete">/jsp/Book_Management/Book_Management_Delete_Books_Main.jsp</result>
+			<result name="edit">/jsp/Book_Management/Book_Management_Edit_Books_Main.jsp</result>
+			<result name="success">/logout.jsp</result>
+			<result name="input">/logout.jsp</result>
+		</action>
+		
+		<!-- Book Management Delete Books -->
+		<action name="BookManagement_Delete_Books" class="bookAction" method="bookManagement_Detele_Books">
+			<result name="success" type="chain">
+				<param name="actionName">createDeltionRecord</param>
+			</result>
+			<result name="input">/jsp/Book_Management/Book_Management_Delete_Books_Main.jsp</result>
+		</action>
+		
+		<!-- Book Management Edit Books -->
+		<action name="BookManagement_Edit_Books" class="bookAction" method="bookManagement_Edit_Books">
+			<result name="success">/jsp/Book_Management/Book_Management_Edit_Books_Main.jsp</result>
+			<result name="failure">/jsp/Book_Management/Book_Management_Edit_Books_Main.jsp</result>
+			<result name="input">/logout.jsp</result>		
+		</action>
+		
+		<!-- BookDeleteRecord Management -->
+		<action name="createDeltionRecord" class="bookDeleteRecordAction" method="addRecord">
+			<result name="success">/jsp/Book_Management/Book_Management_Delete_Books_Main.jsp</result>
+			<result name="input">/jsp/Book_Management/Book_Management_Delete_Books_Main.jsp</result>
+		</action>
+		
+		<action name="viewDeletionRecord" class="bookDeleteRecordAction" method="viewRecord">
+			<result name="success" >/jsp/Book_Management/Book_Management_Delete_Books_DeletionRecord_Main.jsp</result>
+		</action>
+		<!-- Book Management -->
+		
+		<!-- Announcement -->
+		<!-- View Announcement -->
+		<action name="viewAnnouncement" class="announcementAction" method="viewAnnouncement">
+			<result name="success">/jsp/Announcement_Management/Announcement_Management_Edit_Announcement_viewAnnouncement.jsp</result>
+		</action>
+		
+		<!-- View Announcements -->
+		<action name="viewAnnouncements" class="announcementAction" method="viewAnnouncements">
+			<result name="success">/logout.jsp</result>
+			<result name="input">/logout.jsp</result>
+		</action>
+		
+		<action name="viewAnnouncements_Delete" class="announcementAction" method="viewAnnouncements_Delete">
+			<result name="success">/jsp/Announcement_Management/Announcement_Management_Delete_Announcement_Main.jsp</result>
+			<result name="input">/jsp/Announcement_Management/Announcement_Management_Delete_Announcement_Main.jsp</result>
+		</action>
+		
+		<action name="viewAnnouncements_Edit" class="announcementAction" method="viewAnnouncements_Edit">
+			<result name="success">/jsp/Announcement_Management/Announcement_Management_Edit_Announcement_Main.jsp</result>
+			<result name="input">/jsp/Announcement_Management/Announcement_Management_Edit_Announcement_Main.jsp</result>
+		</action>
+		<!-- View Announcements -->
+		
+		<!-- Delete/Edit/Create Announcement -->
+		<action name="deleteAnnouncement" class="announcementAction" method="deleteAnnouncement">
+			<result name="success" type="chain">
+				<param name="actionName">viewAnnouncements_Delete</param>
+			</result>
+		</action>
+		
+		<action name="editAnnouncement" class="announcementAction" method="editAnnouncement">
+			<result name="success" type="chain">
+				<param name="actionName">viewAnnouncement</param>
+			</result>
+			<result name="input">/jsp/Announcement_Management/Announcement_Management_Edit_Announcement_viewAnnouncement.jsp</result>
+		</action>
+		
+		<action name="createAnnouncement" class="announcementAction" method="createAnnouncement">
+			<result name="success" type="chain">
+				<param name="actionName">viewAnnouncements</param>
+			</result>
+			<result name="input">/logout.jsp</result>
+		</action>
+		<!-- /Announcement -->
+		
+		
+		<!-- borrow book -->
+		<action name="borrow_FindReader" class="readerAction" method="borrow_FindReader">
+			<result name="success" type="chain">
+				<param name="actionName">borrow_FindBook</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+		
+		<action name="borrow_FindBook" class="bookAction" method="borrow_FindBook">
+			<result name="success" type="chain">
+				<param name="actionName">borrow_BookUpdate</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+		
+		<action name="borrow_BookUpdate" class="bookAction" method="borrow_BookUpdate">
+			<result name="success" type="chain">
+				<param name="actionName">borrow_ReaderUpdate</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+		
+		<action name="borrow_ReaderUpdate" class="readerAction" method="borrow_ReaderUpdate">
+			<result name="success" type="chain">
+				<param name="actionName">makeNewRecord</param>
+			</result>
+			<!-- 如果更新reader的信息失败,需要撤回book信息的修改 -->
+			<result name="input" type="chain">
+				<param name="actionName">revert_Lend_Book_Update</param>
+			</result>
+		</action>
+
+		<!-- 撤回对book信息的修改 -->
+		<action name="revert_Lend_Book_Update" class="bookAction" method="revert_Lend_Book_Update">
+			<result name="success">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+		
+		<action name="makeNewRecord" class="recordAction" method="makeNewRecord">
+			<result name="success" type="chain">
+				<param name="actionName">searchBorrowRecord_Lend</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+		
+		<!-- view record -->
+		<action name="searchBorrowRecord_Lend" class="recordAction" method="searchBorrowRecord_Lend">
+			<result name="success">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Lend_Book.jsp</result>
+		</action>
+		
+		<action name="searchBorrowRecord" class="recordAction" method="searchBorrowRecord">
+			<result name="success">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+		</action>
+		
+		<!-- return book -->
+		<action name="return_RecordUpdate" class="recordAction" method="return_RecordUpdate">
+			<result name="success" type="chain">
+				<param name="actionName">return_BookUpdate</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+		</action>
+		
+		<action name="return_BookUpdate" class="bookAction" method="return_BookUpdate">
+			<result name="success" type="chain">
+				<param name="actionName">return_ReaderUpdate</param>
+			</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+		</action>
+		
+		<action name="return_ReaderUpdate" class="readerAction" method="return_ReaderUpdate">
+			<result name="success">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+			<result name="input">/jsp/Lend_Book_Return_Book/Return_Book.jsp</result>
+		</action>
+		
+		<!-- View Library Income History -->
+		<action name="viewDeposit" class="readerAction" method="viewDeposit">
+			<result name="success" type="chain">
+				<param name="actionName">viewFineValue</param>
+			</result>
+			<result name="input">/jsp/View_Library_Income_History/View_Library_Income_History_Main.jsp</result>
+		</action>
+		
+		<action name="viewFineValue" class="recordAction" method="viewFineValue">
+			<result name="success">/jsp/View_Library_Income_History/View_Library_Income_History_Main.jsp</result>
+			<result name="input">/jsp/View_Library_Income_History/View_Library_Income_History_Main.jsp</result>
+		</action>
+		
+		<!-- searchReader -->
+		<action name="readerManagement_Search" class="readerAction" method="readerManagement_Search">
+			<result name="success">/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp</result>
+			<result name="input">/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp</result>
+		</action>
+		
+		<!-- editReader -->
+		<action name="readerManagement_Edit" class="readerAction" method="readerManagement_Edit">
+			<result name="success">/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp</result>
+			<result name="input">/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp</result>
+		</action>
+		
+		<!-- deleteReader -->
+		<action name="readerManagement_Delete" class="readerAction" method="readerManagement_Delete">
+			<result name="success">/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp</result>
+			<result name="input">/jsp/Reader_Management/Reader_Management_SearchReader_Main.jsp</result>
+		</action>
+		
+		<!--view borrow record -->
+		<action name="searchBorrowRecords" class="recordAction" method="searchBorrowRecords">
+			<result name="success" type="chain">
+				<param name="actionName">viewBorrowInfo</param>
+			</result>
+			<result name="input">/jsp/Reader_Management/Reader_Management_ReaderHistory_Main.jsp</result>
+		</action>
+		
+		<action name="viewBorrowInfo" class="bookAction" method="viewBorrowInfo">
+			<result name="success">/jsp/Reader_Management/Reader_Management_ReaderHistory_Main.jsp</result>
+		</action>
+		
+		<!--clear fine  -->
+		<action name="clearFine" class="recordAction" method="clearFine">
+			<result name="success" type="chain">
+				<param name="actionName">searchBorrowRecords</param>
+			</result>
+		</action>
+		
+		<!-- AdminLogin -->
+		<action name="AdminLogin" class="adminAction" method="signin">
+			<result name="success">/index.jsp</result>
+			<result name="input">/AdminLogin.jsp</result>
+		</action>
+		
+		<!-- AdminLogout -->
+		<action name="AdminLogout" class="adminAction" method="logout">
+			<result name="success">/AdminLogin.jsp</result>
+		</action>
+		
+		<!-- 超管的密码修改 -->
+		<action name="changePassword" class="adminAction" method="changePassword">
+			<result name="success">/change_admin_password.jsp</result>
+		</action>
+		
+		<!-- 注册新的管理员账号 -->
+		<action name="registerLibrarian" class="librarianAction" method="checkUsername">
+			<result name="success" type="chain">
+			<param name="actionName">LibrarianResiger</param> 
+			</result>
+			<result name="input">/register_librarian_accounts.jsp</result>
+		</action>	
+		
+		<action name="LibrarianResiger" class="librarianAction" method="register">
+			<result name="success">/register_librarian_accounts.jsp</result>
+			<result name="input">/register_librarian_accounts.jsp</result>
+		</action>	
+		
+		<!-- 查找全部管理员账号！！！ -->
+		<action name="ManagerLibrarian" class="librarianAction" method="manager">
+			<result name="success">/Search_and_Manager_Librarian_Accounts.jsp</result>
+		</action>
+		
+		<!-- 查找特定管理员账号！！！ -->
+		<action name="searchLibrarian" class="librarianAction" method="search">
+			<result name="success">/Search_and_Manager_Librarian_Accounts.jsp</result>
+		</action>
+		
+		<!-- 删除管理员账号 -->
+		<action name="delectLibrarian" class="librarianAction" method="checkUsername">
+			<result name="success" type="chain">
+			<param name="actionName">LibrarianDelect</param> 
+			</result>
+			<result name="input">/delect_librarian_accounts.jsp</result>
+		</action>
+		
+		<action name="LibrarianDelect" class="librarianAction" method="delectLibrarian">
+			<result name="success">/delect_librarian_accounts.jsp</result>
+			<result name="input">/delect_librarian_accounts.jsp</result>
+		</action>
+		
+		<!-- 编辑管理员账号！！！ -->
+		<action name="changeLibrarian" class="librarianAction" method="checkUsername">
+			<result name="success" type="chain">
+			<param name="actionName">LibrarianChange</param> 
+			</result>
+			<result name="input">/change_librarian_accounts.jsp</result>
+		</action>	
+		
+		<action name="LibrarianChange" class="librarianAction" method="changeLibrarian">
+			<result name="success">/change_librarian_accounts.jsp</result>
+			<result name="input">/change_librarian_accounts.jsp</result>
+		</action>
+		
+		<!-- 更改fineValue -->
+		<action name="modifyFine" class="adminAction" method="modifyFine">
+			<result name="success">/modify_finevalue.jsp</result>
+		</action>
+		<!-- 页面finevalue加载时显示数据 -->
+		<action name="onloadFine" class="adminAction" method="onload">
+		 	<result name="success">/modify_finevalue.jsp</result>
+		 		
+		</action>
+		
+		<!-- 更改deposit -->
+		<action name="modifyDeposit" class="adminAction" method="modifyDeposit">
+			<result name="success">/modify_deposit.jsp</result>
 			
-			<action name="out" class="readerAction" method="logout">
-				<result name="success">/index.jsp</result>
-			</action>
+		</action>
+		<!-- 页面deposit加载时显示数据 -->
+		<action name="onloadDeposit" class="adminAction" method="onload">
+			<result name="success">/modify_deposit.jsp</result>	
+		</action>
+		
+		<!-- 更改ReturnPeriod -->
+		<action name="modifyP" class="adminAction" method="modifyP">
+			<result name="success">/modify_period.jsp</result>
+		</action>
+		<!-- 页面ReturnPeriod加载时显示数据 -->
+		<action name="onloadPeriod" class="adminAction" method="onload">
+			<result name="success">/modify_period.jsp</result>	
+		</action>
 	</package>
-	
+
 </struts>

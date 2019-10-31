@@ -13,7 +13,7 @@
 
     <title>current-borrowed</title>
 </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100" background="pic/bg111.jpg">
 
 	<header>
 		<div class="container">

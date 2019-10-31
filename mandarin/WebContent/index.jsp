@@ -1,104 +1,119 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<!doctype html>
-<html lang="en" class="h-100">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-
-	<title>Mandarin</title>
+<title>Admin</title>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="layui/css/layui.css" media="all" />
+<script src="layui/layui.js"></script>
+<script src="layui/layui.all.js"></script>
 </head>
-<body class="d-flex flex-column h-100">
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+		<div class="layui-header">
+			<ul class="layui-nav" lay-filter="">
+				<li class="layui-nav-item layui-logo"><a href=""><img
+						src="img/011.jpg" class="layui-nav-img" />Library Admin</a></li>
+				<li class="layui-nav-item layui-this"><a href="">Home</a></li>
 
-		<header>
-			<div class="container">
-				<s:include value="navbar.jsp" />
-			</div>
-		</header>
-	
-		<main role="main" class="">
-			<div class="">
-				 <div id="carouselExampleIndicators" class="carousel slide"
-					data-ride="carousel" >
-					<ol class="carousel-indicators">
-						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<!--  	<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>-->
-					</ol>
-					
-				  
-				  	<div class="carousel-inner" >
-						<div class="carousel-item active">
-							<img class="d-block w-100" src="pic/1.jpg" alt="First slide">
-							<div class="carousel-caption text-left">
-                              <h1>Welcome to Mandarin-Library Automation</h1>
-                              <p>If you don't have an account, please register it first, so that you can borrow books quickly</p>
-                           </div>
-						</div>
-					 <!--
-						<div class="carousel-item">
-							<img class="d-block w-100" src="pic/b.jpg" alt="Second slide">
-                              <div class="carousel-caption">
-                                  <h1>Current Borrowing</h1>
-                                  <p>Can display the books you are currently borrowing, as well as information about books.</p>
-                                  <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>   
-                            </div>
-						</div>
-						-->
-						<div class="carousel-item">
-							<img class="d-block w-100" src="pic/2.jpg" alt="Third slide">
-							<div class="carousel-caption text-right">
-                                <h1>Borrowing Record</h1>
-                                <p>If you want to know the books you are borrowing and the specific information about them, you can find out more here.</p>
-                              </div>
-                            </div>
-						</div>
-					</div> 
-					<a class="carousel-control-prev" href="#carouselExampleIndicators"
-						role="button" data-slide="prev"> <span
-						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-						role="button" data-slide="next"> <span
-						class="carousel-control-next-icon" aria-hidden="true"></span> <span
-						class="sr-only">Next</span>
-					</a>
-				</div> 
-					
-				<div class="mt-4 row justify-content-center">
-					<form class="form-inline" action="reader-search">
-					    <select name="option" class="custom-select mr-sm-2 rounded-right" id="inlineFormCustomSelect">
-					    	<option value="title">Book Title</option>
-					    	<option value="author">Author</option>
-					    	<option value="publisher">Publisher</option>
-					    	<option value="isbn">ISBN</option>
-					    </select>
-					    <input name="searchContent" type="text" placeholder="Search" class="form-control mr-sm-2" aria-label="Search" autocomplete="off">
-					    <button class="btn btn-outline-primary my-2 my-sm-0 rounded-left" type="submit">Search</button>
-				    </form>
-				</div>
-				
-				<div>
-					
-				</div>	
+			</ul>
+			<ul class="layui-nav layui-layout-right" lay-filter="">
+				<li class="layui-nav-item layui-hide-xs" lay-unselect=lay-unselect>
+					<a href="http://localhost:8080/mandarin/AdminLogin.jsp"> 
+					<img src="img/01.jpg" class="layui-nav-img" />Sign
+						out
+				</a>
+				</li>
 
-		</main>
-	
-		<footer class="footer mt-auto">
-			<div class="container text-center py-3" style="background-color: #f5f5f5">
-				© 2019 <a href="http://www.nwpu.edu.cn/" target="_blank">XXXX</a> Mandarin-Library Automation
+			</ul>
+		</div>
+
+		<div class="layui-side layui-bg-black">
+
+			<div class="layui-side-scroll">
+				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+				<ul class="layui-nav layui-nav-tree" lay-filter="test">
+					<li class="layui-nav-item layui-nav-itemed"><a
+						href="javascript:;">Set/Modify</a>
+						<dl class="layui-nav-child">
+							<dd>
+								<a href="modify_finevalue-onload.jsp">FineValue</a>
+							</dd>
+							<dd>
+								<a href="modify_period-onload.jsp">ReturnPeriod</a>
+							</dd>
+							<dd>
+								<a href="modify_deposit-onload.jsp">SecurityDeposit</a>
+							</dd>
+
+						</dl></li>
+					<li class="layui-nav-item"><a href="javascript:;">Librarian
+							Account</a>
+						<dl class="layui-nav-child">
+							<dd>
+								<a href="register_librarian_accounts.jsp">Register</a>
+							</dd>
+							<dd>
+								<a href="delect_librarian_accounts.jsp">Delect </a>
+							</dd>
+							<dd>
+								<a href="change_librarian_accounts.jsp">Change</a>
+							</dd>
+							<dd>
+								<a href="Search_and_Manager_Librarian_Accounts-onload.jsp"
+									class="layui-this">Manage</a>
+							</dd>
+						</dl></li>
+					<li class="layui-nav-item"><a
+						href="http://localhost:8080/mandarin/change_admin_password.jsp">ChangePassword</a></li>
+				</ul>
+				<script src="layui/layui.js" charset="utf-8">
+					
+				</script>
+				<script>
+					layui.use([ 'element', 'layer' ], function() {
+						var element = layui.element;
+						var layer = layui.layer;
+
+						//监听折叠
+						element.on('collapse(test)', function(data) {
+						});
+					});
+				</script>
 			</div>
-		</footer>
-	
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-3.3.1.slim.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+		</div>
+		 <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div class="grid-demo grid-demo-bg1" style="text-align: center; ">
+			 <img src="img/011.jpg">
+		  </div>
+    <div style="padding: 15px;">
+    <div class="layui-anim layui-anim-upbit">
+   	 	<div  action="Admin.do" method="post" id="box" style="margin-top: 20px;text-align: center; ">  
+    		<h1>Welcome!<s:property value="user"/></h1>
+    		
+		</div> 
+	</div>
+    </div>
+  </div>
+
+		<div class="layui-footer">
+			<!-- 底部固定区域 -->
+			Mandarin Admin
+		</div>
+	</div>
+	<script src="../src/layui.js"></script>
+	<script>
+		//JavaScript代码区域
+		layui.use('element', function() {
+			var element = layui.element;
+
+		});
+	</script>
 </body>
 </html>

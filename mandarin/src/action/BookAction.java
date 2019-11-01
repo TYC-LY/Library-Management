@@ -88,6 +88,8 @@ public class BookAction extends BaseAction<Book, BookService> {
 	private List<BorrowInfo> payedFine = new ArrayList<BorrowInfo>();
 	private List<BorrowInfo> unPayedFine = new ArrayList<BorrowInfo>();
 
+	private String location;
+	
 	private class BorrowInfo {
 		private long id;
 		private long bookId;
@@ -520,6 +522,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 		String location_floor = this.getModel().getLocation_floor();
 		String location_stack = this.getModel().getLocation_stack();
 		String location_area = this.getModel().getLocation_area();
+		setLocation("area:" + location_area + " floor:" + location_floor + " stack:" + location_stack);
 		String price = this.getModel().getPrice();
 		String categoryNo = this.getModel().getCategoryNo();
 		String imagePath = this.getModel().getImagePath();
@@ -662,7 +665,7 @@ public class BookAction extends BaseAction<Book, BookService> {
 			String idString = String.valueOf(id);
 			String bookLocation = "floor " + tempBook.getLocation_floor() + " stack " + tempBook.getLocation_stack()
 					+ " area " + tempBook.getLocation_area();
-
+			setLocation(bookLocation);
 			// 生成barcode
 			try {
 				BufferedImage image = BarCodeUtils.insertWords(BarCodeUtils.getBarCode(idString), idString);
@@ -1107,5 +1110,13 @@ public class BookAction extends BaseAction<Book, BookService> {
 
 	public void setUnPayedFine(List<BorrowInfo> unPayedFine) {
 		this.unPayedFine = unPayedFine;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 }

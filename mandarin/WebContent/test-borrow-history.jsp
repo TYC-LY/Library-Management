@@ -26,16 +26,16 @@
 		<table class="table table-striped table-sm">
 			<thead>
 				<tr>
-					<th>Book Name<></th>
+					<th>Book Name</th>
 					<th>Borrowing Date</th>
 					<th>Return Date</th>
 					<th>Fine value</th>
 				</tr>
 			</thead>
 			<tbody>
-				<s:iterator value="historyTable">
+				<s:iterator value="historyTable" status="L">
 					<tr>
-						<td><s:property value="book.title" /></td>
+						<td><s:property value="books[#L.index].title" /></td>
 						<td><s:property value="borrowDate" /></td>
 						<td><s:property value="returnDate" /></td>
 						<td><s:property value="fineValue" /></td>

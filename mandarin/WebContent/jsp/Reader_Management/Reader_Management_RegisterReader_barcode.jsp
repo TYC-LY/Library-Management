@@ -37,7 +37,8 @@
 			<div class="col-sm-8">
 				<h1 class="text-success"><s:property value="errorMessage"/></h1>
 				<h4>This is the barcode of the reader:</h4>
-				<img src="D:/barcode_reader/<s:property value="id"/>.jpg" width="300" height="50">
+				<!-- <img src="D:/barcode_reader/<s:property value="id"/>.jpg" width="300" height="50"> -->
+				<img src="http://api.k780.com/?app=barcode.get&bc_text=<s:property value="id"/>&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4" width="300" height="50">
 			</div>
 		</div>
 	</div>

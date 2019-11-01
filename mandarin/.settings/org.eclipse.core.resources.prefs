@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/jsp/Book_Management/BookManagement_Add_Books_Image.jsp=UTF-8
 encoding//WebContent/profile.jsp=UTF-8
 encoding//src/service/ReaderServiceImpl.java=UTF-8
 encoding//src/utils/mail.java=UTF-8

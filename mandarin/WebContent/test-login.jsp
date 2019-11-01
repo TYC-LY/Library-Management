@@ -73,6 +73,7 @@
 			onclick="fun()">login</button>
 		<a class="btn btn-lg btn-primary btn-block" href="recovery.jsp">recovery
 			password</a>
+		<a class="btn btn-lg btn-primary btn-block" href="login.jsp">login as librarian</a>
 		<script>
 			function launch_toast() {
 				toastr.options = {

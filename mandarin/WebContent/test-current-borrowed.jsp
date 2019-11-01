@@ -33,9 +33,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<s:iterator value="currentTable">
+				<s:iterator value="currentTable" status="L">
 					<tr>
-						<td><s:property value="book.title" /></td>
+						<td><s:property value="books[#L.index].title" /></td>
 						<td><s:property value="borrowDate" /></td>
 						<td><s:property value="deadline" /></td>
 						<td><s:property value="fineValue" /></td>

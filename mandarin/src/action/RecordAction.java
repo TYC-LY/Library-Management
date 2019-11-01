@@ -6,9 +6,17 @@ import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
 
+import dao.BookDaoImpl;
+import dao.ReaderDaoImpl;
+import dao.RecordDaoImpl;
+import entity.Book;
 import entity.Reader;
 import entity.Record;
+import service.BookServiceImpl;
+import service.ReaderServiceImpl;
 import service.RecordService;
+import service.RecordServiceImpl;
+import utils.HibernateHelper;
 
 public class RecordAction extends BaseAction<Record, RecordService> {
 
@@ -16,6 +24,7 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 	private List<Record> recordTable;
 	private List<Record> currentTable;
 	private List<Record> historyTable;
+	private List<Book> books = new ArrayList<Book>();
 	
 	//
 	private Record tempRecord;
@@ -35,6 +44,13 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 				currentTable.add(recordTable.get(i));
 			}
 		}
+		BookServiceImpl bookSer = new BookServiceImpl();
+		BookDaoImpl bookDao = new BookDaoImpl();
+		bookDao.setSessionFactory(HibernateHelper.getSessionFactory());
+		bookSer.setDao(bookDao);
+		for (Record record : currentTable) {
+			books.add(bookSer.getBookById(record.getBookId()));
+		}
 		return INPUT;
 	}
 	
@@ -47,6 +63,13 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 			if (recordTable.get(i).getReturnDate() != null && recordTable.get(i).getBorrowState() == true && recordTable.get(i).getReturnDate() != null) {
 				historyTable.add(recordTable.get(i));
 			}
+		}
+		BookServiceImpl bookSer = new BookServiceImpl();
+		BookDaoImpl bookDao = new BookDaoImpl();
+		bookDao.setSessionFactory(HibernateHelper.getSessionFactory());
+		bookSer.setDao(bookDao);
+		for (Record record : historyTable) {
+			books.add(bookSer.getBookById(record.getBookId()));
 		}
 		return INPUT;
 	}
@@ -207,5 +230,13 @@ public class RecordAction extends BaseAction<Record, RecordService> {
 		this.getService().clearFineById(this.getModel().getId());
 		return SUCCESS;
 		
+	}
+
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
 	}
 }
